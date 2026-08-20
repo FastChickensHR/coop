@@ -1,6 +1,6 @@
 {
   "name": "@fastchickenshr/coop",
-  "version": "0.0.0-dev.c98aaef",
+  "version": "1.0.0-beta.1",
   "description": "The open-source design system behind FastChickens HR — accessible React components styled with a typed theme.",
   "license": "MIT",
   "type": "module",
