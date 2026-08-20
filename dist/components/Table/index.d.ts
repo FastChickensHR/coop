@@ -3,24 +3,35 @@ export declare const TableScroll: import("styled-components/dist/types").IStyled
 export declare const Table: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>> & string;
 export declare const Thead: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never> & Partial<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never>>> & string;
 export declare const Tbody: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never> & Partial<Pick<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never>>> & string;
-export declare const Tr: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, "$interactive"> & {
-    $interactive?: boolean;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, "$interactive"> & {
-    $interactive?: boolean;
+export declare const Tr: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, "interactive"> & {
+    interactive?: boolean;
+}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, "interactive"> & {
+    interactive?: boolean;
 }, never>>> & string;
 type Align = 'left' | 'right' | 'center';
-export declare const Th: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, "$noBorder" | "$align"> & {
-    $noBorder?: boolean;
-    $align?: Align;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, "$noBorder" | "$align"> & {
-    $noBorder?: boolean;
-    $align?: Align;
+export declare const Th: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, "align" | "noBorder"> & {
+    noBorder?: boolean;
+    align?: Align;
+}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, "align" | "noBorder"> & {
+    noBorder?: boolean;
+    align?: Align;
 }, never>>> & string;
-export declare const Td: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, "$noBorder" | "$align"> & {
-    $noBorder?: boolean;
-    $align?: Align;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, "$noBorder" | "$align"> & {
-    $noBorder?: boolean;
-    $align?: Align;
+export declare const Td: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, "align" | "noBorder" | "mono" | "muted"> & {
+    noBorder?: boolean;
+    align?: Align;
+    mono?: boolean;
+    muted?: boolean;
+}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, "align" | "noBorder" | "mono" | "muted"> & {
+    noBorder?: boolean;
+    align?: Align;
+    mono?: boolean;
+    muted?: boolean;
+}, never>>> & string;
+export declare const Timeline: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, "as" | "forwardedAs"> & {
+    as?: import("styled-components").WebTarget | undefined;
+    forwardedAs?: import("styled-components").WebTarget | undefined;
+}, never> & Partial<Pick<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<import("react").DetailedHTMLProps<import("react").TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, "as" | "forwardedAs"> & {
+    as?: import("styled-components").WebTarget | undefined;
+    forwardedAs?: import("styled-components").WebTarget | undefined;
 }, never>>> & string;
 export {};

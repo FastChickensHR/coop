@@ -8,6 +8,7 @@ export interface EmptyStateProps {
     description?: ReactNode;
     /** Optional primary action (a Button). */
     action?: ReactNode;
+    /** Class name for the root element (for layout only — colour and size come from the theme). */
     className?: string;
 }
 /**

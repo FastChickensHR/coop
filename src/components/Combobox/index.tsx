@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
-import styled from 'styled-components'
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import styled, { css } from 'styled-components'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
-import { useFieldControl, type FieldStatus } from '../FormField/context'
+import { Chip } from '../Chip'
+import { useFieldControl, STATUS_SOFT, type FieldStatus } from '../FormField/context'
 import { controlStatusStyles } from '../FormField/fieldStyles'
 
 export interface ComboboxOption {
@@ -10,52 +11,117 @@ export interface ComboboxOption {
 }
 
 export interface ComboboxProps {
+  /** The choices to offer; filtered client-side as the user types unless `onSearch` is given. */
   options: ComboboxOption[]
+  /** Selected value (single-select mode). */
   value?: string
+  /** Called with the picked value (single-select mode). */
   onValueChange?: (value: string) => void
+  /** Enable multi-select: selections render as removable chips, picking toggles membership, and the list stays open. */
+  multiple?: boolean
+  /** Selected values (multi-select mode, with `multiple`). */
+  values?: string[]
+  /** Called with the full next selection (multi-select mode, with `multiple`). */
+  onValuesChange?: (values: string[]) => void
+  /** Fetch options remotely: called (debounced) with the query as the user types. When provided, the component stops filtering client-side — the server-supplied `options` are shown as-is. */
+  onSearch?: (query: string) => void
+  /** Show a loading row while remote results are in flight (used with `onSearch`). */
+  loading?: boolean
+  /** Debounce before `onSearch` fires, in milliseconds. @default 250 */
+  debounceMs?: number
+  /** Allow entering a value that isn't in the list: a "Create …" row appears for an unmatched query, and the typed text becomes the value. */
+  creatable?: boolean
+  /** Called with the newly created value when a "Create …" row is chosen (with `creatable`). */
+  onCreate?: (value: string) => void
+  /** Text shown in the empty search box. @default 'Search…' */
   placeholder?: string
+  /** Render the control unusable and dimmed; the list cannot be opened. */
   disabled?: boolean
-  $hasError?: boolean
+  /** Force the error status even outside a FormField. */
+  hasError?: boolean
+  /** Override the auto-generated control id (normally supplied by FormField). */
   id?: string
+  /** Accessible name for the search box when there's no visible label. */
   'aria-label'?: string
+  /** Class name for the root element (for layout only — colour and size come from the theme). */
   className?: string
 }
 
 /**
  * A searchable select (ADR-0175): type to filter a long option list, then pick
- * one. Use a Combobox over a plain Select when there are enough options that
- * scanning them is slow (states, carriers, employees); for a short list a Select
- * is simpler, and for a few side-by-side choices use a Radio group. Full keyboard
- * nav (type, arrows, Enter, Escape) and FormField status wiring.
+ * one — or several with `multiple`, where picks become removable chips. Use a
+ * Combobox over a plain Select when there are enough options that scanning them
+ * is slow (states, carriers, employees); for a short list a Select is simpler,
+ * and for a few side-by-side choices use a Radio group. Pass `onSearch` to load
+ * options remotely (debounced) for very large lists, or `creatable` to let users
+ * enter a value that isn't listed. Full keyboard nav (type, arrows, Enter, Escape;
+ * Backspace removes the last chip) and FormField status wiring.
  */
 export function Combobox({
   options,
   value,
   onValueChange,
+  multiple,
+  values,
+  onValuesChange,
+  onSearch,
+  loading,
+  debounceMs = 250,
+  creatable,
+  onCreate,
   placeholder = 'Search…',
   disabled,
-  $hasError,
+  hasError,
   id,
   className,
   'aria-label': ariaLabel,
 }: ComboboxProps) {
   const { fieldProps, status } = useFieldControl()
-  const controlStatus: FieldStatus | undefined = $hasError ? 'error' : status
+  const controlStatus: FieldStatus | undefined = hasError ? 'error' : status
 
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const rootRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const selected = options.find((o) => o.value === value)
+  const isAsync = !!onSearch
+  const selectedValues = values ?? []
+  const isSelected = (v: string) => (multiple ? selectedValues.includes(v) : v === value)
+
+  // Label for a value from the current options; falls back to the raw value when the
+  // option isn't in the current (e.g. async) results, so a selection never loses its chip.
+  const labelFor = (v: string) => options.find((o) => o.value === v)?.label ?? v
+
+  const selectedOptions = multiple ? selectedValues.map((v) => ({ value: v, label: labelFor(v) })) : []
   const filtered = useMemo(() => {
+    if (isAsync) return options // the server already filtered
     const q = query.trim().toLowerCase()
     if (!q) return options
     return options.filter((o) => o.label.toLowerCase().includes(q))
-  }, [options, query])
+  }, [options, query, isAsync])
 
-  const activeIndex = filtered.length ? Math.min(active, filtered.length - 1) : 0
+  // A "Create …" affordance when the typed query matches no existing option; it sits
+  // after the options and is navigable like any other row.
+  const trimmedQuery = query.trim()
+  const showCreate =
+    !!creatable &&
+    trimmedQuery !== '' &&
+    !filtered.some(
+      (o) =>
+        o.label.toLowerCase() === trimmedQuery.toLowerCase() ||
+        o.value.toLowerCase() === trimmedQuery.toLowerCase(),
+    )
+  const createIndex = filtered.length
+  const itemCount = filtered.length + (showCreate ? 1 : 0)
+  const activeIndex = itemCount ? Math.min(active, itemCount - 1) : 0
+
+  // Per-instance ids so multiple Comboboxes on one page don't collide, and so the
+  // input can point `aria-activedescendant` at the highlighted option for screen readers.
+  const baseId = useId()
+  const listboxId = `${baseId}-listbox`
+  const optionId = (index: number) => `${baseId}-option-${index}`
 
   // Close on outside click.
   useEffect(() => {
@@ -72,70 +138,166 @@ export function Combobox({
     listRef.current?.querySelector<HTMLElement>(`[data-index="${activeIndex}"]`)?.scrollIntoView({ block: 'nearest' })
   }, [activeIndex, open])
 
+  // Keep the latest onSearch in a ref so re-creating the callback each render doesn't
+  // reset the debounce timer below.
+  const onSearchRef = useRef(onSearch)
+  useEffect(() => {
+    onSearchRef.current = onSearch
+  })
+
+  // Debounced remote search: fire when the query changes or the list opens, in async mode.
+  useEffect(() => {
+    if (!isAsync || !open) return
+    const timer = setTimeout(() => onSearchRef.current?.(query), debounceMs)
+    return () => clearTimeout(timer)
+  }, [query, open, isAsync, debounceMs])
+
   function choose(opt: ComboboxOption | undefined) {
     if (!opt) return
-    onValueChange?.(opt.value)
-    setQuery('')
-    setOpen(false)
+    if (multiple) {
+      const next = selectedValues.includes(opt.value)
+        ? selectedValues.filter((v) => v !== opt.value)
+        : [...selectedValues, opt.value]
+      onValuesChange?.(next)
+      setQuery('')
+      setActive(0)
+      setOpen(true)
+      inputRef.current?.focus()
+    } else {
+      onValueChange?.(opt.value)
+      setQuery('')
+      setOpen(false)
+    }
+  }
+
+  function removeValue(v: string) {
+    onValuesChange?.(selectedValues.filter((x) => x !== v))
+  }
+
+  function createValue(text: string) {
+    const v = text.trim()
+    if (!v) return
+    onCreate?.(v)
+    if (multiple) {
+      if (!selectedValues.includes(v)) onValuesChange?.([...selectedValues, v])
+      setQuery('')
+      setActive(0)
+      setOpen(true)
+      inputRef.current?.focus()
+    } else {
+      onValueChange?.(v)
+      setQuery('')
+      setOpen(false)
+    }
   }
 
   function onKeyDown(e: ReactKeyboardEvent) {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (!open) setOpen(true)
-      else setActive((a) => Math.min(a + 1, filtered.length - 1))
+      else setActive((a) => Math.min(a + 1, itemCount - 1))
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActive((a) => Math.max(a - 1, 0))
     } else if (e.key === 'Enter') {
       if (open) {
         e.preventDefault()
-        choose(filtered[activeIndex])
+        if (showCreate && activeIndex === createIndex) createValue(trimmedQuery)
+        else choose(filtered[activeIndex])
+      }
+    } else if (e.key === 'Backspace') {
+      if (multiple && query === '' && selectedValues.length > 0) {
+        removeValue(selectedValues[selectedValues.length - 1])
       }
     } else if (e.key === 'Escape') {
       setOpen(false)
     }
   }
 
-  const displayValue = open ? query : selected?.label ?? ''
+  const displayValue = open ? query : value ? labelFor(value) : ''
 
   return (
     <Root ref={rootRef} className={className}>
-      <ControlInput
-        id={id ?? fieldProps.id}
-        role="combobox"
-        aria-expanded={open}
-        aria-controls="combobox-list"
-        aria-label={ariaLabel}
-        aria-describedby={fieldProps['aria-describedby']}
-        aria-required={fieldProps['aria-required']}
-        aria-invalid={controlStatus === 'error' || undefined}
-        $status={controlStatus}
-        disabled={disabled}
-        placeholder={selected && !open ? selected.label : placeholder}
-        value={displayValue}
-        onFocus={() => setOpen(true)}
-        onChange={(e) => {
-          setQuery(e.target.value)
-          setActive(0)
-          setOpen(true)
-        }}
-        onKeyDown={onKeyDown}
-      />
+      {multiple ? (
+        <MultiControl
+          $status={controlStatus}
+          data-disabled={disabled || undefined}
+          onMouseDown={(e) => {
+            // Clicking the container's own padding focuses the input; clicks on a
+            // chip's remove button or the input itself are left alone.
+            if (e.target === e.currentTarget) {
+              e.preventDefault()
+              inputRef.current?.focus()
+            }
+          }}
+        >
+          {selectedOptions.map((opt) => (
+            <Chip key={opt.value} onRemove={disabled ? undefined : () => removeValue(opt.value)}>
+              {opt.label}
+            </Chip>
+          ))}
+          <BareInput
+            ref={inputRef}
+            id={id ?? fieldProps.id}
+            role="combobox"
+            aria-expanded={open}
+            aria-controls={open ? listboxId : undefined}
+            aria-activedescendant={open && itemCount ? optionId(activeIndex) : undefined}
+            aria-label={ariaLabel}
+            aria-describedby={fieldProps['aria-describedby']}
+            aria-required={fieldProps['aria-required']}
+            aria-invalid={controlStatus === 'error' || undefined}
+            disabled={disabled}
+            placeholder={selectedOptions.length === 0 ? placeholder : ''}
+            value={query}
+            onFocus={() => setOpen(true)}
+            onChange={(e) => {
+              setQuery(e.target.value)
+              setActive(0)
+              setOpen(true)
+            }}
+            onKeyDown={onKeyDown}
+          />
+        </MultiControl>
+      ) : (
+        <ControlInput
+          ref={inputRef}
+          id={id ?? fieldProps.id}
+          role="combobox"
+          aria-expanded={open}
+          aria-controls={open ? listboxId : undefined}
+          aria-activedescendant={open && filtered.length ? optionId(activeIndex) : undefined}
+          aria-label={ariaLabel}
+          aria-describedby={fieldProps['aria-describedby']}
+          aria-required={fieldProps['aria-required']}
+          aria-invalid={controlStatus === 'error' || undefined}
+          $status={controlStatus}
+          disabled={disabled}
+          placeholder={value && !open ? labelFor(value) : placeholder}
+          value={displayValue}
+          onFocus={() => setOpen(true)}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setActive(0)
+            setOpen(true)
+          }}
+          onKeyDown={onKeyDown}
+        />
+      )}
       <Chevron aria-hidden="true">
         <ChevronUpDownIcon width={18} height={18} />
       </Chevron>
       {open && (
-        <List id="combobox-list" ref={listRef} role="listbox">
-          {filtered.length === 0 ? (
-            <Empty>No matches</Empty>
-          ) : (
-            filtered.map((opt, i) => (
+        <List id={listboxId} ref={listRef} role="listbox" aria-multiselectable={multiple || undefined}>
+          {loading && <Loading aria-live="polite">Searching…</Loading>}
+          {!loading && filtered.length === 0 && !showCreate && <Empty>No matches</Empty>}
+          {filtered.map((opt, i) => (
               <Option
                 key={opt.value}
+                id={optionId(i)}
                 data-index={i}
                 role="option"
-                aria-selected={opt.value === value}
+                aria-selected={isSelected(opt.value)}
                 $active={i === activeIndex}
                 onMouseEnter={() => setActive(i)}
                 onMouseDown={(e) => {
@@ -144,9 +306,26 @@ export function Combobox({
                 }}
               >
                 <span>{opt.label}</span>
-                {opt.value === value && <CheckIcon width={16} height={16} />}
+                {isSelected(opt.value) && <CheckIcon width={16} height={16} />}
               </Option>
-            ))
+            ))}
+          {showCreate && (
+            <Option
+              id={optionId(createIndex)}
+              data-index={createIndex}
+              role="option"
+              aria-selected={false}
+              $active={activeIndex === createIndex}
+              onMouseEnter={() => setActive(createIndex)}
+              onMouseDown={(e) => {
+                e.preventDefault()
+                createValue(trimmedQuery)
+              }}
+            >
+              <CreateRow>
+                Create “<strong>{trimmedQuery}</strong>”
+              </CreateRow>
+            </Option>
           )}
         </List>
       )}
@@ -182,6 +361,59 @@ const ControlInput = styled.input<{ $status?: FieldStatus }>`
   }
   &::placeholder {
     color: ${({ theme }) => theme.colors.subtle};
+  }
+`
+
+const MultiControl = styled.div<{ $status?: FieldStatus }>`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  width: 100%;
+  min-height: 44px;
+  padding: 0.3rem 2.5rem 0.3rem 0.5rem;
+  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  background-color: ${({ theme }) => theme.colors.canvas};
+  box-sizing: border-box;
+  cursor: text;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+
+  ${({ $status, theme }) =>
+    $status &&
+    css`
+      border-color: ${theme.colors[$status]};
+      box-shadow: 0 0 0 3px ${theme.colors[STATUS_SOFT[$status]]};
+    `}
+
+  &:focus-within {
+    border-color: ${({ theme }) => theme.colors.accent};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accentSoft};
+  }
+
+  &[data-disabled] {
+    background-color: ${({ theme }) => theme.colors.surface2};
+    cursor: not-allowed;
+  }
+`
+
+const BareInput = styled.input`
+  flex: 1 1 4rem;
+  min-width: 4rem;
+  height: 30px;
+  padding: 0 0.25rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: ${({ theme }) => theme.typography.fontFamily.sans};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  color: ${({ theme }) => theme.colors.ink};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.subtle};
+  }
+  &:disabled {
+    cursor: not-allowed;
   }
 `
 
@@ -238,4 +470,20 @@ const Empty = styled.li`
   text-align: center;
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.colors.muted};
+`
+
+const Loading = styled.li`
+  padding: ${({ theme }) => theme.spacing.md};
+  text-align: center;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  color: ${({ theme }) => theme.colors.muted};
+`
+
+const CreateRow = styled.span`
+  color: ${({ theme }) => theme.colors.muted};
+
+  strong {
+    color: ${({ theme }) => theme.colors.ink};
+    font-weight: ${({ theme }) => theme.fontWeight.medium};
+  }
 `

@@ -3,11 +3,13 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 
 export interface ChipProps {
+  /** The token's label; truncates with an ellipsis rather than wrapping. */
   children: ReactNode
   /** When provided, renders a remove (×) button that calls this. */
   onRemove?: () => void
-  /** Accessible label for the remove button (default "Remove"). */
+  /** Accessible label for the remove button. @default 'Remove' */
   removeLabel?: string
+  /** Class name for the root element (for layout only — colour and size come from the theme). */
   className?: string
 }
 

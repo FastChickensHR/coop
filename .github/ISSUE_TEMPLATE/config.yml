@@ -1,0 +1,7 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/FastChickensHR/coop/security/advisories/new
+    about: >-
+      Please use GitHub's private vulnerability reporting — never a public
+      issue. See SECURITY.md.

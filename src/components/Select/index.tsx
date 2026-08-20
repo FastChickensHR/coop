@@ -7,20 +7,33 @@ import { controlStatusStyles } from '../FormField/fieldStyles'
 export interface SelectOption {
   value: string
   label: string
+  /** Render the option visible but unselectable (a refused-but-not-hidden choice). @default false */
+  disabled?: boolean
+  /** Muted sub-line under the label — e.g. why a disabled option can't be chosen. */
+  hint?: string
 }
 
 export interface SelectProps {
+  /** The selected option's value (controlled). */
   value?: string
+  /** Called with the value of the option the user picked. */
   onValueChange?: (value: string) => void
+  /** The choices to offer, in display order. */
   options: SelectOption[]
+  /** Text shown on the trigger while nothing is selected. */
   placeholder?: string
+  /** Render the control unusable and dimmed; the list cannot be opened. */
   disabled?: boolean
-  $hasError?: boolean
+  /** Force the error status even outside a FormField. */
+  hasError?: boolean
   /** Override the auto-generated control id (normally supplied by FormField). */
   id?: string
   /** Accessible name for a select with no visible label (inline filters, table cells). */
   'aria-label'?: string
+  /** Id of an existing element that names the trigger (alternative to `aria-label`). */
   'aria-labelledby'?: string
+  /** Forwarded to the trigger — e.g. `-1` to take it out of the tab order inside a roving grid. */
+  tabIndex?: number
   /** Forwarded to the trigger so `styled(Select)` can adjust sizing/layout. */
   className?: string
 }
@@ -72,7 +85,8 @@ const Viewport = styled(RadixSelect.Viewport)`
 
 const Item = styled(RadixSelect.Item)`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.base};
@@ -88,6 +102,18 @@ const Item = styled(RadixSelect.Item)`
     background-color: ${({ theme }) => theme.colors.surface2};
     color: ${({ theme }) => theme.colors.ink};
   }
+
+  &[data-disabled] {
+    color: ${({ theme }) => theme.colors.subtle};
+    cursor: not-allowed;
+  }
+`
+
+const ItemHint = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  color: ${({ theme }) => theme.colors.muted};
+  max-width: 18rem;
+  white-space: normal;
 `
 
 const ItemIndicator = styled(RadixSelect.ItemIndicator)`
@@ -113,9 +139,10 @@ export function Select({
   options,
   placeholder,
   disabled,
-  $hasError,
+  hasError,
   id,
   className,
+  tabIndex,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledby,
 }: SelectProps) {
@@ -124,8 +151,9 @@ export function Select({
     <RadixSelect.Root value={value} onValueChange={onValueChange} disabled={disabled}>
       <Trigger
         className={className}
-        $status={$hasError ? 'error' : status}
+        $status={hasError ? 'error' : status}
         id={id ?? fieldProps.id}
+        tabIndex={tabIndex}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
         aria-describedby={fieldProps['aria-describedby']}
@@ -144,8 +172,9 @@ export function Select({
           </ScrollButton>
           <Viewport>
             {options.map((opt) => (
-              <Item key={opt.value} value={opt.value}>
+              <Item key={opt.value} value={opt.value} disabled={opt.disabled}>
                 <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>
+                {opt.hint && <ItemHint>{opt.hint}</ItemHint>}
                 <ItemIndicator>
                   <CheckIcon style={{ width: '0.875rem', height: '0.875rem' }} />
                 </ItemIndicator>

@@ -5,6 +5,7 @@ export interface SwitchProps {
   checked: boolean
   /** Called with the new state when toggled (takes effect immediately). */
   onCheckedChange: (checked: boolean) => void
+  /** Render the switch unusable and dimmed; it stays in its current position. */
   disabled?: boolean
   /** Accessible name when there's no visible label. */
   'aria-label'?: string

@@ -9,7 +9,9 @@ export interface Crumb {
 }
 
 export interface BreadcrumbsProps {
+  /** The trail, root first; the last entry is rendered as the current page, not a link. */
   items: Crumb[]
+  /** Class name for the root `<nav>` (for layout only — colour and size come from the theme). */
   className?: string
 }
 

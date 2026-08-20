@@ -1,12 +1,15 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu'
 import styled from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
 
 /**
  * The styled menu parts for a {@link DropdownMenu} (ADR-0175). Styled-only file
  * (no function component) so Fast Refresh stays happy; the Portal-wrapping
  * content lives in `DropdownMenuContent.tsx`.
  */
-export const DropdownMenuItem = styled(RadixDropdownMenu.Item)<{ $danger?: boolean }>`
+export const DropdownMenuItem = styled(RadixDropdownMenu.Item).withConfig({
+  shouldForwardProp: blockStyleProps('danger'),
+})<{ danger?: boolean }>`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
@@ -14,13 +17,13 @@ export const DropdownMenuItem = styled(RadixDropdownMenu.Item)<{ $danger?: boole
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme, $danger }) => ($danger ? theme.colors.error : theme.colors.ink)};
+  color: ${({ theme, danger }) => (danger ? theme.colors.error : theme.colors.ink)};
   cursor: pointer;
   outline: none;
   user-select: none;
 
   &[data-highlighted] {
-    background-color: ${({ theme, $danger }) => ($danger ? theme.colors.errorSoft : theme.colors.surface2)};
+    background-color: ${({ theme, danger }) => (danger ? theme.colors.errorSoft : theme.colors.surface2)};
   }
 
   &[data-disabled] {

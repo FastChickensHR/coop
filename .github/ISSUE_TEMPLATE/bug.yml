@@ -1,0 +1,64 @@
+name: Bug report
+description: >-
+  Something in Coop is broken or behaving unexpectedly. Accessibility bugs —
+  focus, keyboard, screen reader, contrast, reduced motion — are especially
+  welcome; treat them as first-class bugs, not nitpicks.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. A minimal reproduction is
+        the single most useful thing you can give us.
+
+        **Accessibility bugs are very welcome here** — if a component traps
+        focus, skips the keyboard, confuses a screen reader, fails contrast,
+        or ignores reduced motion, we want to know.
+
+        ⚠️ **Security vulnerabilities**: do NOT report them here — use
+        [private vulnerability reporting](https://github.com/FastChickensHR/coop/security/advisories/new)
+        instead.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: >-
+        The release tag you installed (e.g. `v1.0.0-beta.1`), or the
+        `Mono-Source` SHA from the commit you're on.
+      placeholder: v1.0.0-beta.1
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Affected component
+      description: >-
+        Which component (or token/theme area) is affected? Free text — name it
+        as you see it.
+      placeholder: Button, DatePicker, theme.colors, …
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: >-
+        A StackBlitz (or similar) link is ideal; a small self-contained code
+        snippet is fine too. The smaller, the faster we can fix it.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-vs-actual
+    attributes:
+      label: Expected vs actual
+      description: What did you expect to happen, and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser / OS
+      description: Where did you see this?
+      placeholder: Chrome 138 on macOS 15, Firefox 141 on Windows 11, …
+    validations:
+      required: false

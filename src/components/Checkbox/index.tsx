@@ -5,14 +5,19 @@ import styled from 'styled-components'
 import { useFieldControl } from '../FormField/context'
 
 export interface CheckboxProps {
+  /** Whether the box is ticked (controlled). */
   checked?: boolean
+  /** Called with the new state when the user toggles the box. */
   onCheckedChange?: (checked: boolean) => void
+  /** Render the box unusable and dimmed; it stays visible and keeps its value. */
   disabled?: boolean
   /** Override the auto-generated id (normally supplied by FormField / auto). */
   id?: string
+  /** Accessible name when there's no visible label (no `children`, no FormField). */
   'aria-label'?: string
   /** Optional inline label rendered beside the box; clicking it toggles the checkbox. */
   children?: ReactNode
+  /** Class name for the row wrapping box and label (for layout only). */
   className?: string
 }
 
@@ -53,7 +58,10 @@ const Box = styled(RadixCheckbox.Root)`
 
 const Indicator = styled(RadixCheckbox.Indicator)`
   display: inline-flex;
-  color: ${({ theme }) => theme.colors.canvas};
+  /* The checkmark sits on the accent-filled box, so it must stay light in BOTH
+     themes. canvas flips to near-black in dark mode (a near-invisible check on
+     the blue box); onFill is fixed light. (ADR-0228) */
+  color: ${({ theme }) => theme.colors.onFill};
   svg {
     width: 14px;
     height: 14px;

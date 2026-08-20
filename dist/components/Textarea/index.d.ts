@@ -1,7 +1,7 @@
 import type { TextareaHTMLAttributes } from 'react';
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     /** Force the error status even outside a FormField. */
-    $hasError?: boolean;
+    hasError?: boolean;
 }
 /**
  * Base multi-line text input. Self-wires to a surrounding `FormField` via

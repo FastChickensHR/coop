@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
 
 export type SpinnerSize = 'sm' | 'md' | 'lg'
 
@@ -14,9 +15,9 @@ const spin = keyframes`
 
 export interface SpinnerProps {
   /** Diameter preset. @default 'md' */
-  $size?: SpinnerSize
+  size?: SpinnerSize
   /** Ring colour; defaults to the interaction accent (or inherits `currentColor`). */
-  $color?: string
+  color?: string
 }
 
 /**
@@ -25,16 +26,18 @@ export interface SpinnerProps {
  * hold the shape of content that's loading use {@link Skeleton}.
  *
  * Colour follows `currentColor`, so it inherits the surrounding text colour (or
- * set `color` / `$color`). Honours prefers-reduced-motion by slowing, not
+ * set the `color` prop). Honours prefers-reduced-motion by slowing, not
  * stopping — a stopped spinner reads as broken.
  */
-export const Spinner = styled.span<SpinnerProps>`
+export const Spinner = styled.span.withConfig({
+  shouldForwardProp: blockStyleProps('size', 'color'),
+})<SpinnerProps>`
   display: inline-block;
-  width: ${({ $size = 'md' }) => SIZES[$size]};
-  height: ${({ $size = 'md' }) => SIZES[$size]};
+  width: ${({ size = 'md' }) => SIZES[size]};
+  height: ${({ size = 'md' }) => SIZES[size]};
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.colors.borderStrong};
-  border-top-color: ${({ theme, $color }) => $color ?? theme.colors.accent};
+  border-top-color: ${({ theme, color }) => color ?? theme.colors.accent};
   animation: ${spin} 0.6s linear infinite;
   flex-shrink: 0;
 

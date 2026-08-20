@@ -1,6 +1,6 @@
 {
-  "name": "coop",
-  "version": "0.1.0",
+  "name": "@fastchickenshr/coop",
+  "version": "0.0.0-dev.c98aaef",
   "description": "The open-source design system behind FastChickens HR — accessible React components styled with a typed theme.",
   "license": "MIT",
   "type": "module",
@@ -17,8 +17,14 @@
     "dist",
     "src",
     "README.md",
+    "CHANGELOG.md",
+    "API.md",
     "LICENSE"
   ],
+  "scripts": {
+    "build": "vite build && tsc",
+    "typecheck": "tsc --noEmit"
+  },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",

@@ -3,7 +3,9 @@ export interface ProgressProps {
     value?: number | null;
     /** Accessible name for the bar (e.g. "Upload progress"). */
     'aria-label'?: string;
+    /** Id of an existing element that names the bar (alternative to `aria-label`). */
     'aria-labelledby'?: string;
+    /** Class name for the track element (for layout only — colour and size come from the theme). */
     className?: string;
 }
 /**

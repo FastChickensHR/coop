@@ -3,30 +3,30 @@ import t, { css as n, keyframes as r } from "styled-components";
 import * as i from "@radix-ui/react-avatar";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 import { CalendarDaysIcon as c, CheckIcon as l, ChevronDownIcon as u, ChevronLeftIcon as d, ChevronRightIcon as f, ChevronUpDownIcon as p, ChevronUpIcon as m, XMarkIcon as h } from "@heroicons/react/24/outline";
-import { Fragment as g, createContext as _, forwardRef as v, useContext as y, useEffect as b, useId as x, useLayoutEffect as S, useMemo as ee, useRef as C, useState as w } from "react";
-import * as T from "@radix-ui/react-checkbox";
-import * as E from "@radix-ui/react-popover";
-import { getDayOfWeek as D, getLocalTimeZone as O, getWeeksInMonth as k, parseDate as A, startOfMonth as j, today as M } from "@internationalized/date";
-import * as N from "@radix-ui/react-dropdown-menu";
-import * as P from "@radix-ui/react-label";
-import * as F from "@radix-ui/react-dialog";
-import * as I from "@radix-ui/react-progress";
-import * as L from "@radix-ui/react-radio-group";
-import * as R from "@radix-ui/react-select";
-import * as z from "@radix-ui/react-slider";
-import * as B from "@radix-ui/react-tabs";
-import * as V from "@radix-ui/react-toggle-group";
-import * as H from "@radix-ui/react-tooltip";
+import { Fragment as g, createContext as ee, forwardRef as _, useContext as te, useEffect as v, useId as ne, useLayoutEffect as re, useMemo as ie, useRef as y, useState as b } from "react";
+import * as x from "@radix-ui/react-checkbox";
+import * as S from "@radix-ui/react-dialog";
+import * as C from "@radix-ui/react-popover";
+import { endOfMonth as w, endOfYear as T, fromDate as E, getDayOfWeek as D, getLocalTimeZone as O, getWeeksInMonth as k, parseDate as A, startOfMonth as j, startOfYear as M, toCalendarDate as N, today as P } from "@internationalized/date";
+import * as F from "@radix-ui/react-dropdown-menu";
+import * as I from "@radix-ui/react-label";
+import * as L from "@radix-ui/react-progress";
+import * as R from "@radix-ui/react-radio-group";
+import * as z from "@radix-ui/react-select";
+import * as B from "@radix-ui/react-slider";
+import * as V from "@radix-ui/react-tabs";
+import * as H from "@radix-ui/react-toggle-group";
+import * as U from "@radix-ui/react-tooltip";
 //#region src/components/Accordion/index.tsx
-var U = e.Root, W = t(e.Item)`
+var W = e.Root, G = t(e.Item)`
   border-bottom: 1px solid ${({ theme: e }) => e.colors.border};
 
   &:first-child {
     border-top: 1px solid ${({ theme: e }) => e.colors.border};
   }
-`, te = t(e.Header)`
+`, K = t(e.Header)`
   margin: 0;
-`, ne = t(e.Trigger)`
+`, ae = t(e.Trigger)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,24 +70,24 @@ var U = e.Root, W = t(e.Item)`
       transition: none;
     }
   }
-`, re = r`
+`, oe = r`
   from { height: 0; }
   to { height: var(--radix-accordion-content-height); }
-`, ie = r`
+`, se = r`
   from { height: var(--radix-accordion-content-height); }
   to { height: 0; }
-`, ae = t(e.Content)`
+`, q = t(e.Content)`
   overflow: hidden;
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.muted};
   line-height: ${({ theme: e }) => e.lineHeight.relaxed};
 
   &[data-state='open'] {
-    animation: ${re} ${({ theme: e }) => e.motion.duration.base}
+    animation: ${oe} ${({ theme: e }) => e.motion.duration.base}
       ${({ theme: e }) => e.motion.easing.standard};
   }
   &[data-state='closed'] {
-    animation: ${ie} ${({ theme: e }) => e.motion.duration.fast}
+    animation: ${se} ${({ theme: e }) => e.motion.duration.fast}
       ${({ theme: e }) => e.motion.easing.exit};
   }
 
@@ -99,7 +99,10 @@ var U = e.Root, W = t(e.Item)`
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`, oe = {
+`, J = (...e) => {
+	let t = new Set(e);
+	return (e) => !t.has(e);
+}, ce = {
 	info: n`
     background-color: ${({ theme: e }) => e.colors.infoSoft};
     border-left-color: ${({ theme: e }) => e.colors.info};
@@ -120,7 +123,7 @@ var U = e.Root, W = t(e.Item)`
     border-left-color: ${({ theme: e }) => e.colors.error};
     color: ${({ theme: e }) => e.colors.error};
   `
-}, se = t.div`
+}, le = t.div.withConfig({ shouldForwardProp: J("variant") })`
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
@@ -129,63 +132,63 @@ var U = e.Root, W = t(e.Item)`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
 
-  ${({ $variant: e = "info" }) => oe[e]}
-`, G = t.span`
+  ${({ variant: e = "info" }) => ce[e]}
+`, ue = t.span`
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
   padding-top: 1px;
   width: 1rem;
   height: 1rem;
-`, ce = t.div`
+`, de = t.div`
   flex: 1;
   min-width: 0;
-`, le = t.p`
+`, fe = t.p`
   margin: 0 0 0.125rem;
   font-weight: ${({ theme: e }) => e.fontWeight.semibold};
   font-size: ${({ theme: e }) => e.fontSize.sm};
-`, K = t.p`
+`, pe = t.p`
   margin: 0;
   font-size: ${({ theme: e }) => e.fontSize.sm};
   opacity: 0.9;
-`, q = {
+`, me = {
 	sm: "1.75rem",
 	md: "2.25rem",
 	lg: "3rem"
 };
-function ue(e) {
+function he(e) {
 	let t = e.trim().split(/\s+/).filter(Boolean);
 	return t.length === 0 ? "?" : t.length === 1 ? t[0].slice(0, 2).toUpperCase() : (t[0][0] + t[t.length - 1][0]).toUpperCase();
 }
-function de({ name: e, src: t, size: n = "md", className: r }) {
-	return /* @__PURE__ */ s(fe, {
+function ge({ name: e, src: t, size: n = "md", className: r }) {
+	return /* @__PURE__ */ s(_e, {
 		$size: n,
 		className: r,
-		children: [t && /* @__PURE__ */ o(pe, {
+		children: [t && /* @__PURE__ */ o(ve, {
 			src: t,
 			alt: e
-		}), /* @__PURE__ */ o(me, {
+		}), /* @__PURE__ */ o(ye, {
 			delayMs: t ? 300 : 0,
-			children: ue(e)
+			children: he(e)
 		})]
 	});
 }
-var fe = t(i.Root)`
+var _e = t(i.Root)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $size: e }) => q[e]};
-  height: ${({ $size: e }) => q[e]};
+  width: ${({ $size: e }) => me[e]};
+  height: ${({ $size: e }) => me[e]};
   border-radius: ${({ theme: e }) => e.borderRadius.full};
   overflow: hidden;
   flex-shrink: 0;
   user-select: none;
   vertical-align: middle;
-`, pe = t(i.Image)`
+`, ve = t(i.Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
-`, me = t(i.Fallback)`
+`, ye = t(i.Fallback)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,7 +200,7 @@ var fe = t(i.Root)`
   font-size: 0.7em;
   font-weight: ${({ theme: e }) => e.fontWeight.semibold};
   letter-spacing: 0.02em;
-`, he = {
+`, be = {
 	active: n`
     background-color: ${({ theme: e }) => e.colors.successSoft};
     color: ${({ theme: e }) => e.colors.success};
@@ -218,7 +221,7 @@ var fe = t(i.Root)`
     color: ${({ theme: e }) => e.colors.muted};
     border: none;
   `
-}, ge = {
+}, xe = {
 	inbound: n`
     background-color: transparent;
     color: ${({ theme: e }) => e.colors.info};
@@ -234,10 +237,10 @@ var fe = t(i.Root)`
     color: ${({ theme: e }) => e.colors.muted};
     border: 1px solid ${({ theme: e }) => e.colors.borderStrong};
   `
-}, _e = {
-	...he,
-	...ge
-}, ve = t.span`
+}, Se = {
+	...be,
+	...xe
+}, Ce = t.span.withConfig({ shouldForwardProp: J("variant") })`
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -249,23 +252,23 @@ var fe = t(i.Root)`
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
   white-space: nowrap;
 
-  ${({ $variant: e = "default" }) => _e[e]}
+  ${({ variant: e = "default" }) => Se[e]}
 `;
 //#endregion
 //#region src/components/Breadcrumbs/index.tsx
-function ye({ items: e, className: t }) {
-	return /* @__PURE__ */ o(be, {
+function we({ items: e, className: t }) {
+	return /* @__PURE__ */ o(Te, {
 		"aria-label": "Breadcrumb",
 		className: t,
-		children: /* @__PURE__ */ o(xe, { children: e.map((t, n) => {
+		children: /* @__PURE__ */ o(Ee, { children: e.map((t, n) => {
 			let r = n === e.length - 1;
-			return /* @__PURE__ */ s(g, { children: [/* @__PURE__ */ o("li", { children: t.href && !r ? /* @__PURE__ */ o(Se, {
+			return /* @__PURE__ */ s(g, { children: [/* @__PURE__ */ o("li", { children: t.href && !r ? /* @__PURE__ */ o(De, {
 				href: t.href,
 				children: t.label
-			}) : /* @__PURE__ */ o(Ce, {
+			}) : /* @__PURE__ */ o(Oe, {
 				"aria-current": r ? "page" : void 0,
 				children: t.label
-			}) }), !r && /* @__PURE__ */ o(we, {
+			}) }), !r && /* @__PURE__ */ o(ke, {
 				"aria-hidden": "true",
 				children: /* @__PURE__ */ o(f, {
 					width: 14,
@@ -275,10 +278,10 @@ function ye({ items: e, className: t }) {
 		}) })
 	});
 }
-var be = t.nav`
+var Te = t.nav`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
-`, xe = t.ol`
+`, Ee = t.ol`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -286,7 +289,7 @@ var be = t.nav`
   list-style: none;
   margin: 0;
   padding: 0;
-`, Se = t.a`
+`, De = t.a`
   color: ${({ theme: e }) => e.colors.muted};
   text-decoration: none;
 
@@ -294,13 +297,13 @@ var be = t.nav`
     color: ${({ theme: e }) => e.colors.ink};
     text-decoration: underline;
   }
-`, Ce = t.span`
+`, Oe = t.span`
   color: ${({ theme: e }) => e.colors.ink};
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
-`, we = t.span`
+`, ke = t.span`
   display: inline-flex;
   color: ${({ theme: e }) => e.colors.subtle};
-`, Te = {
+`, Ae = {
 	primary: n`
     background-color: ${({ theme: e }) => e.colors.ink900};
     color: ${({ theme: e }) => e.colors.brand50};
@@ -328,7 +331,7 @@ var be = t.nav`
     border: 1px solid transparent;
     &:hover:not(:disabled) { background-color: ${({ theme: e }) => e.colors.surface2}; }
   `
-}, Ee = {
+}, je = {
 	sm: n`
     height: 34px;
     padding: 0 0.75rem;
@@ -344,7 +347,7 @@ var be = t.nav`
     padding: 0 1.5rem;
     font-size: ${({ theme: e }) => e.fontSize.lg};
   `
-}, De = t.button`
+}, Me = t.button.withConfig({ shouldForwardProp: J("variant", "size") })`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -353,12 +356,19 @@ var be = t.nav`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-weight: ${({ theme: e }) => e.fontWeight.bold};
   cursor: pointer;
-  transition: background-color 150ms ease, opacity 150ms ease;
+  transition: background-color ${({ theme: e }) => e.motion.duration.fast}
+      ${({ theme: e }) => e.motion.easing.standard},
+    opacity ${({ theme: e }) => e.motion.duration.fast} ${({ theme: e }) => e.motion.easing.standard};
   white-space: nowrap;
   box-shadow: ${({ theme: e }) => e.boxShadow.card};
 
-  ${({ $variant: e = "primary" }) => Te[e]}
-  ${({ $size: e = "md" }) => Ee[e]}
+  ${({ variant: e = "primary" }) => Ae[e]}
+  ${({ size: e = "md" }) => je[e]}
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme: e }) => e.colors.brand};
+    outline-offset: 2px;
+  }
 
   &:disabled {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -367,14 +377,84 @@ var be = t.nav`
     cursor: not-allowed;
     box-shadow: none;
   }
-`, Oe = t.div`
+`, Ne = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-style: italic;
+  font-weight: ${({ theme: e }) => e.fontWeight.black};
+  font-size: ${({ theme: e }) => e.fontSize["5xl"]};
+  line-height: ${({ theme: e }) => e.lineHeight.flat};
+  letter-spacing: ${({ theme: e }) => e.letterSpacing.tight};
+`, Pe = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-weight: ${({ theme: e }) => e.fontWeight.extrabold};
+  font-size: ${({ theme: e }) => e.fontSize["4xl"]};
+  line-height: ${({ theme: e }) => e.lineHeight.snugTight};
+`, Fe = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-weight: ${({ theme: e }) => e.fontWeight.bold};
+  font-size: ${({ theme: e }) => e.fontSize["2xl"]};
+  line-height: ${({ theme: e }) => e.lineHeight.tight};
+`, Ie = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  line-height: ${({ theme: e }) => e.lineHeight.snug};
+`, Le = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-weight: ${({ theme: e }) => e.fontWeight.normal};
+  font-size: ${({ theme: e }) => e.fontSize.lg};
+  line-height: ${({ theme: e }) => e.lineHeight.relaxed};
+`, Re = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-weight: ${({ theme: e }) => e.fontWeight.normal};
+  font-size: ${({ theme: e }) => e.fontSize.base};
+  line-height: ${({ theme: e }) => e.lineHeight.relaxed};
+`, ze = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-weight: ${({ theme: e }) => e.fontWeight.normal};
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  line-height: ${({ theme: e }) => e.lineHeight.normal};
+`, Be = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-weight: ${({ theme: e }) => e.fontWeight.normal};
+  font-size: ${({ theme: e }) => e.fontSize.xs};
+  line-height: ${({ theme: e }) => e.lineHeight.normal};
+`, Ve = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.mono};
+  font-weight: ${({ theme: e }) => e.fontWeight.medium};
+  font-size: ${({ theme: e }) => e.fontSize.xs};
+  line-height: ${({ theme: e }) => e.lineHeight.normal};
+  letter-spacing: ${({ theme: e }) => e.letterSpacing.wide};
+`, He = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.mono};
+  font-weight: ${({ theme: e }) => e.fontWeight.normal};
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  line-height: ${({ theme: e }) => e.lineHeight.normal};
+`, Ue = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-weight: ${({ theme: e }) => e.fontWeight.bold};
+  font-size: ${({ theme: e }) => e.fontSize["2xl"]};
+`, We = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+  font-size: ${({ theme: e }) => e.fontSize.lg};
+`, Ge = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+  font-size: ${({ theme: e }) => e.fontSize.base};
+`, Ke = n`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.mono};
+  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+  font-size: ${({ theme: e }) => e.fontSize.xs};
+  letter-spacing: 0.05em;
+`, qe = t.div.withConfig({ shouldForwardProp: J("interactive") })`
   background-color: ${({ theme: e }) => e.colors.canvas};
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.lg};
   box-shadow: ${({ theme: e }) => e.boxShadow.card};
   overflow: hidden;
 
-  ${({ theme: e, $interactive: t }) => t && `
+  ${({ theme: e, interactive: t }) => t && `
     cursor: pointer;
     transition: border-color ${e.motion.duration.fast} ${e.motion.easing.standard},
       box-shadow ${e.motion.duration.fast} ${e.motion.easing.standard};
@@ -383,27 +463,25 @@ var be = t.nav`
       box-shadow: ${e.boxShadow.pop};
     }
   `}
-`, ke = t.div`
+`, Je = t.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: ${({ theme: e }) => e.spacing.lg};
   padding: ${({ theme: e }) => e.spacing.lg} ${({ theme: e }) => e.spacing.xl};
   border-bottom: 1px solid ${({ theme: e }) => e.colors.border};
-`, Ae = t.h3`
-  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
-  font-size: ${({ theme: e }) => e.fontSize.base};
-  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+`, Ye = t.h3`
+  ${Ge}
   color: ${({ theme: e }) => e.colors.ink};
   margin: 0;
-`, je = t.div`
+`, Xe = t.div`
   display: flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.sm};
   flex-shrink: 0;
-`, Me = t.div`
+`, Ze = t.div`
   padding: ${({ theme: e }) => e.spacing.xl};
-`, Ne = t.div`
+`, Qe = t.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -411,13 +489,13 @@ var be = t.nav`
   padding: ${({ theme: e }) => e.spacing.lg} ${({ theme: e }) => e.spacing.xl};
   border-top: 1px solid ${({ theme: e }) => e.colors.border};
   background-color: ${({ theme: e }) => e.colors.surface};
-`, Pe = {
+`, $e = {
 	error: "errorSoft",
 	warning: "warningSoft",
 	success: "successSoft"
-}, Fe = _(null);
-function J() {
-	let e = y(Fe);
+}, et = ee(null);
+function Y() {
+	let e = te(et);
 	if (!e) return {
 		fieldProps: {},
 		hasError: !1
@@ -436,12 +514,12 @@ function J() {
 }
 //#endregion
 //#region src/components/Checkbox/index.tsx
-var Ie = t.div`
+var tt = t.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: ${({ $disabled: e }) => e ? "not-allowed" : "pointer"};
-`, Le = t(T.Root)`
+`, nt = t(x.Root)`
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -467,26 +545,29 @@ var Ie = t.div`
     outline: 2px solid ${({ theme: e }) => e.colors.accent};
     outline-offset: 2px;
   }
-`, Re = t(T.Indicator)`
+`, rt = t(x.Indicator)`
   display: inline-flex;
-  color: ${({ theme: e }) => e.colors.canvas};
+  /* The checkmark sits on the accent-filled box, so it must stay light in BOTH
+     themes. canvas flips to near-black in dark mode (a near-invisible check on
+     the blue box); onFill is fixed light. (ADR-0228) */
+  color: ${({ theme: e }) => e.colors.onFill};
   svg {
     width: 14px;
     height: 14px;
     stroke-width: 3;
   }
-`, ze = t.label`
+`, it = t.label`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.ink};
   cursor: inherit;
 `;
-function Be({ checked: e, onCheckedChange: t, disabled: n, id: r, children: i, className: a, ...c }) {
-	let { fieldProps: u } = J(), d = x(), f = r ?? u.id ?? `checkbox-${d}`;
-	return /* @__PURE__ */ s(Ie, {
+function at({ checked: e, onCheckedChange: t, disabled: n, id: r, children: i, className: a, ...c }) {
+	let { fieldProps: u } = Y(), d = ne(), f = r ?? u.id ?? `checkbox-${d}`;
+	return /* @__PURE__ */ s(tt, {
 		$disabled: n,
 		className: a,
-		children: [/* @__PURE__ */ o(Le, {
+		children: [/* @__PURE__ */ o(nt, {
 			id: f,
 			checked: e,
 			onCheckedChange: (e) => t?.(e === !0),
@@ -495,8 +576,8 @@ function Be({ checked: e, onCheckedChange: t, disabled: n, id: r, children: i, c
 			"aria-describedby": u["aria-describedby"],
 			"aria-invalid": u["aria-invalid"],
 			"aria-required": u["aria-required"],
-			children: /* @__PURE__ */ o(Re, { children: /* @__PURE__ */ o(l, {}) })
-		}), i != null && /* @__PURE__ */ o(ze, {
+			children: /* @__PURE__ */ o(rt, { children: /* @__PURE__ */ o(l, {}) })
+		}), i != null && /* @__PURE__ */ o(it, {
 			htmlFor: f,
 			children: i
 		})]
@@ -504,10 +585,10 @@ function Be({ checked: e, onCheckedChange: t, disabled: n, id: r, children: i, c
 }
 //#endregion
 //#region src/components/Chip/index.tsx
-function Ve({ children: e, onRemove: t, removeLabel: n = "Remove", className: r }) {
-	return /* @__PURE__ */ s(He, {
+function ot({ children: e, onRemove: t, removeLabel: n = "Remove", className: r }) {
+	return /* @__PURE__ */ s(st, {
 		className: r,
-		children: [/* @__PURE__ */ o(Ue, { children: e }), t && /* @__PURE__ */ o(We, {
+		children: [/* @__PURE__ */ o(ct, { children: e }), t && /* @__PURE__ */ o(lt, {
 			type: "button",
 			"aria-label": n,
 			onClick: t,
@@ -518,7 +599,7 @@ function Ve({ children: e, onRemove: t, removeLabel: n = "Remove", className: r 
 		})]
 	});
 }
-var He = t.span`
+var st = t.span`
   display: inline-flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.xs};
@@ -531,12 +612,12 @@ var He = t.span`
   font-size: ${({ theme: e }) => e.fontSize.xs};
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
   max-width: 100%;
-`, Ue = t.span`
+`, ct = t.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 0 0.125rem;
-`, We = t.button`
+`, lt = t.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -558,10 +639,10 @@ var He = t.span`
     outline: 2px solid ${({ theme: e }) => e.colors.accent};
     outline-offset: 1px;
   }
-`, Y = (e) => n`
+`, ut = (e) => n`
   ${e && n`
     border-color: ${({ theme: t }) => t.colors[e]};
-    box-shadow: 0 0 0 3px ${({ theme: t }) => t.colors[Pe[e]]};
+    box-shadow: 0 0 0 3px ${({ theme: t }) => t.colors[$e[e]]};
   `}
 
   &:focus {
@@ -571,83 +652,170 @@ var He = t.span`
 `;
 //#endregion
 //#region src/components/Combobox/index.tsx
-function Ge({ options: e, value: t, onValueChange: n, placeholder: r = "Search…", disabled: i, $hasError: a, id: c, className: u, "aria-label": d }) {
-	let { fieldProps: f, status: m } = J(), h = a ? "error" : m, [g, _] = w(!1), [v, y] = w(""), [x, S] = w(0), T = C(null), E = C(null), D = e.find((e) => e.value === t), O = ee(() => {
-		let t = v.trim().toLowerCase();
+function dt({ options: e, value: t, onValueChange: n, multiple: r, values: i, onValuesChange: a, onSearch: c, loading: u, debounceMs: d = 250, creatable: f, onCreate: m, placeholder: h = "Search…", disabled: g, hasError: ee, id: _, className: te, "aria-label": re }) {
+	let { fieldProps: x, status: S } = Y(), C = ee ? "error" : S, [w, T] = b(!1), [E, D] = b(""), [O, k] = b(0), A = y(null), j = y(null), M = y(null), N = !!c, P = i ?? [], F = (e) => r ? P.includes(e) : e === t, I = (t) => e.find((e) => e.value === t)?.label ?? t, L = r ? P.map((e) => ({
+		value: e,
+		label: I(e)
+	})) : [], R = ie(() => {
+		if (N) return e;
+		let t = E.trim().toLowerCase();
 		return t ? e.filter((e) => e.label.toLowerCase().includes(t)) : e;
-	}, [e, v]), k = O.length ? Math.min(x, O.length - 1) : 0;
-	b(() => {
-		if (!g) return;
+	}, [
+		e,
+		E,
+		N
+	]), z = E.trim(), B = !!f && z !== "" && !R.some((e) => e.label.toLowerCase() === z.toLowerCase() || e.value.toLowerCase() === z.toLowerCase()), V = R.length, H = R.length + +!!B, U = H ? Math.min(O, H - 1) : 0, W = ne(), G = `${W}-listbox`, K = (e) => `${W}-option-${e}`;
+	v(() => {
+		if (!w) return;
 		function e(e) {
-			T.current && !T.current.contains(e.target) && _(!1);
+			A.current && !A.current.contains(e.target) && T(!1);
 		}
 		return document.addEventListener("mousedown", e), () => document.removeEventListener("mousedown", e);
-	}, [g]), b(() => {
-		E.current?.querySelector(`[data-index="${k}"]`)?.scrollIntoView({ block: "nearest" });
-	}, [k, g]);
-	function A(e) {
-		e && (n?.(e.value), y(""), _(!1));
+	}, [w]), v(() => {
+		j.current?.querySelector(`[data-index="${U}"]`)?.scrollIntoView({ block: "nearest" });
+	}, [U, w]);
+	let ae = y(c);
+	v(() => {
+		ae.current = c;
+	}), v(() => {
+		if (!N || !w) return;
+		let e = setTimeout(() => ae.current?.(E), d);
+		return () => clearTimeout(e);
+	}, [
+		E,
+		w,
+		N,
+		d
+	]);
+	function oe(e) {
+		if (e) if (r) {
+			let t = P.includes(e.value) ? P.filter((t) => t !== e.value) : [...P, e.value];
+			a?.(t), D(""), k(0), T(!0), M.current?.focus();
+		} else n?.(e.value), D(""), T(!1);
 	}
-	function j(e) {
-		e.key === "ArrowDown" ? (e.preventDefault(), g ? S((e) => Math.min(e + 1, O.length - 1)) : _(!0)) : e.key === "ArrowUp" ? (e.preventDefault(), S((e) => Math.max(e - 1, 0))) : e.key === "Enter" ? g && (e.preventDefault(), A(O[k])) : e.key === "Escape" && _(!1);
+	function se(e) {
+		a?.(P.filter((t) => t !== e));
 	}
-	let M = g ? v : D?.label ?? "";
-	return /* @__PURE__ */ s(Ke, {
-		ref: T,
-		className: u,
+	function q(e) {
+		let t = e.trim();
+		t && (m?.(t), r ? (P.includes(t) || a?.([...P, t]), D(""), k(0), T(!0), M.current?.focus()) : (n?.(t), D(""), T(!1)));
+	}
+	function J(e) {
+		e.key === "ArrowDown" ? (e.preventDefault(), w ? k((e) => Math.min(e + 1, H - 1)) : T(!0)) : e.key === "ArrowUp" ? (e.preventDefault(), k((e) => Math.max(e - 1, 0))) : e.key === "Enter" ? w && (e.preventDefault(), B && U === V ? q(z) : oe(R[U])) : e.key === "Backspace" ? r && E === "" && P.length > 0 && se(P[P.length - 1]) : e.key === "Escape" && T(!1);
+	}
+	let ce = w ? E : t ? I(t) : "";
+	return /* @__PURE__ */ s(ft, {
+		ref: A,
+		className: te,
 		children: [
-			/* @__PURE__ */ o(qe, {
-				id: c ?? f.id,
-				role: "combobox",
-				"aria-expanded": g,
-				"aria-controls": "combobox-list",
-				"aria-label": d,
-				"aria-describedby": f["aria-describedby"],
-				"aria-required": f["aria-required"],
-				"aria-invalid": h === "error" || void 0,
-				$status: h,
-				disabled: i,
-				placeholder: D && !g ? D.label : r,
-				value: M,
-				onFocus: () => _(!0),
-				onChange: (e) => {
-					y(e.target.value), S(0), _(!0);
+			r ? /* @__PURE__ */ s(mt, {
+				$status: C,
+				"data-disabled": g || void 0,
+				onMouseDown: (e) => {
+					e.target === e.currentTarget && (e.preventDefault(), M.current?.focus());
 				},
-				onKeyDown: j
+				children: [L.map((e) => /* @__PURE__ */ o(ot, {
+					onRemove: g ? void 0 : () => se(e.value),
+					children: e.label
+				}, e.value)), /* @__PURE__ */ o(ht, {
+					ref: M,
+					id: _ ?? x.id,
+					role: "combobox",
+					"aria-expanded": w,
+					"aria-controls": w ? G : void 0,
+					"aria-activedescendant": w && H ? K(U) : void 0,
+					"aria-label": re,
+					"aria-describedby": x["aria-describedby"],
+					"aria-required": x["aria-required"],
+					"aria-invalid": C === "error" || void 0,
+					disabled: g,
+					placeholder: L.length === 0 ? h : "",
+					value: E,
+					onFocus: () => T(!0),
+					onChange: (e) => {
+						D(e.target.value), k(0), T(!0);
+					},
+					onKeyDown: J
+				})]
+			}) : /* @__PURE__ */ o(pt, {
+				ref: M,
+				id: _ ?? x.id,
+				role: "combobox",
+				"aria-expanded": w,
+				"aria-controls": w ? G : void 0,
+				"aria-activedescendant": w && R.length ? K(U) : void 0,
+				"aria-label": re,
+				"aria-describedby": x["aria-describedby"],
+				"aria-required": x["aria-required"],
+				"aria-invalid": C === "error" || void 0,
+				$status: C,
+				disabled: g,
+				placeholder: t && !w ? I(t) : h,
+				value: ce,
+				onFocus: () => T(!0),
+				onChange: (e) => {
+					D(e.target.value), k(0), T(!0);
+				},
+				onKeyDown: J
 			}),
-			/* @__PURE__ */ o(Je, {
+			/* @__PURE__ */ o(gt, {
 				"aria-hidden": "true",
 				children: /* @__PURE__ */ o(p, {
 					width: 18,
 					height: 18
 				})
 			}),
-			g && /* @__PURE__ */ o(Ye, {
-				id: "combobox-list",
-				ref: E,
+			w && /* @__PURE__ */ s(_t, {
+				id: G,
+				ref: j,
 				role: "listbox",
-				children: O.length === 0 ? /* @__PURE__ */ o(Ze, { children: "No matches" }) : O.map((e, n) => /* @__PURE__ */ s(Xe, {
-					"data-index": n,
-					role: "option",
-					"aria-selected": e.value === t,
-					$active: n === k,
-					onMouseEnter: () => S(n),
-					onMouseDown: (t) => {
-						t.preventDefault(), A(e);
-					},
-					children: [/* @__PURE__ */ o("span", { children: e.label }), e.value === t && /* @__PURE__ */ o(l, {
-						width: 16,
-						height: 16
-					})]
-				}, e.value))
+				"aria-multiselectable": r || void 0,
+				children: [
+					u && /* @__PURE__ */ o(bt, {
+						"aria-live": "polite",
+						children: "Searching…"
+					}),
+					!u && R.length === 0 && !B && /* @__PURE__ */ o(yt, { children: "No matches" }),
+					R.map((e, t) => /* @__PURE__ */ s(vt, {
+						id: K(t),
+						"data-index": t,
+						role: "option",
+						"aria-selected": F(e.value),
+						$active: t === U,
+						onMouseEnter: () => k(t),
+						onMouseDown: (t) => {
+							t.preventDefault(), oe(e);
+						},
+						children: [/* @__PURE__ */ o("span", { children: e.label }), F(e.value) && /* @__PURE__ */ o(l, {
+							width: 16,
+							height: 16
+						})]
+					}, e.value)),
+					B && /* @__PURE__ */ o(vt, {
+						id: K(V),
+						"data-index": V,
+						role: "option",
+						"aria-selected": !1,
+						$active: U === V,
+						onMouseEnter: () => k(V),
+						onMouseDown: (e) => {
+							e.preventDefault(), q(z);
+						},
+						children: /* @__PURE__ */ s(xt, { children: [
+							"Create “",
+							/* @__PURE__ */ o("strong", { children: z }),
+							"”"
+						] })
+					})
+				]
 			})
 		]
 	});
 }
-var Ke = t.div`
+var ft = t.div`
   position: relative;
   width: 100%;
-`, qe = t.input`
+`, pt = t.input`
   width: 100%;
   height: 44px;
   padding: 0 2.5rem 0 0.875rem;
@@ -661,7 +829,7 @@ var Ke = t.div`
   box-sizing: border-box;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  ${({ $status: e }) => Y(e)}
+  ${({ $status: e }) => ut(e)}
 
   &:disabled {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -671,7 +839,54 @@ var Ke = t.div`
   &::placeholder {
     color: ${({ theme: e }) => e.colors.subtle};
   }
-`, Je = t.span`
+`, mt = t.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ${({ theme: e }) => e.spacing.xs};
+  width: 100%;
+  min-height: 44px;
+  padding: 0.3rem 2.5rem 0.3rem 0.5rem;
+  border: 1px solid ${({ theme: e }) => e.colors.borderStrong};
+  border-radius: ${({ theme: e }) => e.borderRadius.md};
+  background-color: ${({ theme: e }) => e.colors.canvas};
+  box-sizing: border-box;
+  cursor: text;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+
+  ${({ $status: e, theme: t }) => e && n`
+      border-color: ${t.colors[e]};
+      box-shadow: 0 0 0 3px ${t.colors[$e[e]]};
+    `}
+
+  &:focus-within {
+    border-color: ${({ theme: e }) => e.colors.accent};
+    box-shadow: 0 0 0 3px ${({ theme: e }) => e.colors.accentSoft};
+  }
+
+  &[data-disabled] {
+    background-color: ${({ theme: e }) => e.colors.surface2};
+    cursor: not-allowed;
+  }
+`, ht = t.input`
+  flex: 1 1 4rem;
+  min-width: 4rem;
+  height: 30px;
+  padding: 0 0.25rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-size: ${({ theme: e }) => e.fontSize.base};
+  color: ${({ theme: e }) => e.colors.ink};
+
+  &::placeholder {
+    color: ${({ theme: e }) => e.colors.subtle};
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+`, gt = t.span`
   position: absolute;
   top: 0;
   right: 0;
@@ -682,7 +897,7 @@ var Ke = t.div`
   justify-content: center;
   color: ${({ theme: e }) => e.colors.muted};
   pointer-events: none;
-`, Ye = t.ul`
+`, _t = t.ul`
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
@@ -697,7 +912,7 @@ var Ke = t.div`
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-`, Xe = t.li`
+`, vt = t.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -713,60 +928,342 @@ var Ke = t.div`
     color: ${({ theme: e }) => e.colors.accent};
     flex-shrink: 0;
   }
-`, Ze = t.li`
+`, yt = t.li`
   padding: ${({ theme: e }) => e.spacing.md};
   text-align: center;
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.muted};
-`, Qe = /^\d{4}-\d{2}-\d{2}$/;
+`, bt = t.li`
+  padding: ${({ theme: e }) => e.spacing.md};
+  text-align: center;
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  color: ${({ theme: e }) => e.colors.muted};
+`, xt = t.span`
+  color: ${({ theme: e }) => e.colors.muted};
+
+  strong {
+    color: ${({ theme: e }) => e.colors.ink};
+    font-weight: ${({ theme: e }) => e.fontWeight.medium};
+  }
+`;
+//#endregion
+//#region src/components/Modal/index.tsx
+function St({ open: e, onOpenChange: t, title: n, description: r, children: i, footer: a, width: c }) {
+	return /* @__PURE__ */ o(S.Root, {
+		open: e,
+		onOpenChange: t,
+		children: /* @__PURE__ */ s(S.Portal, { children: [/* @__PURE__ */ o(Tt, {}), /* @__PURE__ */ s(Et, {
+			style: c ? { maxWidth: c } : void 0,
+			children: [
+				/* @__PURE__ */ s(Dt, { children: [/* @__PURE__ */ s(Ot, { children: [/* @__PURE__ */ o(kt, { children: n }), r ? /* @__PURE__ */ o(At, { children: r }) : /* @__PURE__ */ o(S.Description, {
+					"aria-hidden": !0,
+					style: { display: "none" }
+				})] }), /* @__PURE__ */ o(S.Close, {
+					asChild: !0,
+					children: /* @__PURE__ */ o(jt, {
+						"aria-label": "Close",
+						children: /* @__PURE__ */ o(h, {
+							width: 20,
+							height: 20
+						})
+					})
+				})] }),
+				/* @__PURE__ */ o(Mt, { children: i }),
+				a && /* @__PURE__ */ o(Nt, { children: a })
+			]
+		})] })
+	});
+}
+var Ct = r`from { opacity: 0; } to { opacity: 1; }`, wt = r`
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+`, Tt = t(S.Overlay)`
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.45);
+  animation: ${Ct} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`, Et = t(S.Content)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 2rem);
+  max-width: 32rem;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme: e }) => e.colors.canvas};
+  border: 1px solid ${({ theme: e }) => e.colors.border};
+  border-radius: ${({ theme: e }) => e.borderRadius.lg};
+  box-shadow: ${({ theme: e }) => e.boxShadow.pop};
+  z-index: 51;
+  animation: ${wt} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`, Dt = t.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: ${({ theme: e }) => e.spacing.lg};
+  padding: ${({ theme: e }) => e.spacing.xl} ${({ theme: e }) => e.spacing.xl} ${({ theme: e }) => e.spacing.lg};
+  flex-shrink: 0;
+`, Ot = t.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme: e }) => e.spacing.xs};
+  min-width: 0;
+`, kt = t(S.Title)`
+  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
+  font-size: ${({ theme: e }) => e.fontSize.lg};
+  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
+  color: ${({ theme: e }) => e.colors.ink};
+  margin: 0;
+`, At = t(S.Description)`
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  color: ${({ theme: e }) => e.colors.muted};
+  margin: 0;
+`, jt = t.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  border-radius: ${({ theme: e }) => e.borderRadius.md};
+  color: ${({ theme: e }) => e.colors.muted};
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color ${({ theme: e }) => e.motion.duration.fast} ${({ theme: e }) => e.motion.easing.standard};
+
+  &:hover {
+    background-color: ${({ theme: e }) => e.colors.surface2};
+    color: ${({ theme: e }) => e.colors.ink};
+  }
+`, Mt = t.div`
+  padding: 0 ${({ theme: e }) => e.spacing.xl};
+  overflow-y: auto;
+`, Nt = t.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: ${({ theme: e }) => e.spacing.md};
+  padding: ${({ theme: e }) => e.spacing.xl};
+  flex-shrink: 0;
+`;
+//#endregion
+//#region src/components/ConfirmDialog/index.tsx
+function Pt({ open: e, onOpenChange: t, title: n, description: r, children: i, confirmLabel: c = "Confirm", cancelLabel: l = "Cancel", confirmVariant: u = "primary", pending: d = !1, onConfirm: f }) {
+	return /* @__PURE__ */ o(St, {
+		open: e,
+		onOpenChange: t,
+		title: n,
+		description: r,
+		width: "26rem",
+		footer: /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o(Me, {
+			type: "button",
+			variant: "secondary",
+			size: "sm",
+			disabled: d,
+			onClick: () => t(!1),
+			children: l
+		}), /* @__PURE__ */ o(Me, {
+			type: "button",
+			variant: u,
+			size: "sm",
+			disabled: d,
+			onClick: f,
+			children: c
+		})] }),
+		children: i
+	});
+}
+//#endregion
+//#region src/lib/date.ts
+var Ft = /^\d{4}-\d{2}-\d{2}$/;
 function X(e) {
-	if (!e || !Qe.test(e)) return null;
+	if (!e || !Ft.test(e)) return null;
 	try {
 		return A(e);
 	} catch {
 		return null;
 	}
 }
-function $e(e) {
+function It(e) {
 	return e ? e.toString() : null;
 }
-var et = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-function tt(e) {
+function Z() {
+	return P(O());
+}
+function Lt(e) {
+	return P(e);
+}
+function Rt() {
+	return Z().toString();
+}
+function Q(e, t, n) {
+	return !!t && e < t || !!n && e > n;
+}
+var zt = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/, Bt = /^(\d{4})(\d{2})(\d{2})$/;
+function Vt(e) {
 	let t = e.trim();
 	if (!t) return null;
-	if (Qe.test(t)) return X(t);
-	let n = et.exec(t);
+	if (Ft.test(t)) return X(t);
+	let n = Bt.exec(t);
 	if (n) {
 		let [, e, t, r] = n;
-		return X(`${r}-${e.padStart(2, "0")}-${t.padStart(2, "0")}`);
+		return X(`${e}-${t}-${r}`);
+	}
+	let r = zt.exec(t);
+	if (r) {
+		let [, e, t, n] = r;
+		return X(`${n}-${e.padStart(2, "0")}-${t.padStart(2, "0")}`);
 	}
 	return null;
 }
-var nt = new Intl.DateTimeFormat("en-US", {
+var Ht = "Always", Ut = "Ongoing", Wt = "Anytime", Gt = new Intl.DateTimeFormat("en-US", {
 	month: "short",
 	day: "numeric",
 	year: "numeric",
 	timeZone: "UTC"
-}), rt = new Intl.DateTimeFormat("en-US", {
-	month: "short",
-	day: "numeric",
-	year: "numeric"
 });
-function it(e, t = "—") {
-	if (!e) return t;
-	let n = X(e);
-	if (n) return nt.format(new Date(Date.UTC(n.year, n.month - 1, n.day)));
-	let r = new Date(e);
-	return Number.isNaN(r.getTime()) ? t : rt.format(r);
+function Kt(e, t = "—") {
+	return e && X(e) ? e : t;
 }
-function at(e, t = "—") {
-	if (!e) return t;
-	let [n, r, i] = e.slice(0, 10).split("-");
-	return !n || !r || !i ? t : `${r}/${i}/${n}`;
+function qt(e) {
+	if (!e || Ft.test(e)) return null;
+	let t = new Date(e);
+	return Number.isNaN(t.getTime()) ? null : N(E(t, O()));
+}
+function Jt(e, t = "—") {
+	let n = qt(e);
+	return n ? Gt.format(new Date(Date.UTC(n.year, n.month - 1, n.day))) : t;
+}
+function Yt(e, t, n = "—") {
+	if (!e) return n;
+	let r = new Date(e);
+	return Number.isNaN(r.getTime()) ? n : new Intl.DateTimeFormat("en-US", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
+		hour: "2-digit",
+		minute: "2-digit",
+		...t?.timeZoneName ? { timeZoneName: "short" } : {}
+	}).format(r);
+}
+//#endregion
+//#region src/lib/quickPicks.ts
+var Xt = {
+	start: [
+		{
+			token: "today",
+			label: "Today"
+		},
+		{
+			token: "month",
+			label: "1st of next month"
+		},
+		{
+			token: "year",
+			label: "1st of next year"
+		}
+	],
+	end: [
+		{
+			token: "month",
+			label: "End of this month"
+		},
+		{
+			token: "year",
+			label: "End of this year"
+		},
+		{
+			token: "ongoing",
+			label: "Ongoing"
+		}
+	]
+};
+function Zt(e, t = "start") {
+	let n = Z();
+	switch (e) {
+		case "today": return n.toString();
+		case "ongoing": return null;
+		case "month": return (t === "start" ? j(n.add({ months: 1 })) : w(n)).toString();
+		case "year": return (t === "start" ? M(n.add({ years: 1 })) : T(n)).toString();
+	}
+}
+function Qt(e, t, n) {
+	return {
+		token: e,
+		label: t,
+		markIndex: t.toLowerCase().indexOf(e),
+		accessibleName: `${t}, type ${e[0]}`,
+		value: Zt(e, n)
+	};
+}
+function $t({ edge: e = "start", allowOpenEnded: t, min: n, max: r } = {}) {
+	return Xt[e].filter(({ token: e }) => e !== "ongoing" || t).map(({ token: t, label: n }) => Qt(t, n, e)).filter((e) => e.value === null || !Q(e.value, n, r));
+}
+function en(e, t = {}) {
+	let n = e.trim().toLowerCase();
+	if (!n) return { kind: "none" };
+	let { edge: r = "start", allowOpenEnded: i, min: a, max: o } = t, s = Xt[r].find(({ token: e }) => e.startsWith(n) && (e !== "ongoing" || i));
+	if (!s) return { kind: "none" };
+	let c = Qt(s.token, s.label, r);
+	return c.value !== null && Q(c.value, a, o) ? {
+		kind: "outOfRange",
+		pick: c
+	} : {
+		kind: "match",
+		pick: c
+	};
+}
+var tn = [
+	{
+		period: "thisMonth",
+		label: "This month"
+	},
+	{
+		period: "nextMonth",
+		label: "Next month"
+	},
+	{
+		period: "thisYear",
+		label: "This year"
+	},
+	{
+		period: "nextYear",
+		label: "Next year"
+	}
+];
+function nn(e) {
+	let t = Z(), n = e === "nextMonth" ? t.add({ months: 1 }) : e === "nextYear" ? t.add({ years: 1 }) : t, [r, i] = e === "thisMonth" || e === "nextMonth" ? [j(n), w(n)] : [M(n), T(n)];
+	return {
+		start: r.toString(),
+		end: i.toString()
+	};
+}
+function rn({ min: e, max: t } = {}) {
+	return tn.map(({ period: e, label: t }) => ({
+		period: e,
+		label: t,
+		...nn(e)
+	})).filter(({ start: n, end: r }) => !Q(n, e, t) && !Q(r, e, t));
 }
 //#endregion
 //#region src/components/DatePicker/index.tsx
-var ot = "en-US", st = [
+var an = "en-US", on = [
 	"January",
 	"February",
 	"March",
@@ -779,7 +1276,7 @@ var ot = "en-US", st = [
 	"October",
 	"November",
 	"December"
-], ct = [
+], sn = [
 	"Su",
 	"Mo",
 	"Tu",
@@ -788,20 +1285,21 @@ var ot = "en-US", st = [
 	"Fr",
 	"Sa"
 ];
-function lt(e) {
-	let t = j(e), n = D(t, ot), r = t.subtract({ days: n }), i = k(e, ot);
+function cn(e) {
+	let t = j(e), n = D(t, an), r = t.subtract({ days: n }), i = k(e, an);
 	return Array.from({ length: i * 7 }, (e, t) => r.add({ days: t }));
 }
-function Z(e, t, n) {
-	return !!t && e < t || !!n && e > n;
+function ln(e) {
+	let [t, n, r] = e.split("-");
+	return `${e}, ${t}${n}${r}, or ${n}/${r}/${t}`;
 }
-function ut(e) {
-	return `${st[e.month - 1]} ${e.day}, ${e.year}`;
+function un(e) {
+	return `${on[e.month - 1]} ${e.day}, ${e.year}`;
 }
-var dt = t.div`
+var dn = t.div`
   position: relative;
   width: 100%;
-`, ft = t.input`
+`, fn = t.input`
   width: 100%;
   height: 44px;
   padding: 0 2.75rem 0 0.875rem;
@@ -816,7 +1314,7 @@ var dt = t.div`
   box-sizing: border-box;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  ${({ $status: e }) => Y(e)}
+  ${({ $status: e }) => ut(e)}
 
   &:disabled {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -827,7 +1325,7 @@ var dt = t.div`
   &::placeholder {
     color: ${({ theme: e }) => e.colors.subtle};
   }
-`, pt = t.button`
+`, pn = t.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -849,25 +1347,25 @@ var dt = t.div`
     color: ${({ theme: e }) => e.colors.subtle};
   }
   svg { width: 1.15rem; height: 1.15rem; }
-`, mt = t(E.Content)`
+`, mn = t(C.Content)`
   background-color: ${({ theme: e }) => e.colors.canvas};
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  padding: 0.75rem;
+  padding: 1rem;
   z-index: 50;
-`, ht = t.div`
+`, hn = t.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
-`, gt = t.button`
+  margin-bottom: 0.75rem;
+`, gn = t.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.sm};
   background: none;
@@ -875,34 +1373,34 @@ var dt = t.div`
   cursor: pointer;
 
   &:hover { background-color: ${({ theme: e }) => e.colors.surface2}; color: ${({ theme: e }) => e.colors.ink}; }
-  svg { width: 15px; height: 15px; }
-`, _t = t.span`
+  svg { width: 17px; height: 17px; }
+`, _n = t.span`
   font-family: ${({ theme: e }) => e.typography.fontFamily.display};
-  font-size: ${({ theme: e }) => e.fontSize.sm};
+  font-size: ${({ theme: e }) => e.fontSize.base};
   font-weight: ${({ theme: e }) => e.fontWeight.semibold};
   color: ${({ theme: e }) => e.colors.ink};
-`, vt = t.div`
+`, vn = t.div`
   display: grid;
-  grid-template-columns: repeat(7, 2rem);
-`, yt = t.span`
+  grid-template-columns: repeat(7, 2.5rem);
+`, yn = t.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1.75rem;
+  height: 2rem;
   font-family: ${({ theme: e }) => e.typography.fontFamily.mono};
   font-size: ${({ theme: e }) => e.fontSize.xs};
   color: ${({ theme: e }) => e.colors.muted};
-`, bt = t.button`
+`, bn = t.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
-  font-size: ${({ theme: e }) => e.fontSize.sm};
+  font-size: ${({ theme: e }) => e.fontSize.base};
   font-weight: ${({ theme: e, $today: t }) => t ? e.fontWeight.bold : e.fontWeight.normal};
   color: ${({ theme: e, $selected: t, $outside: n }) => t ? e.colors.canvas : n ? e.colors.subtle : e.colors.ink};
   background-color: ${({ theme: e, $selected: t }) => t ? e.colors.accent : "transparent"};
@@ -920,238 +1418,413 @@ var dt = t.div`
     cursor: not-allowed;
     opacity: 0.5;
   }
-`, xt = t.p`
+`, xn = t.p`
   margin: 0.375rem 0 0;
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.xs};
   color: ${({ theme: e }) => e.colors.error};
-`, St = t.button`
-  margin-top: 0.375rem;
-  padding: 0;
-  background: none;
+`, Sn = t.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid ${({ theme: e }) => e.colors.border};
+`, Cn = t.button`
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.5rem;
   border: none;
+  border-radius: ${({ theme: e }) => e.borderRadius.sm};
+  background: none;
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
-  font-size: ${({ theme: e }) => e.fontSize.xs};
-  color: ${({ theme: e }) => e.colors.muted};
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  color: ${({ theme: e }) => e.colors.ink};
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
 
-  &:hover { color: ${({ theme: e }) => e.colors.ink}; }
+  &:hover { background-color: ${({ theme: e }) => e.colors.surface2}; }
+  &:focus-visible {
+    outline: 2px solid ${({ theme: e }) => e.colors.accent};
+    outline-offset: -2px;
+  }
+`, wn = t.span`
+  display: inline;
+`, Tn = t.span`
+  font-weight: ${({ theme: e }) => e.fontWeight.bold};
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
 `;
-function Ct({ value: e, onValueChange: t, min: n, max: r, allowOpenEnded: i, openEndedLabel: l, placeholder: u = "MM/DD/YYYY", disabled: p, $hasError: m, id: h, "aria-label": g, "aria-labelledby": _, className: v }) {
-	let { fieldProps: y, status: b } = J(), x = m ? "error" : b, [T, D] = w(!1), [k, A] = w(""), [N, P] = w(!1), [F, I] = w(!1), L = C(null), R = C(!1), [z, B] = w(() => X(e) ?? M(O())), [V, H] = w(() => X(e) ?? M(O())), U = C(null), W = h ?? y.id, te = W ? `${W}-parse-error` : void 0;
-	S(() => {
-		F && U.current?.querySelector(`[data-date="${V.toString()}"]`)?.focus();
-	}, [F, V]);
-	function ne(t) {
+function En({ value: e, onValueChange: t, min: n, max: r, allowOpenEnded: i, openEndedLabel: l, edge: u = "start", placeholder: p = "YYYY-MM-DD", disabled: m, hasError: h, id: g, "aria-label": ee, "aria-labelledby": _, className: te }) {
+	let { fieldProps: v, status: ne } = Y(), x = h ? "error" : ne, [S, w] = b(!1), [T, E] = b(""), [D, O] = b(!1), [k, A] = b(!1), [M, N] = b(!1), P = y(null), F = y(!1), I = y(!1), L = y(!1), [R, z] = b(() => X(e) ?? Z()), [B, V] = b(() => X(e) ?? Z()), [H, U] = b(null), W = g ?? v.id, G = W ? `${W}-parse-error` : void 0, K = W ? `${W}-calendar` : void 0;
+	re(() => {
+		I.current && (I.current = !1, P.current?.select());
+	}, [S, T]), re(() => {
+		!M || !H || H.querySelector(`[data-date="${B.toString()}"]`)?.focus();
+	}, [
+		M,
+		B,
+		H
+	]);
+	function ae(t) {
 		if (t) {
-			let t = X(e) ?? M(O());
-			B(j(t)), H(t);
-		}
-		I(t);
+			let t = X(e) ?? Z();
+			z(j(t)), V(t);
+		} else N(!1);
+		A(t);
 	}
-	function re(e) {
+	function oe() {
+		N(!1), A(!1), I.current = !0, P.current?.focus();
+	}
+	function se() {
+		let e = P.current;
+		if (!e) return;
+		let t = Array.from(document.querySelectorAll("a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex=\"-1\"])")).filter((t) => t.offsetParent !== null || t === e);
+		t[t.indexOf(e) + 1]?.focus();
+	}
+	let q = {
+		edge: u,
+		allowOpenEnded: i,
+		min: n,
+		max: r
+	}, J = $t(q);
+	function ce(e) {
 		let i = e.trim();
 		if (!i) {
-			P(!1), t?.(null);
+			O(!1), t?.(null);
 			return;
 		}
-		let a = $e(tt(i));
-		if (!a || Z(a, n, r)) {
-			P(!0);
+		let a = It(Vt(i));
+		if (a && !Q(a, n, r)) {
+			O(!1), t?.(a);
 			return;
 		}
-		P(!1), t?.(a);
+		let o = en(i, q);
+		if (o.kind === "match") {
+			O(!1), t?.(o.pick.value);
+			return;
+		}
+		O(!0);
 	}
-	function ie(e) {
+	function le(e) {
+		P.current?.focus(), O(!1), t?.(e.value), E(e.value ?? ""), F.current = !1, I.current = !0, N(!1), A(!1);
+	}
+	function ue(e) {
 		let i = e.toString();
-		Z(i, n, r) || (P(!1), t?.(i), I(!1));
+		Q(i, n, r) || (P.current?.focus(), O(!1), t?.(i), E(i), F.current = !1, I.current = !0, N(!1), A(!1));
 	}
-	function ae(e) {
-		H(e), (e.month !== z.month || e.year !== z.year) && B(j(e));
+	function de(e) {
+		V(e), (e.month !== R.month || e.year !== R.year) && z(j(e));
 	}
-	function oe(e) {
+	function fe(e) {
+		if (e.key === "Tab" && !e.shiftKey) {
+			e.preventDefault(), N(!1), A(!1), se();
+			return;
+		}
 		let t = {
-			ArrowLeft: () => V.subtract({ days: 1 }),
-			ArrowRight: () => V.add({ days: 1 }),
-			ArrowUp: () => V.subtract({ weeks: 1 }),
-			ArrowDown: () => V.add({ weeks: 1 }),
-			PageUp: () => V.subtract({ months: 1 }),
-			PageDown: () => V.add({ months: 1 }),
-			Home: () => j(V)
+			ArrowLeft: () => B.subtract({ days: 1 }),
+			ArrowRight: () => B.add({ days: 1 }),
+			ArrowUp: () => B.subtract({ weeks: 1 }),
+			ArrowDown: () => B.add({ weeks: 1 }),
+			PageUp: () => B.subtract({ months: 1 }),
+			PageDown: () => B.add({ months: 1 }),
+			Home: () => j(B)
 		}[e.key];
-		t && (e.preventDefault(), ae(t()));
+		t && (e.preventDefault(), de(t()));
 	}
-	let se = ee(() => lt(z), [z]), G = M(O()).toString(), ce = e ?? null, le = V.toString(), K = i === !0 && e == null, q = e ? it(e) : "", ue = T ? k : e ? q : K && l ? l : "";
-	return /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ s(E.Root, {
-		open: F,
-		onOpenChange: ne,
-		children: [
-			/* @__PURE__ */ s(dt, {
-				className: v,
-				children: [/* @__PURE__ */ o(ft, {
-					ref: L,
-					$openEnded: K && !T,
-					id: W,
-					"aria-label": g,
-					"aria-labelledby": _,
-					"aria-invalid": N || y["aria-invalid"] || void 0,
-					"aria-required": y["aria-required"],
-					"aria-describedby": [N ? te : void 0, y["aria-describedby"]].filter(Boolean).join(" ") || void 0,
-					$status: N ? "error" : x,
-					disabled: p,
-					placeholder: u,
-					value: ue,
-					onFocus: () => {
-						D(!0), R.current = !1, A(K ? "" : q);
-					},
-					onChange: (e) => {
-						let i = e.target.value;
-						A(i), R.current = !0, N && P(!1);
-						let a = $e(tt(i));
-						a && !Z(a, n, r) && t?.(a);
-					},
-					onBlur: () => {
-						D(!1), R.current && (R.current = !1, re(k));
-					},
-					onKeyDown: (e) => {
-						e.key === "Enter" && (e.preventDefault(), R.current && (R.current = !1, re(k)));
+	let pe = ie(() => cn(R), [R]), me = Rt(), he = e ?? null, ge = B.toString(), _e = i === !0 && e == null, ve = S ? T : e || (_e && l ? l : "");
+	return /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ s(C.Root, {
+		open: k,
+		onOpenChange: ae,
+		children: [/* @__PURE__ */ s(dn, {
+			className: te,
+			children: [/* @__PURE__ */ o(fn, {
+				ref: P,
+				$openEnded: _e && !S,
+				id: W,
+				"aria-label": ee,
+				"aria-labelledby": _,
+				"aria-keyshortcuts": "ArrowDown",
+				"aria-invalid": D || v["aria-invalid"] || void 0,
+				"aria-required": v["aria-required"],
+				"aria-describedby": [D ? G : void 0, v["aria-describedby"]].filter(Boolean).join(" ") || void 0,
+				$status: D ? "error" : x,
+				disabled: m,
+				placeholder: p,
+				value: ve,
+				onMouseDown: () => {
+					L.current = document.activeElement !== P.current;
+				},
+				onMouseUp: (e) => {
+					L.current && (L.current = !1, e.preventDefault());
+				},
+				onFocus: () => {
+					w(!0), F.current = !1, I.current = !0, E(_e ? "" : e ?? "");
+				},
+				onChange: (e) => {
+					let i = e.target.value;
+					E(i), F.current = !0, D && O(!1);
+					let a = It(Vt(i));
+					if (a && !Q(a, n, r)) {
+						if (t?.(a), k) {
+							let e = X(a);
+							e && de(e);
+						}
+						return;
 					}
-				}), /* @__PURE__ */ o(E.Trigger, {
-					asChild: !0,
-					children: /* @__PURE__ */ o(pt, {
-						type: "button",
-						disabled: p,
-						"aria-label": "Open calendar",
-						children: /* @__PURE__ */ o(c, {})
-					})
-				})]
-			}),
-			i && !p && (e == null ? /* @__PURE__ */ o(St, {
-				type: "button",
-				onClick: () => {
-					D(!0), A(""), L.current?.focus();
+					let o = en(i, q);
+					if (o.kind === "match" && (t?.(o.pick.value), k && o.pick.value)) {
+						let e = X(o.pick.value);
+						e && de(e);
+					}
 				},
-				children: "Pick a date"
-			}) : /* @__PURE__ */ s(St, {
-				type: "button",
-				onClick: () => {
-					P(!1), t?.(null);
+				onBlur: () => {
+					w(!1), F.current && (F.current = !1, ce(T));
 				},
-				children: ["Set to ", l ?? "open-ended"]
-			})),
-			/* @__PURE__ */ o(E.Portal, { children: /* @__PURE__ */ s(mt, {
-				align: "start",
-				sideOffset: 4,
-				role: "dialog",
-				"aria-label": "Choose date",
-				onOpenAutoFocus: (e) => e.preventDefault(),
-				children: [/* @__PURE__ */ s(ht, { children: [
-					/* @__PURE__ */ o(gt, {
+				onKeyDown: (e) => {
+					if (e.key === "Enter") {
+						e.preventDefault();
+						let n = en(T, q);
+						if (n.kind === "match") {
+							O(!1), t?.(n.pick.value), E(n.pick.value ?? ""), F.current = !1, I.current = !0;
+							return;
+						}
+						F.current && (F.current = !1, ce(T));
+						return;
+					}
+					if (e.key === "ArrowDown") {
+						e.preventDefault(), k || ae(!0), N(!0);
+						return;
+					}
+					e.key === "Tab" && k && (N(!1), A(!1));
+				}
+			}), /* @__PURE__ */ o(C.Trigger, {
+				asChild: !0,
+				children: /* @__PURE__ */ o(pn, {
+					type: "button",
+					disabled: m,
+					tabIndex: -1,
+					onMouseDown: (e) => e.preventDefault(),
+					"aria-label": "Open calendar",
+					"aria-expanded": k,
+					"aria-controls": k ? K : void 0,
+					children: /* @__PURE__ */ o(c, {})
+				})
+			})]
+		}), /* @__PURE__ */ o(C.Portal, { children: /* @__PURE__ */ s(mn, {
+			id: K,
+			align: "start",
+			sideOffset: 4,
+			collisionPadding: 8,
+			role: "dialog",
+			"aria-label": "Choose date",
+			onOpenAutoFocus: (e) => e.preventDefault(),
+			onCloseAutoFocus: (e) => e.preventDefault(),
+			onFocusOutside: (e) => e.preventDefault(),
+			onPointerDownOutside: (e) => {
+				e.target === P.current && e.preventDefault();
+			},
+			onEscapeKeyDown: () => {
+				M && oe();
+			},
+			children: [
+				J.length > 0 && /* @__PURE__ */ o(Sn, { children: J.map((e) => /* @__PURE__ */ o(Cn, {
+					type: "button",
+					"aria-label": e.accessibleName,
+					onMouseDown: (e) => e.preventDefault(),
+					onClick: () => le(e),
+					children: /* @__PURE__ */ s(wn, { children: [
+						e.label.slice(0, e.markIndex),
+						/* @__PURE__ */ o(Tn, { children: e.label[e.markIndex] }),
+						e.label.slice(e.markIndex + 1)
+					] })
+				}, e.token)) }),
+				/* @__PURE__ */ s(hn, { children: [
+					/* @__PURE__ */ o(gn, {
 						type: "button",
 						"aria-label": "Previous month",
-						onClick: () => B(z.subtract({ months: 1 })),
+						onClick: () => z(R.subtract({ months: 1 })),
 						children: /* @__PURE__ */ o(d, {})
 					}),
-					/* @__PURE__ */ s(_t, { children: [
-						st[z.month - 1],
+					/* @__PURE__ */ s(_n, { children: [
+						on[R.month - 1],
 						" ",
-						z.year
+						R.year
 					] }),
-					/* @__PURE__ */ o(gt, {
+					/* @__PURE__ */ o(gn, {
 						type: "button",
 						"aria-label": "Next month",
-						onClick: () => B(z.add({ months: 1 })),
+						onClick: () => z(R.add({ months: 1 })),
 						children: /* @__PURE__ */ o(f, {})
 					})
-				] }), /* @__PURE__ */ s(vt, {
+				] }),
+				/* @__PURE__ */ s(vn, {
 					ref: U,
-					onKeyDown: oe,
-					children: [ct.map((e) => /* @__PURE__ */ o(yt, {
+					onKeyDown: fe,
+					children: [sn.map((e) => /* @__PURE__ */ o(yn, {
 						"aria-hidden": "true",
 						children: e
-					}, e)), se.map((e) => {
-						let t = e.toString(), i = e.month === z.month && e.year === z.year, a = t === ce;
-						return /* @__PURE__ */ o(bt, {
+					}, e)), pe.map((e) => {
+						let t = e.toString(), i = e.month === R.month && e.year === R.year, a = t === he;
+						return /* @__PURE__ */ o(bn, {
 							type: "button",
 							"data-date": t,
-							tabIndex: t === le ? 0 : -1,
-							"aria-label": ut(e),
+							tabIndex: t === ge ? 0 : -1,
+							"aria-label": un(e),
 							"aria-pressed": a,
-							"aria-current": t === G ? "date" : void 0,
-							disabled: Z(t, n, r),
+							"aria-current": t === me ? "date" : void 0,
+							disabled: Q(t, n, r),
 							$selected: a,
-							$today: t === G,
+							$today: t === me,
 							$outside: !i,
-							onClick: () => ie(e),
+							onMouseDown: (e) => e.preventDefault(),
+							onClick: () => ue(e),
 							children: e.day
 						}, t);
 					})]
-				})]
-			}) })
-		]
-	}), N && /* @__PURE__ */ s(xt, {
-		id: te,
+				})
+			]
+		}) })]
+	}), D && /* @__PURE__ */ o(xn, {
+		id: G,
 		role: "alert",
-		children: [
-			"Enter a date like ",
-			G,
-			" or ",
-			at(G),
-			"."
-		]
+		children: /^[a-z]/i.test(T.trim()) && J.length > 0 ? `Try ${J.map((e) => e.token).join(", ")}.` : `Enter a date like ${ln(me)}.`
 	})] });
 }
 //#endregion
-//#region src/components/DateRangePicker/index.tsx
-var wt = t.div`
+//#region src/components/DateRangePicker/PeriodChips.tsx
+function Dn({ min: e, max: t, disabled: n, "aria-label": r, onPick: i }) {
+	let [a, s] = b(0), c = y([]), l = rn({
+		min: e,
+		max: t
+	});
+	if (l.length === 0) return null;
+	let u = Math.min(a, l.length - 1);
+	function d(e) {
+		s(e), c.current[e]?.focus();
+	}
+	function f(e) {
+		let t = l.length - 1, n = e.key === "ArrowRight" ? u === t ? 0 : u + 1 : e.key === "ArrowLeft" ? u === 0 ? t : u - 1 : e.key === "Home" ? 0 : e.key === "End" ? t : null;
+		n !== null && (e.preventDefault(), d(n));
+	}
+	return /* @__PURE__ */ o(On, {
+		role: "toolbar",
+		"aria-orientation": "horizontal",
+		"aria-label": r,
+		onKeyDown: f,
+		children: l.map((e, t) => /* @__PURE__ */ o(kn, {
+			type: "button",
+			ref: (e) => {
+				c.current[t] = e;
+			},
+			tabIndex: t === u ? 0 : -1,
+			disabled: n,
+			onClick: () => {
+				i({
+					start: e.start,
+					end: e.end
+				}), d(t);
+			},
+			children: e.label
+		}, e.period))
+	});
+}
+var On = t.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+  gap: ${({ theme: e }) => e.spacing.xs};
+`, kn = t.button`
+  height: 1.75rem;
+  padding: 0 ${({ theme: e }) => e.spacing.sm};
+  border: 1px solid ${({ theme: e }) => e.colors.border};
+  border-radius: ${({ theme: e }) => e.borderRadius.full};
+  background-color: ${({ theme: e }) => e.colors.surface2};
+  color: ${({ theme: e }) => e.colors.ink};
+  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
+  font-size: ${({ theme: e }) => e.fontSize.xs};
+  font-weight: ${({ theme: e }) => e.fontWeight.medium};
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+
+  &:hover:not(:disabled) {
+    background-color: ${({ theme: e }) => e.colors.border};
+    border-color: ${({ theme: e }) => e.colors.borderStrong};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme: e }) => e.colors.accent};
+    outline-offset: 1px;
+  }
+
+  &:disabled {
+    color: ${({ theme: e }) => e.colors.subtle};
+    cursor: not-allowed;
+  }
+`, An = t.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+`, jn = t.div`
   display: flex;
   align-items: center;
   gap: 0.625rem;
-`, Tt = t.div`
+  flex: 1 1 20rem;
+  min-width: 0;
+`, Mn = t.div`
   flex: 1 1 0;
   min-width: 0;
-`, Et = t.span`
+`, Nn = t.span`
   flex-shrink: 0;
   color: ${({ theme: e }) => e.colors.muted};
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
 `;
-function Dt({ start: e, end: t, onStartChange: n, onEndChange: r, min: i, max: a, allowOpenEndedStart: c, allowOpenEndedEnd: l, startOpenEndedLabel: u, endOpenEndedLabel: d, startId: f, endId: p, startAriaLabel: m = "Start date", endAriaLabel: h = "End date", disabled: g, $hasError: _ }) {
-	return /* @__PURE__ */ s(wt, { children: [
-		/* @__PURE__ */ o(Tt, { children: /* @__PURE__ */ o(Ct, {
-			id: f,
-			"aria-label": m,
+function Pn({ start: e, end: t, onStartChange: n, onEndChange: r, onRangeChange: i, periodsAriaLabel: a = "Set both dates", min: c, max: l, allowOpenEndedStart: u, allowOpenEndedEnd: d, startOpenEndedLabel: f, endOpenEndedLabel: p, startId: m, endId: h, startAriaLabel: g = "Start date", endAriaLabel: ee = "End date", disabled: _, hasError: te }) {
+	return /* @__PURE__ */ s(An, { children: [/* @__PURE__ */ s(jn, { children: [
+		/* @__PURE__ */ o(Mn, { children: /* @__PURE__ */ o(En, {
+			edge: "start",
+			id: m,
+			"aria-label": g,
 			value: e,
 			onValueChange: n,
-			min: i || void 0,
-			max: t || a || void 0,
-			allowOpenEnded: c,
-			openEndedLabel: u,
-			disabled: g,
-			$hasError: _
+			min: c || void 0,
+			max: t || l || void 0,
+			allowOpenEnded: u,
+			openEndedLabel: f,
+			disabled: _,
+			hasError: te
 		}) }),
-		/* @__PURE__ */ o(Et, {
+		/* @__PURE__ */ o(Nn, {
 			"aria-hidden": "true",
 			children: "–"
 		}),
-		/* @__PURE__ */ o(Tt, { children: /* @__PURE__ */ o(Ct, {
-			id: p,
-			"aria-label": h,
+		/* @__PURE__ */ o(Mn, { children: /* @__PURE__ */ o(En, {
+			edge: "end",
+			id: h,
+			"aria-label": ee,
 			value: t,
 			onValueChange: r,
-			min: e || i || void 0,
-			max: a || void 0,
-			allowOpenEnded: l,
-			openEndedLabel: d,
-			disabled: g,
-			$hasError: _
+			min: e || c || void 0,
+			max: l || void 0,
+			allowOpenEnded: d,
+			openEndedLabel: p,
+			disabled: _,
+			hasError: te
 		}) })
-	] });
+	] }), i && /* @__PURE__ */ o(Dn, {
+		"aria-label": a,
+		min: c,
+		max: l,
+		disabled: _,
+		onPick: i
+	})] });
 }
 //#endregion
 //#region src/components/DescriptionList/index.tsx
-var Ot = t.dl`
+var Fn = t.dl`
   display: grid;
   grid-template-columns: minmax(8rem, 12rem) 1fr;
   gap: ${({ theme: e }) => e.spacing.sm} ${({ theme: e }) => e.spacing.lg};
@@ -1161,12 +1834,12 @@ var Ot = t.dl`
     grid-template-columns: 1fr;
     gap: ${({ theme: e }) => e.spacing.xs} 0;
   }
-`, kt = t.dt`
+`, In = t.dt`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.muted};
   margin: 0;
-`, At = t.dd`
+`, Ln = t.dd`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.ink};
@@ -1175,10 +1848,10 @@ var Ot = t.dl`
   @media (max-width: 480px) {
     margin-bottom: ${({ theme: e }) => e.spacing.sm};
   }
-`, jt = N.Root, Mt = N.Trigger, Nt = r`
+`, Rn = F.Root, zn = F.Trigger, Bn = r`
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
-`, Pt = t(N.Content)`
+`, Vn = t(F.Content)`
   min-width: 11rem;
   padding: ${({ theme: e }) => e.spacing.xs};
   background-color: ${({ theme: e }) => e.colors.canvas};
@@ -1186,15 +1859,15 @@ var Ot = t.dl`
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
   z-index: 60;
-  animation: ${Nt} ${({ theme: e }) => e.motion.duration.fast}
+  animation: ${Bn} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
 `;
-function Ft(e) {
-	return /* @__PURE__ */ o(N.Portal, { children: /* @__PURE__ */ o(Pt, {
+function Hn(e) {
+	return /* @__PURE__ */ o(F.Portal, { children: /* @__PURE__ */ o(Vn, {
 		align: "end",
 		sideOffset: 4,
 		...e
@@ -1202,7 +1875,7 @@ function Ft(e) {
 }
 //#endregion
 //#region src/components/DropdownMenu/items.tsx
-var It = t(N.Item)`
+var Un = t(F.Item).withConfig({ shouldForwardProp: J("danger") })`
   display: flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.sm};
@@ -1210,13 +1883,13 @@ var It = t(N.Item)`
   border-radius: ${({ theme: e }) => e.borderRadius.sm};
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
-  color: ${({ theme: e, $danger: t }) => t ? e.colors.error : e.colors.ink};
+  color: ${({ theme: e, danger: t }) => t ? e.colors.error : e.colors.ink};
   cursor: pointer;
   outline: none;
   user-select: none;
 
   &[data-highlighted] {
-    background-color: ${({ theme: e, $danger: t }) => t ? e.colors.errorSoft : e.colors.surface2};
+    background-color: ${({ theme: e, danger: t }) => t ? e.colors.errorSoft : e.colors.surface2};
   }
 
   &[data-disabled] {
@@ -1228,11 +1901,11 @@ var It = t(N.Item)`
     width: 1rem;
     height: 1rem;
   }
-`, Lt = t(N.Separator)`
+`, Wn = t(F.Separator)`
   height: 1px;
   margin: ${({ theme: e }) => e.spacing.xs} 0;
   background-color: ${({ theme: e }) => e.colors.border};
-`, Rt = t(N.Label)`
+`, Gn = t(F.Label)`
   padding: ${({ theme: e }) => e.spacing.xs} ${({ theme: e }) => e.spacing.md};
   font-size: ${({ theme: e }) => e.fontSize.xs};
   font-weight: ${({ theme: e }) => e.fontWeight.semibold};
@@ -1242,21 +1915,21 @@ var It = t(N.Item)`
 `;
 //#endregion
 //#region src/components/EmptyState/index.tsx
-function zt({ icon: e, title: t, description: n, action: r, className: i }) {
-	return /* @__PURE__ */ s(Bt, {
+function Kn({ icon: e, title: t, description: n, action: r, className: i }) {
+	return /* @__PURE__ */ s(qn, {
 		className: i,
 		children: [
-			e && /* @__PURE__ */ o(Vt, {
+			e && /* @__PURE__ */ o(Jn, {
 				"aria-hidden": "true",
 				children: e
 			}),
-			/* @__PURE__ */ o(Ht, { children: t }),
-			n && /* @__PURE__ */ o(Ut, { children: n }),
-			r && /* @__PURE__ */ o(Wt, { children: r })
+			/* @__PURE__ */ o(Yn, { children: t }),
+			n && /* @__PURE__ */ o(Xn, { children: n }),
+			r && /* @__PURE__ */ o(Zn, { children: r })
 		]
 	});
 }
-var Bt = t.div`
+var qn = t.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1264,7 +1937,7 @@ var Bt = t.div`
   gap: ${({ theme: e }) => e.spacing.sm};
   padding: ${({ theme: e }) => e.spacing["3xl"]} ${({ theme: e }) => e.spacing.xl};
   color: ${({ theme: e }) => e.colors.muted};
-`, Vt = t.div`
+`, Jn = t.div`
   color: ${({ theme: e }) => e.colors.subtle};
   margin-bottom: ${({ theme: e }) => e.spacing.xs};
 
@@ -1272,26 +1945,26 @@ var Bt = t.div`
     width: 2.5rem;
     height: 2.5rem;
   }
-`, Ht = t.p`
+`, Yn = t.p`
   font-family: ${({ theme: e }) => e.typography.fontFamily.display};
   font-size: ${({ theme: e }) => e.fontSize.lg};
   font-weight: ${({ theme: e }) => e.fontWeight.semibold};
   color: ${({ theme: e }) => e.colors.ink};
   margin: 0;
-`, Ut = t.p`
+`, Xn = t.p`
   font-size: ${({ theme: e }) => e.fontSize.sm};
   max-width: 40ch;
   line-height: ${({ theme: e }) => e.lineHeight.relaxed};
   margin: 0;
-`, Wt = t.div`
+`, Zn = t.div`
   margin-top: ${({ theme: e }) => e.spacing.md};
-`, Gt = t(P.Root)`
+`, Qn = t(I.Root)`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
   color: ${({ theme: e }) => e.colors.ink};
   cursor: default;
-`, Kt = t.input`
+`, $n = t.input`
   width: 100%;
   height: 44px;
   padding: 0 0.875rem;
@@ -1303,9 +1976,11 @@ var Bt = t.div`
   background-color: ${({ theme: e }) => e.colors.canvas};
   outline: none;
   box-sizing: border-box;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color ${({ theme: e }) => e.motion.duration.fast}
+      ${({ theme: e }) => e.motion.easing.standard},
+    box-shadow ${({ theme: e }) => e.motion.duration.fast} ${({ theme: e }) => e.motion.easing.standard};
 
-  ${({ $status: e }) => Y(e)}
+  ${({ $status: e }) => ut(e)}
 
   &:disabled {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -1316,42 +1991,42 @@ var Bt = t.div`
   &::placeholder {
     color: ${({ theme: e }) => e.colors.subtle};
   }
-`, qt = v(function({ $hasError: e, ...t }, n) {
-	let { fieldProps: r, status: i } = J();
-	return /* @__PURE__ */ o(Kt, {
+`, er = _(function({ hasError: e, ...t }, n) {
+	let { fieldProps: r, status: i } = Y();
+	return /* @__PURE__ */ o($n, {
 		ref: n,
 		$status: e ? "error" : i,
 		...r,
 		...t
 	});
-}), Jt = t.p`
+}), tr = t.p`
   font-size: ${({ theme: e }) => e.fontSize.xs};
   color: ${({ theme: e }) => e.colors.error};
   margin: 0;
-`, Yt = t.p`
+`, nr = t.p.withConfig({ shouldForwardProp: J("status") })`
   font-size: ${({ theme: e }) => e.fontSize.xs};
-  color: ${({ theme: e, $status: t }) => e.colors[t]};
+  color: ${({ theme: e, status: t }) => e.colors[t]};
   margin: 0;
-`, Xt = t.div`
+`, rr = t.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-`, Zt = t.div`
+`, ir = t.div`
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
-`, Qt = t(Gt)`
+`, ar = t(Qn)`
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-`, $t = t.span`
+`, or = t.span`
   color: ${({ theme: e }) => e.colors.brand};
-`, en = t.p`
+`, sr = t.p`
   font-size: ${({ theme: e }) => e.fontSize.xs};
   color: ${({ theme: e }) => e.colors.muted};
   margin: 0;
 `;
-function tn(e, t, n) {
+function cr(e, t, n) {
 	return e ? {
 		status: "error",
 		message: e
@@ -1363,8 +2038,8 @@ function tn(e, t, n) {
 		message: n
 	} : null;
 }
-function nn({ label: e, description: t, error: n, warning: r, success: i, required: a = !1, htmlFor: c, className: l, children: u }) {
-	let d = x(), f = c ?? `field-${d}`, p = t ? `${f}-description` : void 0, m = tn(n, r, i), h = m?.status, g = h ? `${f}-status` : void 0, _ = ee(() => ({
+function lr({ label: e, description: t, error: n, warning: r, success: i, required: a = !1, htmlFor: c, className: l, children: u }) {
+	let d = ne(), f = c ?? `field-${d}`, p = t ? `${f}-description` : void 0, m = cr(n, r, i), h = m?.status, g = h ? `${f}-status` : void 0, ee = ie(() => ({
 		controlId: f,
 		descriptionId: p,
 		statusId: g,
@@ -1377,26 +2052,26 @@ function nn({ label: e, description: t, error: n, warning: r, success: i, requir
 		h,
 		a
 	]);
-	return /* @__PURE__ */ o(Fe.Provider, {
-		value: _,
-		children: /* @__PURE__ */ s(Zt, {
+	return /* @__PURE__ */ o(et.Provider, {
+		value: ee,
+		children: /* @__PURE__ */ s(ir, {
 			className: l,
 			children: [
-				/* @__PURE__ */ s(Qt, {
+				/* @__PURE__ */ s(ar, {
 					htmlFor: f,
-					children: [e, a && /* @__PURE__ */ o($t, {
+					children: [e, a && /* @__PURE__ */ o(or, {
 						"aria-hidden": "true",
 						children: "*"
 					})]
 				}),
 				u,
-				t && /* @__PURE__ */ o(en, {
+				t && /* @__PURE__ */ o(sr, {
 					id: p,
 					children: t
 				}),
-				m && /* @__PURE__ */ o(Yt, {
+				m && /* @__PURE__ */ o(nr, {
 					id: g,
-					$status: m.status,
+					status: m.status,
 					role: m.status === "error" ? "alert" : void 0,
 					children: m.message
 				})
@@ -1405,121 +2080,8 @@ function nn({ label: e, description: t, error: n, warning: r, success: i, requir
 	});
 }
 //#endregion
-//#region src/components/Modal/index.tsx
-function rn({ open: e, onOpenChange: t, title: n, description: r, children: i, footer: a, width: c }) {
-	return /* @__PURE__ */ o(F.Root, {
-		open: e,
-		onOpenChange: t,
-		children: /* @__PURE__ */ s(F.Portal, { children: [/* @__PURE__ */ o(sn, {}), /* @__PURE__ */ s(cn, {
-			style: c ? { maxWidth: c } : void 0,
-			children: [
-				/* @__PURE__ */ s(ln, { children: [/* @__PURE__ */ s(un, { children: [/* @__PURE__ */ o(dn, { children: n }), r ? /* @__PURE__ */ o(fn, { children: r }) : /* @__PURE__ */ o(F.Description, {
-					"aria-hidden": !0,
-					style: { display: "none" }
-				})] }), /* @__PURE__ */ o(F.Close, {
-					asChild: !0,
-					children: /* @__PURE__ */ o(pn, {
-						"aria-label": "Close",
-						children: /* @__PURE__ */ o(h, {
-							width: 20,
-							height: 20
-						})
-					})
-				})] }),
-				/* @__PURE__ */ o(mn, { children: i }),
-				a && /* @__PURE__ */ o(hn, { children: a })
-			]
-		})] })
-	});
-}
-var an = r`from { opacity: 0; } to { opacity: 1; }`, on = r`
-  from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-`, sn = t(F.Overlay)`
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.45);
-  animation: ${an} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-`, cn = t(F.Content)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100vw - 2rem);
-  max-width: 32rem;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme: e }) => e.colors.canvas};
-  border: 1px solid ${({ theme: e }) => e.colors.border};
-  border-radius: ${({ theme: e }) => e.borderRadius.lg};
-  box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 51;
-  animation: ${on} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
-
-  &:focus {
-    outline: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-`, ln = t.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: ${({ theme: e }) => e.spacing.lg};
-  padding: ${({ theme: e }) => e.spacing.xl} ${({ theme: e }) => e.spacing.xl} ${({ theme: e }) => e.spacing.lg};
-  flex-shrink: 0;
-`, un = t.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme: e }) => e.spacing.xs};
-  min-width: 0;
-`, dn = t(F.Title)`
-  font-family: ${({ theme: e }) => e.typography.fontFamily.display};
-  font-size: ${({ theme: e }) => e.fontSize.lg};
-  font-weight: ${({ theme: e }) => e.fontWeight.semibold};
-  color: ${({ theme: e }) => e.colors.ink};
-  margin: 0;
-`, fn = t(F.Description)`
-  font-size: ${({ theme: e }) => e.fontSize.sm};
-  color: ${({ theme: e }) => e.colors.muted};
-  margin: 0;
-`, pn = t.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
-  border-radius: ${({ theme: e }) => e.borderRadius.md};
-  color: ${({ theme: e }) => e.colors.muted};
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background-color ${({ theme: e }) => e.motion.duration.fast} ${({ theme: e }) => e.motion.easing.standard};
-
-  &:hover {
-    background-color: ${({ theme: e }) => e.colors.surface2};
-    color: ${({ theme: e }) => e.colors.ink};
-  }
-`, mn = t.div`
-  padding: 0 ${({ theme: e }) => e.spacing.xl};
-  overflow-y: auto;
-`, hn = t.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: ${({ theme: e }) => e.spacing.md};
-  padding: ${({ theme: e }) => e.spacing.xl};
-  flex-shrink: 0;
-`, gn = t(qt)`
+//#region src/components/NumberInput/index.tsx
+var ur = t(er)`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1528,8 +2090,8 @@ var an = r`from { opacity: 0; } to { opacity: 1; }`, on = r`
   -moz-appearance: textfield;
   appearance: textfield;
 `;
-function _n({ inputMode: e = "numeric", ...t }) {
-	return /* @__PURE__ */ o(gn, {
+function dr({ inputMode: e = "numeric", ...t }) {
+	return /* @__PURE__ */ o(ur, {
 		type: "number",
 		inputMode: e,
 		...t
@@ -1537,14 +2099,14 @@ function _n({ inputMode: e = "numeric", ...t }) {
 }
 //#endregion
 //#region src/components/Pagination/index.tsx
-function vn({ page: e, pageCount: t, onPageChange: n, className: r }) {
+function fr({ page: e, pageCount: t, onPageChange: n, className: r }) {
 	if (t <= 1) return null;
-	let i = bn(e, t);
-	return /* @__PURE__ */ s(xn, {
+	let i = mr(e, t);
+	return /* @__PURE__ */ s(hr, {
 		"aria-label": "Pagination",
 		className: r,
 		children: [
-			/* @__PURE__ */ o(Cn, {
+			/* @__PURE__ */ o(_r, {
 				type: "button",
 				"aria-label": "Previous page",
 				disabled: e <= 1,
@@ -1554,17 +2116,17 @@ function vn({ page: e, pageCount: t, onPageChange: n, className: r }) {
 					height: 16
 				})
 			}),
-			i.map((t, r) => t === yn ? /* @__PURE__ */ o(Tn, {
+			i.map((t, r) => t === pr ? /* @__PURE__ */ o(yr, {
 				"aria-hidden": "true",
 				children: "…"
-			}, `gap-${r}`) : /* @__PURE__ */ o(wn, {
+			}, `gap-${r}`) : /* @__PURE__ */ o(vr, {
 				type: "button",
 				$active: t === e,
 				"aria-current": t === e ? "page" : void 0,
 				onClick: () => n(t),
 				children: t
 			}, t)),
-			/* @__PURE__ */ o(Cn, {
+			/* @__PURE__ */ o(_r, {
 				type: "button",
 				"aria-label": "Next page",
 				disabled: e >= t,
@@ -1577,8 +2139,8 @@ function vn({ page: e, pageCount: t, onPageChange: n, className: r }) {
 		]
 	});
 }
-var yn = -1;
-function bn(e, t) {
+var pr = -1;
+function mr(e, t) {
 	let n = [.../* @__PURE__ */ new Set([
 		1,
 		t,
@@ -1586,15 +2148,15 @@ function bn(e, t) {
 		e - 1,
 		e + 1
 	])].filter((e) => e >= 1 && e <= t).sort((e, t) => e - t), r = [], i = 0;
-	for (let e of n) e - i > 1 && r.push(yn), r.push(e), i = e;
+	for (let e of n) e - i > 1 && r.push(pr), r.push(e), i = e;
 	return r;
 }
-var xn = t.nav`
+var hr = t.nav`
   display: inline-flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.xs};
-`, Sn = "\n  min-width: 2rem;\n  height: 2rem;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 8px;\n  cursor: pointer;\n", Cn = t.button`
-  ${Sn}
+`, gr = "\n  min-width: 2rem;\n  height: 2rem;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 8px;\n  cursor: pointer;\n", _r = t.button`
+  ${gr}
   padding: 0 0.375rem;
   border: 1px solid ${({ theme: e }) => e.colors.border};
   background-color: ${({ theme: e }) => e.colors.canvas};
@@ -1608,8 +2170,8 @@ var xn = t.nav`
     opacity: 0.4;
     cursor: not-allowed;
   }
-`, wn = t.button`
-  ${Sn}
+`, vr = t.button`
+  ${gr}
   padding: 0 0.5rem;
   border: 1px solid ${({ theme: e, $active: t }) => t ? e.colors.accent : e.colors.border};
   background-color: ${({ theme: e, $active: t }) => t ? e.colors.accentSoft : e.colors.canvas};
@@ -1621,14 +2183,97 @@ var xn = t.nav`
   &:hover {
     border-color: ${({ theme: e }) => e.colors.borderStrong};
   }
-`, Tn = t.span`
+`, yr = t.span`
   min-width: 1.5rem;
   text-align: center;
   color: ${({ theme: e }) => e.colors.subtle};
-`, En = E.Root, Dn = E.Trigger, On = E.Close, kn = r`
+`, br = t.div`
+  position: relative;
+`, xr = t(er)`
+  padding-right: 2.75rem;
+`, Sr = t.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.75rem;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: ${({ theme: e }) => e.colors.subtle};
+  cursor: pointer;
+  border-radius: ${({ theme: e }) => e.borderRadius.md};
+
+  &:hover {
+    color: ${({ theme: e }) => e.colors.ink};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme: e }) => e.colors.accent};
+    outline-offset: -4px;
+  }
+`;
+function Cr() {
+	return /* @__PURE__ */ s("svg", {
+		width: "18",
+		height: "18",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		"aria-hidden": "true",
+		children: [/* @__PURE__ */ o("path", {
+			d: "M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z",
+			stroke: "currentColor",
+			strokeWidth: "1.6",
+			strokeLinejoin: "round"
+		}), /* @__PURE__ */ o("circle", {
+			cx: "12",
+			cy: "12",
+			r: "3",
+			stroke: "currentColor",
+			strokeWidth: "1.6"
+		})]
+	});
+}
+function wr() {
+	return /* @__PURE__ */ s("svg", {
+		width: "18",
+		height: "18",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		"aria-hidden": "true",
+		children: [/* @__PURE__ */ o("path", {
+			d: "M2.5 12S6 5.5 12 5.5c1.7 0 3.2.5 4.5 1.2M21.5 12S18 18.5 12 18.5c-1.7 0-3.2-.5-4.5-1.2",
+			stroke: "currentColor",
+			strokeWidth: "1.6",
+			strokeLinecap: "round",
+			strokeLinejoin: "round"
+		}), /* @__PURE__ */ o("path", {
+			d: "M4 20 20 4",
+			stroke: "currentColor",
+			strokeWidth: "1.6",
+			strokeLinecap: "round"
+		})]
+	});
+}
+var Tr = _(function(e, t) {
+	let [n, r] = b(!1);
+	return /* @__PURE__ */ s(br, { children: [/* @__PURE__ */ o(xr, {
+		ref: t,
+		type: n ? "text" : "password",
+		...e
+	}), /* @__PURE__ */ o(Sr, {
+		type: "button",
+		"aria-label": n ? "Hide password" : "Show password",
+		"aria-pressed": n,
+		onClick: () => r((e) => !e),
+		children: o(n ? wr : Cr, {})
+	})] });
+}), Er = C.Root, Dr = C.Trigger, Or = C.Close, kr = r`
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
-`, An = t(E.Content)`
+`, Ar = t(C.Content)`
   min-width: 14rem;
   max-width: min(24rem, calc(100vw - 2rem));
   padding: ${({ theme: e }) => e.spacing.lg};
@@ -1637,7 +2282,7 @@ var xn = t.nav`
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
   z-index: 60;
-  animation: ${kn} ${({ theme: e }) => e.motion.duration.fast}
+  animation: ${kr} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
   &:focus {
@@ -1647,30 +2292,30 @@ var xn = t.nav`
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`, jn = t(E.Arrow)`
+`, jr = t(C.Arrow)`
   fill: ${({ theme: e }) => e.colors.canvas};
   stroke: ${({ theme: e }) => e.colors.border};
   stroke-width: 1px;
 `;
-function Mn(e) {
+function Mr(e) {
 	let { children: t, ...n } = e;
-	return /* @__PURE__ */ o(E.Portal, { children: /* @__PURE__ */ s(An, {
+	return /* @__PURE__ */ o(C.Portal, { children: /* @__PURE__ */ s(Ar, {
 		align: "start",
 		sideOffset: 6,
 		...n,
-		children: [t, /* @__PURE__ */ o(jn, {})]
+		children: [t, /* @__PURE__ */ o(jr, {})]
 	}) });
 }
 //#endregion
 //#region src/components/Progress/index.tsx
-var Nn = t(I.Root)`
+var Nr = t(L.Root)`
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 0.5rem;
   border-radius: ${({ theme: e }) => e.borderRadius.full};
   background-color: ${({ theme: e }) => e.colors.surface2};
-`, Pn = t(I.Indicator)`
+`, Pr = t(L.Indicator)`
   height: 100%;
   background-color: ${({ theme: e }) => e.colors.accent};
   border-radius: inherit;
@@ -1681,28 +2326,28 @@ var Nn = t(I.Root)`
     transition: none;
   }
 `;
-function Fn({ value: e, className: t, ...n }) {
+function Fr({ value: e, className: t, ...n }) {
 	let r = e == null ? null : Math.max(0, Math.min(100, e));
-	return /* @__PURE__ */ o(Nn, {
+	return /* @__PURE__ */ o(Nr, {
 		value: r,
 		className: t,
 		...n,
-		children: /* @__PURE__ */ o(Pn, { style: { width: `${r ?? 0}%` } })
+		children: /* @__PURE__ */ o(Pr, { style: { width: `${r ?? 0}%` } })
 	});
 }
 //#endregion
 //#region src/components/RadioGroup/index.tsx
-var In = t(L.Root)`
+var Ir = t(R.Root)`
   display: flex;
   flex-direction: ${({ $horizontal: e }) => e ? "row" : "column"};
   flex-wrap: ${({ $horizontal: e }) => e ? "wrap" : "nowrap"};
   gap: ${({ $horizontal: e }) => e ? "1.25rem" : "0.5rem"};
-`, Ln = t.div`
+`, Lr = t.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: ${({ $disabled: e }) => e ? "not-allowed" : "pointer"};
-`, Rn = t(L.Item)`
+`, Rr = t(R.Item)`
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -1726,7 +2371,7 @@ var In = t(L.Root)`
     outline: 2px solid ${({ theme: e }) => e.colors.accent};
     outline-offset: 2px;
   }
-`, zn = t(L.Indicator)`
+`, zr = t(R.Indicator)`
   display: inline-flex;
   &::after {
     content: '';
@@ -1735,15 +2380,15 @@ var In = t(L.Root)`
     border-radius: 50%;
     background: ${({ theme: e }) => e.colors.accent};
   }
-`, Bn = t.label`
+`, Br = t.label`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   color: ${({ theme: e }) => e.colors.ink};
   cursor: inherit;
 `;
-function Vn({ value: e, onValueChange: t, options: n, disabled: r, id: i, name: a, orientation: c = "vertical", className: l, ...u }) {
-	let { fieldProps: d } = J(), f = x(), p = i ?? d.id ?? `radiogroup-${f}`;
-	return /* @__PURE__ */ o(In, {
+function Vr({ value: e, onValueChange: t, options: n, disabled: r, id: i, name: a, orientation: c = "vertical", className: l, ...u }) {
+	let { fieldProps: d } = Y(), f = ne(), p = i ?? d.id ?? `radiogroup-${f}`;
+	return /* @__PURE__ */ o(Ir, {
 		value: e,
 		onValueChange: t,
 		disabled: r,
@@ -1756,14 +2401,14 @@ function Vn({ value: e, onValueChange: t, options: n, disabled: r, id: i, name: 
 		"aria-required": d["aria-required"],
 		children: n.map((e) => {
 			let t = `${p}-${e.value}`;
-			return /* @__PURE__ */ s(Ln, {
+			return /* @__PURE__ */ s(Lr, {
 				$disabled: r || e.disabled,
-				children: [/* @__PURE__ */ o(Rn, {
+				children: [/* @__PURE__ */ o(Rr, {
 					value: e.value,
 					id: t,
 					disabled: e.disabled,
-					children: /* @__PURE__ */ o(zn, {})
-				}), /* @__PURE__ */ o(Bn, {
+					children: /* @__PURE__ */ o(zr, {})
+				}), /* @__PURE__ */ o(Br, {
 					htmlFor: t,
 					children: e.label
 				})]
@@ -1773,7 +2418,7 @@ function Vn({ value: e, onValueChange: t, options: n, disabled: r, id: i, name: 
 }
 //#endregion
 //#region src/components/Select/index.tsx
-var Hn = t(R.Trigger)`
+var Hr = t(z.Trigger)`
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -1792,7 +2437,7 @@ var Hn = t(R.Trigger)`
   box-sizing: border-box;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  ${({ $status: e }) => Y(e)}
+  ${({ $status: e }) => ut(e)}
 
   &[data-disabled] {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -1803,18 +2448,19 @@ var Hn = t(R.Trigger)`
   &[data-placeholder] {
     color: ${({ theme: e }) => e.colors.subtle};
   }
-`, Un = t(R.Content)`
+`, Ur = t(z.Content)`
   overflow: hidden;
   background-color: ${({ theme: e }) => e.colors.canvas};
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
   z-index: 50;
-`, Wn = t(R.Viewport)`
+`, Wr = t(z.Viewport)`
   padding: 0.25rem;
-`, Gn = t(R.Item)`
+`, Gr = t(z.Item)`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.base};
@@ -1830,13 +2476,23 @@ var Hn = t(R.Trigger)`
     background-color: ${({ theme: e }) => e.colors.surface2};
     color: ${({ theme: e }) => e.colors.ink};
   }
-`, Kn = t(R.ItemIndicator)`
+
+  &[data-disabled] {
+    color: ${({ theme: e }) => e.colors.subtle};
+    cursor: not-allowed;
+  }
+`, Kr = t.span`
+  font-size: ${({ theme: e }) => e.fontSize.sm};
+  color: ${({ theme: e }) => e.colors.muted};
+  max-width: 18rem;
+  white-space: normal;
+`, qr = t(z.ItemIndicator)`
   position: absolute;
   right: 0.5rem;
   display: inline-flex;
   align-items: center;
   color: ${({ theme: e }) => e.colors.accent};
-`, qn = t(R.ScrollUpButton)`
+`, Jr = t(z.ScrollUpButton)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1844,45 +2500,51 @@ var Hn = t(R.Trigger)`
   color: ${({ theme: e }) => e.colors.muted};
   cursor: default;
 `;
-function Jn({ value: e, onValueChange: t, options: n, placeholder: r, disabled: i, $hasError: a, id: c, className: d, "aria-label": f, "aria-labelledby": p }) {
-	let { fieldProps: h, status: g } = J();
-	return /* @__PURE__ */ s(R.Root, {
+function Yr({ value: e, onValueChange: t, options: n, placeholder: r, disabled: i, hasError: a, id: c, className: d, tabIndex: f, "aria-label": p, "aria-labelledby": h }) {
+	let { fieldProps: g, status: ee } = Y();
+	return /* @__PURE__ */ s(z.Root, {
 		value: e,
 		onValueChange: t,
 		disabled: i,
-		children: [/* @__PURE__ */ s(Hn, {
+		children: [/* @__PURE__ */ s(Hr, {
 			className: d,
-			$status: a ? "error" : g,
-			id: c ?? h.id,
-			"aria-label": f,
-			"aria-labelledby": p,
-			"aria-describedby": h["aria-describedby"],
-			"aria-invalid": h["aria-invalid"],
-			"aria-required": h["aria-required"],
-			children: [/* @__PURE__ */ o(R.Value, { placeholder: r ?? "Select…" }), /* @__PURE__ */ o(R.Icon, { children: /* @__PURE__ */ o(u, { style: {
+			$status: a ? "error" : ee,
+			id: c ?? g.id,
+			tabIndex: f,
+			"aria-label": p,
+			"aria-labelledby": h,
+			"aria-describedby": g["aria-describedby"],
+			"aria-invalid": g["aria-invalid"],
+			"aria-required": g["aria-required"],
+			children: [/* @__PURE__ */ o(z.Value, { placeholder: r ?? "Select…" }), /* @__PURE__ */ o(z.Icon, { children: /* @__PURE__ */ o(u, { style: {
 				width: "1rem",
 				height: "1rem"
 			} }) })]
-		}), /* @__PURE__ */ o(R.Portal, { children: /* @__PURE__ */ s(Un, {
+		}), /* @__PURE__ */ o(z.Portal, { children: /* @__PURE__ */ s(Ur, {
 			position: "popper",
 			sideOffset: 4,
 			children: [
-				/* @__PURE__ */ o(qn, {
-					as: R.ScrollUpButton,
+				/* @__PURE__ */ o(Jr, {
+					as: z.ScrollUpButton,
 					children: /* @__PURE__ */ o(m, { style: {
 						width: "1rem",
 						height: "1rem"
 					} })
 				}),
-				/* @__PURE__ */ o(Wn, { children: n.map((e) => /* @__PURE__ */ s(Gn, {
+				/* @__PURE__ */ o(Wr, { children: n.map((e) => /* @__PURE__ */ s(Gr, {
 					value: e.value,
-					children: [/* @__PURE__ */ o(R.ItemText, { children: e.label }), /* @__PURE__ */ o(Kn, { children: /* @__PURE__ */ o(l, { style: {
-						width: "0.875rem",
-						height: "0.875rem"
-					} }) })]
+					disabled: e.disabled,
+					children: [
+						/* @__PURE__ */ o(z.ItemText, { children: e.label }),
+						e.hint && /* @__PURE__ */ o(Kr, { children: e.hint }),
+						/* @__PURE__ */ o(qr, { children: /* @__PURE__ */ o(l, { style: {
+							width: "0.875rem",
+							height: "0.875rem"
+						} }) })
+					]
 				}, e.value)) }),
-				/* @__PURE__ */ o(qn, {
-					as: R.ScrollDownButton,
+				/* @__PURE__ */ o(Jr, {
+					as: z.ScrollDownButton,
 					children: /* @__PURE__ */ o(u, { style: {
 						width: "1rem",
 						height: "1rem"
@@ -1894,28 +2556,28 @@ function Jn({ value: e, onValueChange: t, options: n, placeholder: r, disabled: 
 }
 //#endregion
 //#region src/components/Skeleton/index.tsx
-var Yn = r`
+var Xr = r`
   0%, 100% { opacity: 1; }
   50% { opacity: 0.45; }
-`, Xn = t.div`
+`, Zr = t.div.withConfig({ shouldForwardProp: J("radius") })`
   background-color: ${({ theme: e }) => e.colors.surface2};
-  border-radius: ${({ theme: e, $radius: t }) => t ?? e.borderRadius.sm};
+  border-radius: ${({ theme: e, radius: t }) => t ?? e.borderRadius.sm};
   width: 100%;
   height: 1rem;
-  animation: ${Yn} 1.4s ease-in-out infinite;
+  animation: ${Xr} 1.4s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`, Zn = t(Xn)`
+`, Qr = t(Zr)`
   border-radius: ${({ theme: e }) => e.borderRadius.full};
-`, Qn = t(Xn)`
+`, $r = t(Zr)`
   height: 0.75rem;
 `;
 //#endregion
 //#region src/components/Slider/index.tsx
-function $n({ value: e, onValueChange: t, min: n = 0, max: r = 100, step: i = 1, disabled: a, className: c, "aria-label": l }) {
-	return /* @__PURE__ */ s(er, {
+function ei({ value: e, onValueChange: t, min: n = 0, max: r = 100, step: i = 1, disabled: a, className: c, "aria-label": l }) {
+	return /* @__PURE__ */ s(ti, {
 		value: [e],
 		onValueChange: ([e]) => t(e),
 		min: n,
@@ -1923,10 +2585,10 @@ function $n({ value: e, onValueChange: t, min: n = 0, max: r = 100, step: i = 1,
 		step: i,
 		disabled: a,
 		className: c,
-		children: [/* @__PURE__ */ o(tr, { children: /* @__PURE__ */ o(nr, {}) }), /* @__PURE__ */ o(rr, { "aria-label": l })]
+		children: [/* @__PURE__ */ o(ni, { children: /* @__PURE__ */ o(ri, {}) }), /* @__PURE__ */ o(ii, { "aria-label": l })]
 	});
 }
-var er = t(z.Root)`
+var ti = t(B.Root)`
   position: relative;
   display: flex;
   align-items: center;
@@ -1938,18 +2600,18 @@ var er = t(z.Root)`
   &[data-disabled] {
     opacity: 0.5;
   }
-`, tr = t(z.Track)`
+`, ni = t(B.Track)`
   position: relative;
   flex-grow: 1;
   height: 4px;
   border-radius: ${({ theme: e }) => e.borderRadius.full};
   background-color: ${({ theme: e }) => e.colors.surface2};
-`, nr = t(z.Range)`
+`, ri = t(B.Range)`
   position: absolute;
   height: 100%;
   border-radius: inherit;
   background-color: ${({ theme: e }) => e.colors.accent};
-`, rr = t(z.Thumb)`
+`, ii = t(B.Thumb)`
   display: block;
   width: 1rem;
   height: 1rem;
@@ -1967,20 +2629,20 @@ var er = t(z.Root)`
   &:active {
     cursor: grabbing;
   }
-`, ir = {
+`, ai = {
 	sm: "1rem",
 	md: "1.5rem",
 	lg: "2.25rem"
-}, ar = r`
+}, oi = r`
   to { transform: rotate(360deg); }
-`, or = t.span`
+`, si = t.span.withConfig({ shouldForwardProp: J("size", "color") })`
   display: inline-block;
-  width: ${({ $size: e = "md" }) => ir[e]};
-  height: ${({ $size: e = "md" }) => ir[e]};
+  width: ${({ size: e = "md" }) => ai[e]};
+  height: ${({ size: e = "md" }) => ai[e]};
   border-radius: 50%;
   border: 2px solid ${({ theme: e }) => e.colors.borderStrong};
-  border-top-color: ${({ theme: e, $color: t }) => t ?? e.colors.accent};
-  animation: ${ar} 0.6s linear infinite;
+  border-top-color: ${({ theme: e, color: t }) => t ?? e.colors.accent};
+  animation: ${oi} 0.6s linear infinite;
   flex-shrink: 0;
 
   @media (prefers-reduced-motion: reduce) {
@@ -1989,43 +2651,43 @@ var er = t(z.Root)`
 `;
 //#endregion
 //#region src/components/Stepper/index.tsx
-function sr({ steps: e, current: t, className: n }) {
-	return /* @__PURE__ */ o(cr, {
+function ci({ steps: e, current: t, className: n }) {
+	return /* @__PURE__ */ o(li, {
 		className: n,
 		"aria-label": "Progress",
 		children: e.map((n, r) => {
 			let i = r < t ? "done" : r === t ? "current" : "upcoming";
-			return /* @__PURE__ */ s(g, { children: [/* @__PURE__ */ s(lr, {
+			return /* @__PURE__ */ s(g, { children: [/* @__PURE__ */ s(ui, {
 				"aria-current": i === "current" ? "step" : void 0,
-				children: [/* @__PURE__ */ o(ur, {
+				children: [/* @__PURE__ */ o(di, {
 					$state: i,
 					children: i === "done" ? /* @__PURE__ */ o(l, {
 						width: 14,
 						height: 14
 					}) : r + 1
-				}), /* @__PURE__ */ o(dr, {
+				}), /* @__PURE__ */ o(fi, {
 					$state: i,
 					children: n.label
 				})]
-			}), r < e.length - 1 && /* @__PURE__ */ o(fr, {
+			}), r < e.length - 1 && /* @__PURE__ */ o(pi, {
 				$done: r < t,
 				"aria-hidden": "true"
 			})] }, r);
 		})
 	});
 }
-var cr = t.ol`
+var li = t.ol`
   display: flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.sm};
   list-style: none;
   margin: 0;
   padding: 0;
-`, lr = t.li`
+`, ui = t.li`
   display: inline-flex;
   align-items: center;
   gap: ${({ theme: e }) => e.spacing.sm};
-`, ur = t.span`
+`, di = t.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2039,28 +2701,28 @@ var cr = t.ol`
     ${({ theme: e, $state: t }) => t === "upcoming" ? e.colors.border : e.colors.accent};
   background-color: ${({ theme: e, $state: t }) => t === "done" ? e.colors.accent : e.colors.canvas};
   color: ${({ theme: e, $state: t }) => t === "done" ? e.colors.canvas : t === "current" ? e.colors.accent : e.colors.subtle};
-`, dr = t.span`
+`, fi = t.span`
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
   font-weight: ${({ theme: e, $state: t }) => t === "current" ? e.fontWeight.semibold : e.fontWeight.normal};
   color: ${({ theme: e, $state: t }) => t === "upcoming" ? e.colors.subtle : e.colors.ink};
   white-space: nowrap;
-`, fr = t.span`
+`, pi = t.span`
   width: 2rem;
   height: 2px;
   border-radius: 1px;
   background-color: ${({ theme: e, $done: t }) => t ? e.colors.accent : e.colors.border};
-`, pr = t.label`
+`, mi = t.label`
   display: inline-flex;
   align-items: center;
   cursor: ${({ $disabled: e }) => e ? "not-allowed" : "pointer"};
-`, mr = t.input`
+`, hi = t.input`
   position: absolute;
   width: 1px;
   height: 1px;
   opacity: 0;
   margin: 0;
-`, hr = t.span`
+`, gi = t.span`
   position: relative;
   display: inline-block;
   width: 34px;
@@ -2070,11 +2732,11 @@ var cr = t.ol`
   opacity: ${({ $disabled: e }) => e ? .5 : 1};
   transition: background 120ms ease;
 
-  ${mr}:focus-visible + & {
+  ${hi}:focus-visible + & {
     outline: 2px solid ${({ theme: e }) => e.colors.accent};
     outline-offset: 2px;
   }
-`, gr = t.span`
+`, _i = t.span`
   position: absolute;
   top: 2px;
   left: 2px;
@@ -2085,58 +2747,89 @@ var cr = t.ol`
   transform: translateX(${({ $checked: e }) => e ? "14px" : "0"});
   transition: transform 120ms ease;
 `;
-function _r({ checked: e, onCheckedChange: t, disabled: n, ...r }) {
-	return /* @__PURE__ */ s(pr, {
+function vi({ checked: e, onCheckedChange: t, disabled: n, ...r }) {
+	return /* @__PURE__ */ s(mi, {
 		$disabled: n,
-		children: [/* @__PURE__ */ o(mr, {
+		children: [/* @__PURE__ */ o(hi, {
 			type: "checkbox",
 			role: "switch",
 			checked: e,
 			disabled: n,
 			"aria-label": r["aria-label"],
 			onChange: (e) => t(e.target.checked)
-		}), /* @__PURE__ */ o(hr, {
+		}), /* @__PURE__ */ o(gi, {
 			$checked: e,
 			$disabled: n,
-			children: /* @__PURE__ */ o(gr, { $checked: e })
+			children: /* @__PURE__ */ o(_i, { $checked: e })
 		})]
 	});
 }
 //#endregion
 //#region src/components/Table/index.tsx
-var vr = t.div`
+var yi = t.div`
   overflow-x: auto;
-`, yr = t.table`
+`, bi = t.table`
   width: 100%;
   border-collapse: collapse;
   font-size: ${({ theme: e }) => e.fontSize.sm};
-`, br = t.thead`
+`, xi = t.thead`
   background-color: ${({ theme: e }) => e.colors.surface};
-`, xr = t.tbody``, Sr = t.tr`
-  cursor: ${({ $interactive: e }) => e ? "pointer" : "default"};
-  ${({ $interactive: e, theme: t }) => e && `&:hover { background-color: ${t.colors.surface}; }`}
-`, Cr = t.th`
+`, Si = t.tbody``, Ci = t.tr.withConfig({ shouldForwardProp: J("interactive") })`
+  cursor: ${({ interactive: e }) => e ? "pointer" : "default"};
+  ${({ interactive: e, theme: t }) => e && `&:hover { background-color: ${t.colors.surface}; }`}
+`, wi = t.th.withConfig({ shouldForwardProp: J("noBorder", "align") })`
   padding: 0.75rem 1rem;
-  text-align: ${({ $align: e }) => e ?? "left"};
+  text-align: ${({ align: e }) => e ?? "left"};
   font-family: ${({ theme: e }) => e.typography.fontFamily.mono};
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
   color: ${({ theme: e }) => e.colors.muted};
   text-transform: uppercase;
   font-size: ${({ theme: e }) => e.fontSize.xs};
   letter-spacing: 0.05em;
-  border-bottom: ${({ theme: e, $noBorder: t }) => t ? "none" : `1px solid ${e.colors.border}`};
-`, wr = t.td`
+  border-bottom: ${({ theme: e, noBorder: t }) => t ? "none" : `1px solid ${e.colors.border}`};
+`, Ti = t.td.withConfig({ shouldForwardProp: J("noBorder", "align", "mono", "muted") })`
   padding: 0.75rem 1rem;
-  text-align: ${({ $align: e }) => e ?? "left"};
-  font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
-  color: ${({ theme: e }) => e.colors.ink};
+  text-align: ${({ align: e }) => e ?? "left"};
+  font-family: ${({ theme: e, mono: t }) => t ? e.typography.fontFamily.mono : e.typography.fontFamily.sans};
+  font-size: ${({ theme: e, mono: t, muted: n }) => t || n ? e.fontSize.xs : e.fontSize.sm};
+  color: ${({ theme: e, muted: t }) => t ? e.colors.muted : e.colors.ink};
+  white-space: ${({ mono: e, muted: t }) => e || t ? "nowrap" : "normal"};
   vertical-align: middle;
-  border-bottom: ${({ theme: e, $noBorder: t }) => t ? "none" : `1px solid ${e.colors.border}`};
-`, Tr = B.Root, Er = t(B.List)`
+  border-bottom: ${({ theme: e, noBorder: t }) => t ? "none" : `1px solid ${e.colors.border}`};
+`, Ei = t(bi)`
+  th,
+  td {
+    text-align: center;
+  }
+
+  th[data-identity],
+  td[data-identity] {
+    text-align: left;
+  }
+
+  th[data-action],
+  td[data-action] {
+    width: 1px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  tbody tr:hover {
+    background-color: ${({ theme: e }) => e.colors.surface};
+  }
+
+  tbody tr[data-past] {
+    background-color: ${({ theme: e }) => e.colors.surface};
+  }
+
+  tbody tr[data-past]:hover {
+    background-color: ${({ theme: e }) => e.colors.surface2};
+  }
+`, Di = V.Root, Oi = t(V.List)`
   display: flex;
   border-bottom: 1px solid ${({ theme: e }) => e.colors.border};
   gap: 0;
-`, Dr = t(B.Trigger)`
+`, ki = t(V.Trigger)`
   padding: 0.75rem 1rem;
   font-family: ${({ theme: e }) => e.typography.fontFamily.sans};
   font-size: ${({ theme: e }) => e.fontSize.sm};
@@ -2147,7 +2840,9 @@ var vr = t.div`
   background: none;
   cursor: pointer;
   margin-bottom: -1px;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition: color ${({ theme: e }) => e.motion.duration.fast}
+      ${({ theme: e }) => e.motion.easing.standard},
+    border-color ${({ theme: e }) => e.motion.duration.fast} ${({ theme: e }) => e.motion.easing.standard};
   outline: none;
 
   &:hover {
@@ -2163,14 +2858,62 @@ var vr = t.div`
     box-shadow: 0 0 0 2px ${({ theme: e }) => e.colors.accentSoft};
     border-radius: ${({ theme: e }) => e.borderRadius.sm};
   }
-`, Or = t(B.Content)`
+`, Ai = t(V.Content)`
   outline: none;
 
   &:focus-visible {
     box-shadow: 0 0 0 2px ${({ theme: e }) => e.colors.accentSoft};
     border-radius: ${({ theme: e }) => e.borderRadius.md};
   }
-`, kr = t.textarea`
+`, ji = {
+	display: Ne,
+	h1: Pe,
+	h2: Fe,
+	sectionTitle: Ie,
+	bodyLarge: Le,
+	body: Re,
+	bodySmall: ze,
+	caption: Be,
+	overline: Ve,
+	mono: He
+}, Mi = {
+	default: (e) => e.colors.ink,
+	muted: (e) => e.colors.muted,
+	subtle: (e) => e.colors.subtle,
+	brand: (e) => e.colors.brand,
+	accent: (e) => e.colors.accent,
+	danger: (e) => e.colors.error,
+	warning: (e) => e.colors.warning,
+	success: (e) => e.colors.success,
+	info: (e) => e.colors.info,
+	inverse: (e) => e.colors.onFill
+}, Ni = {
+	display: "h1",
+	h1: "h1",
+	h2: "h2",
+	sectionTitle: "h3",
+	bodyLarge: "p",
+	body: "p",
+	bodySmall: "p",
+	caption: "p",
+	overline: "span",
+	mono: "span"
+}, Pi = t.p`
+  margin: 0; /* layout owns spacing (ADR-0167 gap-first); no stray browser margins */
+  ${({ $variant: e }) => ji[e]}
+  color: ${({ theme: e, $tone: t }) => Mi[t](e)};
+`;
+function Fi({ variant: e = "body", tone: t = "default", as: n, ...r }) {
+	return /* @__PURE__ */ o(Pi, {
+		as: n ?? Ni[e],
+		$variant: e,
+		$tone: t,
+		...r
+	});
+}
+//#endregion
+//#region src/components/Textarea/index.tsx
+var Ii = t.textarea`
   width: 100%;
   min-height: 88px;
   padding: 0.625rem 0.875rem;
@@ -2186,7 +2929,7 @@ var vr = t.div`
   resize: vertical;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  ${({ $status: e }) => Y(e)}
+  ${({ $status: e }) => ut(e)}
 
   &:disabled {
     background-color: ${({ theme: e }) => e.colors.surface2};
@@ -2198,27 +2941,27 @@ var vr = t.div`
   &::placeholder {
     color: ${({ theme: e }) => e.colors.subtle};
   }
-`, Ar = v(function({ $hasError: e, ...t }, n) {
-	let { fieldProps: r, status: i } = J();
-	return /* @__PURE__ */ o(kr, {
+`, Li = _(function({ hasError: e, ...t }, n) {
+	let { fieldProps: r, status: i } = Y();
+	return /* @__PURE__ */ o(Ii, {
 		ref: n,
 		$status: e ? "error" : i,
 		...r,
 		...t
 	});
-}), jr = t(V.Root)`
+}), Ri = t(H.Root)`
   display: inline-flex;
   padding: 2px;
   gap: 2px;
   background-color: ${({ theme: e }) => e.colors.surface2};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
-`, Mr = t(V.Item)`
+`, zi = t(H.Item)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme: e }) => e.spacing.xs};
+  gap: 0.25rem;
   height: 2rem;
-  padding: 0 ${({ theme: e }) => e.spacing.md};
+  padding: 0 0.75rem;
   border: none;
   border-radius: ${({ theme: e }) => e.borderRadius.sm};
   background: none;
@@ -2253,23 +2996,23 @@ var vr = t.div`
 `;
 //#endregion
 //#region src/components/Tooltip/index.tsx
-function Nr({ content: e, children: t, side: n = "top", delayDuration: r = 200 }) {
-	return /* @__PURE__ */ o(H.Provider, {
+function Bi({ content: e, children: t, side: n = "top", delayDuration: r = 200 }) {
+	return /* @__PURE__ */ o(U.Provider, {
 		delayDuration: r,
-		children: /* @__PURE__ */ s(H.Root, { children: [/* @__PURE__ */ o(H.Trigger, {
+		children: /* @__PURE__ */ s(U.Root, { children: [/* @__PURE__ */ o(U.Trigger, {
 			asChild: !0,
 			children: t
-		}), /* @__PURE__ */ o(H.Portal, { children: /* @__PURE__ */ s(Fr, {
+		}), /* @__PURE__ */ o(U.Portal, { children: /* @__PURE__ */ s(Hi, {
 			side: n,
 			sideOffset: 6,
-			children: [e, /* @__PURE__ */ o(Ir, {})]
+			children: [e, /* @__PURE__ */ o(Ui, {})]
 		}) })] })
 	});
 }
-var Pr = r`
+var Vi = r`
   from { opacity: 0; transform: translateY(2px); }
   to { opacity: 1; transform: translateY(0); }
-`, Fr = t(H.Content)`
+`, Hi = t(U.Content)`
   max-width: 18rem;
   padding: 0.375rem 0.625rem;
   border-radius: ${({ theme: e }) => e.borderRadius.sm};
@@ -2280,15 +3023,15 @@ var Pr = r`
   line-height: ${({ theme: e }) => e.lineHeight.snug};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
   z-index: 60;
-  animation: ${Pr} ${({ theme: e }) => e.motion.duration.fast}
+  animation: ${Vi} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`, Ir = t(H.Arrow)`
+`, Ui = t(U.Arrow)`
   fill: ${({ theme: e }) => e.colors.ink};
-`, Q = {
+`, Wi = {
 	white: "#ffffff",
 	black: "#000000",
 	transparent: "transparent",
@@ -2296,6 +3039,9 @@ var Pr = r`
 	ink800: "#212327",
 	ink700: "#2B2D32",
 	ink600: "#3A3D44",
+	ink400: "#6B6E78",
+	ink300: "#A1A3AA",
+	ink50: "#F4F4F5",
 	brand50: "#FDECED",
 	brand200: "#F7A3A7",
 	brand500: "#ED1C24",
@@ -2350,7 +3096,7 @@ var Pr = r`
 		800: "#166534",
 		900: "#14532d"
 	}
-}, Lr = {
+}, Gi = {
 	xs: "0.75rem",
 	sm: "0.8125rem",
 	base: "0.9375rem",
@@ -2360,30 +3106,36 @@ var Pr = r`
 	"3xl": "1.875rem",
 	"4xl": "2.25rem",
 	"5xl": "3rem"
-}, Rr = {
+}, Ki = {
 	normal: "400",
 	medium: "500",
 	semibold: "600",
 	bold: "700",
 	extrabold: "800",
 	black: "900"
-}, zr = {
+}, qi = {
+	flat: "1.1",
+	snugTight: "1.17",
 	tight: "1.25",
 	snug: "1.375",
 	normal: "1.5",
 	relaxed: "1.625",
 	loose: "2"
-}, Br = { fontFamily: {
+}, Ji = {
+	tight: "-0.03em",
+	normal: "0",
+	wide: "0.08em"
+}, Yi = { fontFamily: {
 	display: "'Archivo', sans-serif",
 	sans: "'Public Sans', ui-sans-serif, system-ui, -apple-system, sans-serif",
 	mono: "'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace"
-} }, Vr = {
+} }, Xi = {
 	none: "0",
 	sm: "6px",
 	md: "10px",
 	lg: "14px",
 	full: "9999px"
-}, Hr = {
+}, Zi = {
 	none: "0",
 	xs: "0.25rem",
 	sm: "0.5rem",
@@ -2393,17 +3145,17 @@ var Pr = r`
 	"2xl": "2rem",
 	"3xl": "3rem",
 	"4xl": "4rem"
-}, Ur = {
+}, Qi = {
 	card: "0 1px 2px rgba(16, 17, 20, 0.06)",
 	pop: "0 6px 24px rgba(16, 17, 20, 0.09)",
 	none: "none"
-}, Wr = {
+}, $i = {
 	sm: "640px",
 	md: "768px",
 	lg: "1024px",
 	xl: "1280px",
 	"2xl": "1536px"
-}, Gr = {
+}, ea = {
 	0: "0",
 	10: "10",
 	20: "20",
@@ -2411,7 +3163,7 @@ var Pr = r`
 	40: "40",
 	50: "50",
 	auto: "auto"
-}, Kr = {
+}, ta = {
 	canvas: "#FFFFFF",
 	surface: $.slate[50],
 	surface2: $.slate[100],
@@ -2419,7 +3171,8 @@ var Pr = r`
 	borderStrong: $.slate[300],
 	ink: $.slate[900],
 	muted: $.slate[600],
-	subtle: $.slate[400],
+	subtle: $.slate[500],
+	onFill: "#FFFFFF",
 	brand: "#ED1C24",
 	brandHover: "#C8141B",
 	brandSoft: "#FDECED",
@@ -2436,7 +3189,7 @@ var Pr = r`
 	oe: "#7C3AED",
 	oeSoft: "#EDE7FB",
 	oeFaint: "#F5F1FC"
-}, qr = {
+}, na = {
 	canvas: "#0d1117",
 	surface: "#161b22",
 	surface2: "#21262d",
@@ -2444,7 +3197,8 @@ var Pr = r`
 	borderStrong: "#484f58",
 	ink: "#e6edf3",
 	muted: "#8b949e",
-	subtle: "#6e7681",
+	subtle: "#7d8590",
+	onFill: "#FFFFFF",
 	brand: "#ED1C24",
 	brandHover: "#FF4A52",
 	brandSoft: "rgba(237, 28, 36, 0.18)",
@@ -2461,18 +3215,19 @@ var Pr = r`
 	oe: "#A78BFA",
 	oeSoft: "rgba(167, 139, 250, 0.22)",
 	oeFaint: "rgba(167, 139, 250, 0.10)"
-}, Jr = {
-	fixed: Q,
+}, ra = {
+	fixed: Wi,
 	scales: $,
-	fontSize: Lr,
-	fontWeight: Rr,
-	lineHeight: zr,
-	typography: Br,
-	borderRadius: Vr,
-	spacing: Hr,
-	boxShadow: Ur,
-	screens: Wr,
-	zIndex: Gr,
+	fontSize: Gi,
+	fontWeight: Ki,
+	lineHeight: qi,
+	letterSpacing: Ji,
+	typography: Yi,
+	borderRadius: Xi,
+	spacing: Zi,
+	boxShadow: Qi,
+	screens: $i,
+	zIndex: ea,
 	motion: {
 		duration: {
 			fast: "150ms",
@@ -2485,22 +3240,22 @@ var Pr = r`
 			standard: "cubic-bezier(0.4, 0, 0.2, 1)"
 		}
 	}
-}, Yr = {
-	...Jr,
+}, ia = {
+	...ra,
 	colors: {
-		...Q,
-		...Kr
+		...Wi,
+		...ta
 	}
-}, Xr = {
-	...Jr,
+}, aa = {
+	...ra,
 	colors: {
-		...Q,
-		...qr
+		...Wi,
+		...na
 	}
-}, Zr = {
+}, oa = {
 	STANDARD: 112.5,
 	LARGE: 125,
 	EXTRA_LARGE: 137.5
 };
 //#endregion
-export { U as Accordion, ae as AccordionContent, te as AccordionHeader, W as AccordionItem, ne as AccordionTrigger, se as Alert, ce as AlertBody, G as AlertIcon, K as AlertMessage, le as AlertTitle, de as Avatar, ve as Badge, ye as Breadcrumbs, De as Button, Oe as Card, je as CardActions, Me as CardBody, Ne as CardFooter, ke as CardHeader, Ae as CardTitle, Be as Checkbox, Ve as Chip, Ge as Combobox, Ct as DatePicker, Dt as DateRangePicker, At as DescriptionDetails, Ot as DescriptionList, kt as DescriptionTerm, jt as DropdownMenu, Ft as DropdownMenuContent, It as DropdownMenuItem, Rt as DropdownMenuLabel, Lt as DropdownMenuSeparator, Mt as DropdownMenuTrigger, zt as EmptyState, Jt as ErrorText, Xt as Field, nn as FormField, qt as Input, Gt as Label, rn as Modal, _n as NumberInput, vn as Pagination, En as Popover, On as PopoverClose, Mn as PopoverContent, Dn as PopoverTrigger, Fn as Progress, Vn as RadioGroup, Jn as Select, Xn as Skeleton, Zn as SkeletonCircle, Qn as SkeletonText, $n as Slider, or as Spinner, Yt as StatusMessage, sr as Stepper, _r as Switch, yr as Table, vr as TableScroll, Tr as Tabs, Or as TabsContent, Er as TabsList, Dr as TabsTrigger, xr as Tbody, wr as Td, Ar as Textarea, Cr as Th, br as Thead, jr as ToggleGroup, Mr as ToggleGroupItem, Nr as Tooltip, Sr as Tr, Xr as darkTheme, Zr as fontSizeScale, Yr as lightTheme, $ as scales };
+export { Ht as ALWAYS, Wt as ANYTIME, W as Accordion, q as AccordionContent, K as AccordionHeader, G as AccordionItem, ae as AccordionTrigger, le as Alert, de as AlertBody, ue as AlertIcon, pe as AlertMessage, fe as AlertTitle, ge as Avatar, Ce as Badge, we as Breadcrumbs, Me as Button, qe as Card, Xe as CardActions, Ze as CardBody, Qe as CardFooter, Je as CardHeader, Ye as CardTitle, at as Checkbox, ot as Chip, dt as Combobox, Pt as ConfirmDialog, En as DatePicker, Pn as DateRangePicker, Ln as DescriptionDetails, Fn as DescriptionList, In as DescriptionTerm, Rn as DropdownMenu, Hn as DropdownMenuContent, Un as DropdownMenuItem, Gn as DropdownMenuLabel, Wn as DropdownMenuSeparator, zn as DropdownMenuTrigger, Kn as EmptyState, tr as ErrorText, rr as Field, lr as FormField, er as Input, Qn as Label, St as Modal, dr as NumberInput, Ut as ONGOING, fr as Pagination, Tr as PasswordInput, Er as Popover, Or as PopoverClose, Mr as PopoverContent, Dr as PopoverTrigger, Fr as Progress, Vr as RadioGroup, Yr as Select, Zr as Skeleton, Qr as SkeletonCircle, $r as SkeletonText, ei as Slider, si as Spinner, nr as StatusMessage, ci as Stepper, vi as Switch, bi as Table, yi as TableScroll, Di as Tabs, Ai as TabsContent, Oi as TabsList, ki as TabsTrigger, Si as Tbody, Ti as Td, Fi as Text, Li as Textarea, wi as Th, xi as Thead, Ei as Timeline, Ri as ToggleGroup, zi as ToggleGroupItem, Bi as Tooltip, Ci as Tr, Le as bodyLargeType, ze as bodySmallType, Re as bodyType, Be as captionType, Ge as cardHeadingType, aa as darkTheme, qt as dayOfInstant, Ne as displayType, Ke as eyebrowType, oa as fontSizeScale, Kt as formatDate, Yt as formatDateTime, Jt as formatInstant, X as fromISO, Pe as h1Type, Fe as h2Type, ia as lightTheme, en as matchQuickPick, He as monoType, Q as outOfRange, Ve as overlineType, Ue as pageTitleType, We as panelHeadingType, Vt as parseUserDate, $t as quickPicksFor, rn as rangePicksFor, Zt as resolveQuickPick, nn as resolveRangePeriod, $ as scales, Ie as sectionTitleType, It as toISO, Z as todayDate, Lt as todayDateIn, Rt as todayISO };

@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
 
 type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
 type Size = 'sm' | 'md' | 'lg'
 
 export interface ButtonProps {
   /** Visual emphasis. `primary` = the one commit action per view; `danger` = destructive. @default 'primary' */
-  $variant?: Variant
+  variant?: Variant
   /** Control height/padding. @default 'md' */
-  $size?: Size
+  size?: Size
 }
 
 const variantStyles = {
@@ -58,7 +59,9 @@ const sizeStyles = {
   `,
 }
 
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button.withConfig({
+  shouldForwardProp: blockStyleProps('variant', 'size'),
+})<ButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -67,12 +70,19 @@ export const Button = styled.button<ButtonProps>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   cursor: pointer;
-  transition: background-color 150ms ease, opacity 150ms ease;
+  transition: background-color ${({ theme }) => theme.motion.duration.fast}
+      ${({ theme }) => theme.motion.easing.standard},
+    opacity ${({ theme }) => theme.motion.duration.fast} ${({ theme }) => theme.motion.easing.standard};
   white-space: nowrap;
   box-shadow: ${({ theme }) => theme.boxShadow.card};
 
-  ${({ $variant = 'primary' }) => variantStyles[$variant]}
-  ${({ $size = 'md' }) => sizeStyles[$size]}
+  ${({ variant = 'primary' }) => variantStyles[variant]}
+  ${({ size = 'md' }) => sizeStyles[size]}
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.brand};
+    outline-offset: 2px;
+  }
 
   &:disabled {
     background-color: ${({ theme }) => theme.colors.surface2};

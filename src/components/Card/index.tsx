@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
+import { cardHeadingType } from '../../theme/typography'
 
 export interface CardProps {
   /** Adds hover affordance (pointer cursor + lift) for a whole-card click target. */
-  $interactive?: boolean
+  interactive?: boolean
 }
 
 /**
@@ -12,15 +14,17 @@ export interface CardProps {
  * for the page shell itself use `PageContainer`, and for a full data grid use
  * `Table`. Styled-only (no logic) so it drops into any layout.
  */
-export const Card = styled.div<CardProps>`
+export const Card = styled.div.withConfig({
+  shouldForwardProp: blockStyleProps('interactive'),
+})<CardProps>`
   background-color: ${({ theme }) => theme.colors.canvas};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   box-shadow: ${({ theme }) => theme.boxShadow.card};
   overflow: hidden;
 
-  ${({ theme, $interactive }) =>
-    $interactive &&
+  ${({ theme, interactive }) =>
+    interactive &&
     `
     cursor: pointer;
     transition: border-color ${theme.motion.duration.fast} ${theme.motion.easing.standard},
@@ -42,9 +46,7 @@ export const CardHeader = styled.div`
 `
 
 export const CardTitle = styled.h3`
-  font-family: ${({ theme }) => theme.typography.fontFamily.display};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  ${cardHeadingType}
   color: ${({ theme }) => theme.colors.ink};
   margin: 0;
 `

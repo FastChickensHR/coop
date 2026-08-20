@@ -1,12 +1,18 @@
 import type { ReactNode } from 'react';
 export interface ModalProps {
+    /** Whether the dialog is showing (controlled). */
     open: boolean;
+    /** Called when the dialog wants to open or close — Escape, overlay click, the × button. */
     onOpenChange: (open: boolean) => void;
+    /** Heading text; also the dialog's accessible name, so it is required. */
     title: string;
+    /** One line under the title saying what this dialog is for. */
     description?: ReactNode;
+    /** The dialog body — the form or content the user works through. */
     children: ReactNode;
+    /** Action row pinned to the bottom of the panel (usually Cancel + a primary Button). */
     footer?: ReactNode;
-    /** Max width of the centred panel (default 32rem). */
+    /** Max width of the centred panel. @default '32rem' */
     width?: string;
 }
 /**

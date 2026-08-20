@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'error'
 
 export interface AlertProps {
   /** Semantic severity — info / success / warning / error (traffic-light, ADR-0157). @default 'info' */
-  $variant?: AlertVariant
+  variant?: AlertVariant
 }
 
 const variantStyles = {
@@ -30,7 +31,9 @@ const variantStyles = {
   `,
 }
 
-export const Alert = styled.div<AlertProps>`
+export const Alert = styled.div.withConfig({
+  shouldForwardProp: blockStyleProps('variant'),
+})<AlertProps>`
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
@@ -39,7 +42,7 @@ export const Alert = styled.div<AlertProps>`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.sm};
 
-  ${({ $variant = 'info' }) => variantStyles[$variant]}
+  ${({ variant = 'info' }) => variantStyles[variant]}
 `
 
 export const AlertIcon = styled.span`

@@ -86,6 +86,7 @@ export declare const lightTheme: {
         ink: string;
         muted: string;
         subtle: string;
+        onFill: string;
         brand: string;
         brandHover: string;
         brandSoft: string;
@@ -109,6 +110,9 @@ export declare const lightTheme: {
         ink800: string;
         ink700: string;
         ink600: string;
+        ink400: string;
+        ink300: string;
+        ink50: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -123,6 +127,9 @@ export declare const lightTheme: {
         ink800: string;
         ink700: string;
         ink600: string;
+        ink400: string;
+        ink300: string;
+        ink50: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -199,11 +206,18 @@ export declare const lightTheme: {
         black: string;
     };
     lineHeight: {
+        flat: string;
+        snugTight: string;
         tight: string;
         snug: string;
         normal: string;
         relaxed: string;
         loose: string;
+    };
+    letterSpacing: {
+        tight: string;
+        normal: string;
+        wide: string;
     };
     typography: {
         fontFamily: {
@@ -274,6 +288,7 @@ export declare const darkTheme: {
         ink: string;
         muted: string;
         subtle: string;
+        onFill: string;
         brand: string;
         brandHover: string;
         brandSoft: string;
@@ -297,6 +312,9 @@ export declare const darkTheme: {
         ink800: string;
         ink700: string;
         ink600: string;
+        ink400: string;
+        ink300: string;
+        ink50: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -311,6 +329,9 @@ export declare const darkTheme: {
         ink800: string;
         ink700: string;
         ink600: string;
+        ink400: string;
+        ink300: string;
+        ink50: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -387,11 +408,18 @@ export declare const darkTheme: {
         black: string;
     };
     lineHeight: {
+        flat: string;
+        snugTight: string;
         tight: string;
         snug: string;
         normal: string;
         relaxed: string;
         loose: string;
+    };
+    letterSpacing: {
+        tight: string;
+        normal: string;
+        wide: string;
     };
     typography: {
         fontFamily: {
@@ -467,3 +495,5 @@ export declare const fontSizeScale: Record<FontSizePreference, number>;
  * choosing real fonts later is additive, not a schema migration.
  */
 export type FontFamilyPreference = 'DEFAULT';
+export * from './typography';
+import './styled';

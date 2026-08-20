@@ -36,7 +36,7 @@ const StyledTextarea = styled.textarea<{ $status?: FieldStatus }>`
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Force the error status even outside a FormField. */
-  $hasError?: boolean
+  hasError?: boolean
 }
 
 /**
@@ -44,9 +44,9 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
  * `useFieldControl` (ADR-0075/0157); standalone it is a plain styled textarea.
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  { $hasError, ...rest },
+  { hasError, ...rest },
   ref,
 ) {
   const { fieldProps, status } = useFieldControl()
-  return <StyledTextarea ref={ref} $status={$hasError ? 'error' : status} {...fieldProps} {...rest} />
+  return <StyledTextarea ref={ref} $status={hasError ? 'error' : status} {...fieldProps} {...rest} />
 })

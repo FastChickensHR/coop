@@ -40,6 +40,10 @@ const fixed = {
   ink800: '#212327',
   ink700: '#2B2D32',
   ink600: '#3A3D44',
+  // Light steps of the ink scale — text on the always-dark surfaces above
+  ink400: '#6B6E78', // dim labels (section eyebrows)
+  ink300: '#A1A3AA', // muted text / resting nav items
+  ink50: '#F4F4F5', // active + hovered text
 
   // Brand red scale
   brand50: '#FDECED',
@@ -110,16 +114,27 @@ export const scales = {
 // ---------------------------------------------------------------------------
 // Non-color design tokens — identical in both themes
 // ---------------------------------------------------------------------------
+/**
+ * The type scale. Values are rem, so they scale with the root font size — and the
+ * root is NOT 16px: `index.css` sets `html { font-size: 112.5% }` (= 18px), the
+ * FontSizePreference.STANDARD baseline (ADR-0044). Every px below is therefore the
+ * *rendered* size at STANDARD, not `rem × 16`. LARGE (125%) and EXTRA_LARGE (137.5%)
+ * scale all of them proportionally — that is the whole point of the rem scale, so no
+ * single px number can be right for all three levels. STANDARD is the reference.
+ *
+ * Reach for a {@link Type role} (`theme/typography.ts`) rather than a raw step where
+ * one fits — a role carries the family, weight, line-height, and tracking too.
+ */
 const fontSize = {
-  xs: '0.75rem',      // 12px
-  sm: '0.8125rem',    // 13px
-  base: '0.9375rem',  // 15px
-  lg: '1.0625rem',    // 17px
-  xl: '1.25rem',
-  '2xl': '1.5rem',
-  '3xl': '1.875rem',
-  '4xl': '2.25rem',
-  '5xl': '3rem',
+  xs: '0.75rem',      // 13.5px @ STANDARD
+  sm: '0.8125rem',    // 14.6px
+  base: '0.9375rem',  // 16.9px
+  lg: '1.0625rem',    // 19.1px
+  xl: '1.25rem',      // 22.5px
+  '2xl': '1.5rem',    // 27px
+  '3xl': '1.875rem',  // 33.8px
+  '4xl': '2.25rem',   // 40.5px
+  '5xl': '3rem',      // 54px
 }
 
 const fontWeight = {
@@ -131,12 +146,33 @@ const fontWeight = {
   black: '900',
 }
 
+/**
+ * Line-height ratios. Unitless on purpose: a ratio is independent of the root
+ * scaling above, so these hold at every FontSizePreference level.
+ *
+ * `flat` and `snugTight` sit below `tight` for large display type, where 1.25 leaves
+ * headlines looking slack. They have no Tailwind counterpart (its scale, which the
+ * rest of this one mirrors, jumps straight from `none` to `tight`).
+ */
 const lineHeight = {
+  flat: '1.1',        // Display — 52/56 in the brand guidelines
+  snugTight: '1.17',  // Heading 1 — 36/42
   tight: '1.25',
   snug: '1.375',
   normal: '1.5',
   relaxed: '1.625',
   loose: '2',
+}
+
+/**
+ * Letter-spacing (tracking), in em so it tracks the font size it's applied to.
+ * Large display type needs negative tracking to stop looking gappy; small mono
+ * labels need positive tracking to stay readable.
+ */
+const letterSpacing = {
+  tight: '-0.03em',   // Display
+  normal: '0',
+  wide: '0.08em',     // Overline labels
 }
 
 const typography = {
@@ -213,7 +249,13 @@ const lightColors = {
   // Text hierarchy — Tailwind slate scale
   ink: scales.slate[900],
   muted: scales.slate[600],
-  subtle: scales.slate[400],
+  subtle: scales.slate[500], // 500, not 400 — 400 (#94a3b8) fails AA on white (~2.85:1); 500 passes (~4.8:1)
+
+  // Text that sits on a dark/colored fill (brand/accent buttons, dark chrome).
+  // Fixed light in BOTH themes: those fills are dark in both, so this must NOT
+  // flip like `canvas`/`surface` (which turn near-black in dark mode and made
+  // on-fill text unreadable). This is the `inverse` tone's token (ADR-0228).
+  onFill: '#FFFFFF',
 
   // Brand signal color — distinct from `error`, unchanged by ADR-0042
   brand: '#ED1C24',
@@ -265,7 +307,10 @@ const darkColors = {
   // Text hierarchy — GitHub Primer dark theme neutrals
   ink: '#e6edf3',
   muted: '#8b949e',
-  subtle: '#6e7681',
+  subtle: '#7d8590', // lifted from #6e7681 for AA contrast on the dark canvas
+
+  // Text on a dark/colored fill — fixed light, does NOT flip (see lightColors). (ADR-0228)
+  onFill: '#FFFFFF',
 
   // Brand signal color — distinct from `error`, unchanged by ADR-0042
   brand: '#ED1C24',
@@ -307,8 +352,8 @@ const darkColors = {
 // ---------------------------------------------------------------------------
 const motion = {
   duration: {
-    fast: '150ms', // hovers, overlay-out, drawer exit slide
-    base: '220ms', // drawer enter slide, overlay-in
+    fast: '150ms', // hovers, overlay-out
+    base: '220ms', // general enter/settle, overlay-in
     slow: '280ms', // page / content route transitions
   },
   easing: {
@@ -327,6 +372,7 @@ const baseTheme = {
   fontSize,
   fontWeight,
   lineHeight,
+  letterSpacing,
   typography,
   borderRadius,
   spacing,
@@ -372,3 +418,9 @@ export const fontSizeScale: Record<FontSizePreference, number> = {
  * choosing real fonts later is additive, not a schema migration.
  */
 export type FontFamilyPreference = 'DEFAULT'
+
+// The type roles ride the theme barrel (coop#6: no de-facto-private files), and
+// the side-effect import keeps the DefaultTheme augmentation in every consumer's
+// type graph — declaration emit preserves it into dist/theme/index.d.ts.
+export * from './typography'
+import './styled'

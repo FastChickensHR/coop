@@ -14,7 +14,9 @@ export interface AvatarProps {
   name: string
   /** Optional image URL; falls back to initials while loading or on error. */
   src?: string
+  /** Diameter preset — `sm` 1.75rem, `md` 2.25rem, `lg` 3rem. @default 'md' */
   size?: AvatarSize
+  /** Class name for the root element (for layout only — colour and size come from the theme). */
   className?: string
 }
 

@@ -1,0 +1,75 @@
+name: Release
+
+# Turns an annotated `v*` tag into a GitHub Release.
+#
+# Coop's source of truth is a private monorepo; this repository is a published
+# snapshot of it. The mirror there appends each snapshot commit and cuts release
+# tags over SSH, but an SSH credential is a git credential — it cannot call the
+# Releases API. So the Release is minted here instead, by this repository's own
+# GITHUB_TOKEN, triggered by the tag it is a release of.
+#
+# The `v*` tags are creation-only by ruleset: a tag is never moved or deleted, so
+# this workflow runs exactly once per tag and the notes it generates describe a
+# commit range that can never change underneath them.
+#
+# The notes are the changelog's section for this version, not the commit log:
+# every commit here is a bot snapshot ("Coop 0.0.0-dev.<sha>"), so generated
+# notes would say nothing a consumer wants, while CHANGELOG.md carries the
+# curated entry and its mandatory Breaking subsection. Mono refuses to cut a tag
+# whose section is missing (coop-release.yml), so the fallback below should never
+# fire — but it exists, because by the time this workflow runs the tag is already
+# pushed and immutable, and a release with imperfect notes beats a tag with no
+# release at all.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Publish the GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the tag
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create the Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — nothing to do."
+            exit 0
+          fi
+
+          # The heading is bare semver; the tag wears the v.
+          notes="$RUNNER_TEMP/release-notes.md"
+          if node .github/scripts/changelog-section.mjs --version "${TAG#v}" > "$notes"; then
+            {
+              echo
+              echo "---"
+              echo
+              echo "Full changelog: [CHANGELOG.md](https://github.com/$GITHUB_REPOSITORY/blob/$TAG/CHANGELOG.md)"
+            } >> "$notes"
+            echo "::notice title=Notes from the changelog::Release notes taken from CHANGELOG.md's [${TAG#v}] section."
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Coop $TAG" \
+              --notes-file "$notes" \
+              --verify-tag
+          else
+            echo "::warning title=Changelog section missing::No [${TAG#v}] section in CHANGELOG.md — falling back to generated notes. The tag is immutable, so fix this by editing the Release body by hand."
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Coop $TAG" \
+              --generate-notes \
+              --verify-tag
+          fi

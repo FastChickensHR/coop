@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { blockStyleProps } from '../../lib/styleProps'
 
 // Status variants — filled soft-color background (Active/Pending/Terminated/Draft)
 type StatusVariant = 'active' | 'pending' | 'terminated' | 'draft'
@@ -10,7 +11,7 @@ type BadgeVariant = StatusVariant | TagVariant
 
 export interface BadgeProps {
   /** Status or tag style (active/pending/terminated/draft/inbound/outbound). @default 'default' */
-  $variant?: BadgeVariant
+  variant?: BadgeVariant
 }
 
 const statusStyles = {
@@ -59,7 +60,9 @@ const variantStyles: Record<BadgeVariant, ReturnType<typeof css>> = {
   ...tagStyles,
 }
 
-export const Badge = styled.span<BadgeProps>`
+export const Badge = styled.span.withConfig({
+  shouldForwardProp: blockStyleProps('variant'),
+})<BadgeProps>`
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -71,5 +74,5 @@ export const Badge = styled.span<BadgeProps>`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   white-space: nowrap;
 
-  ${({ $variant = 'default' }) => variantStyles[$variant]}
+  ${({ variant = 'default' }) => variantStyles[variant]}
 `

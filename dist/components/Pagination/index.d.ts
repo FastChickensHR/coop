@@ -3,7 +3,9 @@ export interface PaginationProps {
     page: number;
     /** Total number of pages. */
     pageCount: number;
+    /** Called with the 1-based page the user picked (arrows included). */
     onPageChange: (page: number) => void;
+    /** Class name for the root `<nav>` (for layout only — colour and size come from the theme). */
     className?: string;
 }
 /**

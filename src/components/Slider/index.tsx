@@ -2,13 +2,21 @@ import * as RadixSlider from '@radix-ui/react-slider'
 import styled from 'styled-components'
 
 export interface SliderProps {
+  /** The current value (controlled); clamped to `min`/`max` by the track. */
   value: number
+  /** Called continuously with the new value as the thumb moves. */
   onValueChange: (value: number) => void
+  /** Lower end of the range. @default 0 */
   min?: number
+  /** Upper end of the range. @default 100 */
   max?: number
+  /** Granularity the thumb snaps to, in value units. @default 1 */
   step?: number
+  /** Render the slider unusable and dimmed; the thumb stays where it is. */
   disabled?: boolean
+  /** Accessible name for the thumb — a slider has no visible label of its own. */
   'aria-label'?: string
+  /** Class name for the root element (for layout only — colour and size come from the theme). */
   className?: string
 }
 

@@ -1,10 +1,10 @@
 # Coop
 
-**The open-source design system behind [FastChickens HR](https://fastchickenshr.com).**
+**The open-source design system behind FastChickens HR.**
 
-Coop is a small, carefully-made set of accessible React components and design tokens — the same ones we ship in production. We build in the open because we care about craft, and we'd love your help shaping it.
-
-> **Live showcase → [fastchickenshr.com/design](https://fastchickenshr.com/design)** — every token and component rendered from this source, in light and dark.
+Coop is a small, carefully-made set of accessible React components and design
+tokens — the same ones we ship in production. We build in the open because we
+care about craft, and we'd love your help shaping it.
 
 ## Philosophy
 
@@ -14,16 +14,28 @@ Coop is a small, carefully-made set of accessible React components and design to
 
 ## Install
 
+Coop is distributed **from GitHub only** — there is no npm package. Install a
+**tag**, never a branch:
+
 ```bash
-yarn add github:FastChickensHR/coop
+yarn add FastChickensHR/coop#<tag>           # the tag you're pinning to
 yarn add react react-dom styled-components   # peer deps
 ```
 
-Coop components read their tokens from a styled-components `ThemeProvider` — this is **required**:
+Tags are the versioned surface and carry the compatibility promise below.
+`main` is a **continuously-published mirror** of our monorepo — it may run ahead
+of the tags at any moment, so pin to a tag and move deliberately. The
+[releases page](https://github.com/FastChickensHR/coop/releases) lists every
+published tag; take the newest one.
+
+## Use
+
+Coop components read their tokens from a styled-components `ThemeProvider` —
+this is **required**:
 
 ```tsx
 import { ThemeProvider } from 'styled-components'
-import { lightTheme, Button, FormField, Input } from 'coop'
+import { lightTheme, Button, FormField, Input } from '@fastchickenshr/coop'
 
 export function App() {
   return (
@@ -31,26 +43,78 @@ export function App() {
       <FormField label="Email" required>
         <Input type="email" placeholder="you@company.com" />
       </FormField>
-      <Button $variant="primary">Save</Button>
+      <Button variant="primary">Save</Button>
     </ThemeProvider>
   )
 }
 ```
 
-For dark mode, swap `lightTheme` for `darkTheme`. Coop is designed for Archivo / Public Sans / IBM Plex Mono — install the `@fontsource/*` packages for the intended look (the theme falls back to system fonts otherwise). Full per-component API — props, types, usage — is on the [live docs](https://fastchickenshr.com/design).
+For dark mode, swap `lightTheme` for `darkTheme`. Coop is designed for Archivo /
+Public Sans / IBM Plex Mono — install the `@fontsource/*` packages for the
+intended look (the theme falls back to system fonts otherwise).
+
+Theme access is fully typed with no setup on your side: the `DefaultTheme`
+augmentation ships in the published types, so the tokens are typed inside your
+own styled-components too.
 
 ## What's inside
 
-**35 components** — buttons, the full form-control set (inputs, select, combobox, date pickers, checkbox/radio/switch/slider/toggle), overlays (modal, drawer-adjacent popover, dropdown menu, tooltip), feedback (spinner, skeleton, progress, alert, empty state), surfaces & navigation (card, accordion, breadcrumbs, pagination, stepper), and data display (table, avatar, chip, badge, description list).
+**38 components** — buttons, the full form-control set (inputs, select,
+combobox, date pickers, checkbox/radio/switch/slider/toggle), overlays (modal,
+confirm dialog, popover, dropdown menu, tooltip), feedback (spinner, skeleton,
+progress, alert, empty state), surfaces & navigation (card, accordion,
+breadcrumbs, pagination, stepper), and data display (table, avatar, chip, badge,
+description list).
 
-**Foundations** — a typed theme (color scales + semantic tokens, three type families and a modular scale, spacing, radius, elevation) and a motion scale (durations + easings), all exported.
+**Foundations** — a typed theme (color scales + semantic tokens, three type
+families and a modular scale, spacing, radius, elevation) and a motion scale
+(durations + easings), all exported.
+
+The per-component reference — live demos, props, types, and when to reach for
+each one — lives on the FastChickens HR design showcase. A link will land here
+once the domain is live.
+
+## Tests & bundlers
+
+Bundler consumers (Vite and friends) work out of the box. **Vitest** needs
+`server: { deps: { inline: ['@fastchickenshr/coop'] } }` in its config, and
+**native Node ESM without a bundler is not supported at beta** — see
+[CHANGELOG.md](./CHANGELOG.md) and the Getting Started page on the showcase for
+the detail and the reason.
 
 ## Status
 
-A **curated snapshot** published one-way from our private monorepo — **installable from GitHub** (ships prebuilt ESM + TypeScript types). An npm release will follow if there's demand.
+Coop is in **beta**. Versions run `1.0.0-beta.N` → `1.0.0`; every release
+section in [CHANGELOG.md](./CHANGELOG.md) carries a mandatory **Breaking**
+subsection, written explicitly as "none" when there is nothing to report. Betas
+may break — never silently.
 
-If Coop resonates with you — especially if you're a designer — we'd genuinely love to talk: **contact@fastchickenshr.com**.
+The compatibility promise has **two tiers**: the exported **type surface**
+(everything reachable from the entry point, plus the `DefaultTheme`
+augmentation) is mechanically gated, and **documented prop behavior** is held by
+review and changelog discipline. Rendered DOM, class names, and token *values*
+are explicitly not covered. The full text, with worked examples and the
+deprecation policy, is in [CHANGELOG.md](./CHANGELOG.md).
+
+This repository is a curated snapshot published one-way from our private
+monorepo, prebuilt (ESM + TypeScript types).
+
+If Coop resonates with you — especially if you're a designer — we'd genuinely
+love to talk: **contact@fastchickenshr.com**.
+
+## Support
+
+Support is **best-effort, via [GitHub issues](https://github.com/FastChickensHR/coop/issues)** — no SLA.
+For security vulnerabilities, follow [SECURITY.md](./SECURITY.md) (private
+reporting, never a public issue). If all else fails: **contact@fastchickenshr.com**.
+
+## Brand
+
+The FastChickens HR name, rooster mark, and wordmark are **trademarks, not
+MIT** — they don't ship here. Take the code; leave the rooster. See
+[TRADEMARK.md](./TRADEMARK.md).
 
 ## License
 
-[MIT](./LICENSE) © FastChickens HR
+[MIT](./LICENSE) © FastChickens HR — **code only**. The brand is reserved; see
+[TRADEMARK.md](./TRADEMARK.md).

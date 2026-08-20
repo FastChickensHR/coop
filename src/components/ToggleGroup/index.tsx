@@ -23,9 +23,9 @@ export const ToggleGroupItem = styled(RadixToggleGroup.Item)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xs};
+  gap: 0.25rem;
   height: 2rem;
-  padding: 0 ${({ theme }) => theme.spacing.md};
+  padding: 0 0.75rem;
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background: none;

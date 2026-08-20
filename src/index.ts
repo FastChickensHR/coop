@@ -1,4 +1,14 @@
-// GENERATED entry — the public API of the Coop library.
+// The public API surface of @fastchickenshr/coop — hand-maintained (coop#9).
+// Every name reachable from this barrel is the Tier-1 compat promise (coop#7):
+// removing or retyping one is a breaking change. The compat gate (coop#10)
+// diffs this surface; the package build compiles only what it reaches, so a
+// file absent here and unimported is not published API.
+//
+// Curation happens by editing this file — there is no manifest. The cut line
+// is coop#6's: 38 components, the theme (type roles included), and the two
+// public foundations (lib/date, lib/quickPicks — DateEdge/DateRangeValue leak
+// into public Props, so they are API whether we like it or not).
+
 export * from './components/Accordion'
 export * from './components/Alert'
 export * from './components/Avatar'
@@ -9,6 +19,7 @@ export * from './components/Card'
 export * from './components/Checkbox'
 export * from './components/Chip'
 export * from './components/Combobox'
+export * from './components/ConfirmDialog'
 export * from './components/DatePicker'
 export * from './components/DateRangePicker'
 export * from './components/DescriptionList'
@@ -20,6 +31,7 @@ export * from './components/Label'
 export * from './components/Modal'
 export * from './components/NumberInput'
 export * from './components/Pagination'
+export * from './components/PasswordInput'
 export * from './components/Popover'
 export * from './components/Progress'
 export * from './components/RadioGroup'
@@ -31,9 +43,11 @@ export * from './components/Stepper'
 export * from './components/Switch'
 export * from './components/Table'
 export * from './components/Tabs'
+export * from './components/Text'
 export * from './components/Textarea'
 export * from './components/ToggleGroup'
 export * from './components/Tooltip'
 
-// Theme is public API: components render colourless without a ThemeProvider.
 export * from './theme'
+export * from './lib/date'
+export * from './lib/quickPicks'

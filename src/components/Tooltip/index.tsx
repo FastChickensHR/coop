@@ -7,8 +7,9 @@ export interface TooltipProps {
   content: ReactNode
   /** The element the tooltip describes — must accept a ref / be focusable. */
   children: ReactNode
+  /** Preferred side to open on; Radix flips it if there isn't room. @default 'top' */
   side?: 'top' | 'right' | 'bottom' | 'left'
-  /** Delay before showing, ms (default 200). */
+  /** Delay before showing, in milliseconds. @default 200 */
   delayDuration?: number
 }
 

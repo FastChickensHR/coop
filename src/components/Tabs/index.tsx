@@ -1,6 +1,17 @@
 import * as RadixTabs from '@radix-ui/react-tabs'
 import styled from 'styled-components'
 
+/**
+ * A tab set — sibling views of the same subject, one shown at a time
+ * (ADR-0175). Radix-backed: roving focus, arrow-key nav, correct
+ * `tablist`/`tab`/`tabpanel` roles. Use tabs to slice one page's content;
+ * to move between pages use navigation, and for a mutually-exclusive
+ * *setting* use ToggleGroup or a Radio group.
+ *
+ * Compose like Radix: `Tabs` (root, `value` / `defaultValue` +
+ * `onValueChange`) › `TabsList` › `TabsTrigger value="…"`, then one
+ * `TabsContent value="…"` per trigger.
+ */
 export const Tabs = RadixTabs.Root
 
 export const TabsList = styled(RadixTabs.List)`
@@ -20,7 +31,9 @@ export const TabsTrigger = styled(RadixTabs.Trigger)`
   background: none;
   cursor: pointer;
   margin-bottom: -1px;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition: color ${({ theme }) => theme.motion.duration.fast}
+      ${({ theme }) => theme.motion.easing.standard},
+    border-color ${({ theme }) => theme.motion.duration.fast} ${({ theme }) => theme.motion.easing.standard};
   outline: none;
 
   &:hover {

@@ -1,13 +1,18 @@
 import { type ReactNode } from 'react';
 export interface CheckboxProps {
+    /** Whether the box is ticked (controlled). */
     checked?: boolean;
+    /** Called with the new state when the user toggles the box. */
     onCheckedChange?: (checked: boolean) => void;
+    /** Render the box unusable and dimmed; it stays visible and keeps its value. */
     disabled?: boolean;
     /** Override the auto-generated id (normally supplied by FormField / auto). */
     id?: string;
+    /** Accessible name when there's no visible label (no `children`, no FormField). */
     'aria-label'?: string;
     /** Optional inline label rendered beside the box; clicking it toggles the checkbox. */
     children?: ReactNode;
+    /** Class name for the row wrapping box and label (for layout only). */
     className?: string;
 }
 /**
