@@ -6,6 +6,9 @@ Coop is a small, carefully-made set of accessible React components and design
 tokens — the same ones we ship in production. We build in the open because we
 care about craft, and we'd love your help shaping it.
 
+**[Read the docs →](https://fastchickenshr.github.io/coop/)** — every component with
+live examples, the theme tokens, and the color and typography scales, in light or dark.
+
 ## Philosophy
 
 - **Dependency-light.** No UI framework. Accessible headless primitives ([Radix](https://www.radix-ui.com/)) styled with our own themed [styled-components](https://styled-components.com/) — we own the CSS, so we own the craft.
