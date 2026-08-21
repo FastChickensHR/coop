@@ -1,4 +1,4 @@
-import styled, { css, type DefaultTheme } from 'styled-components'
+import { styled, css, type DefaultTheme } from 'styled-components'
 import type { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react'
 import {
   displayType,

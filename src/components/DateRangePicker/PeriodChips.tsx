@@ -1,5 +1,5 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { rangePicksFor } from '../../lib/quickPicks'
 
 /** Both ends of a range, written together. Never open-ended — a period always has two dates. */

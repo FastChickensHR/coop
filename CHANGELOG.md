@@ -109,6 +109,20 @@ the changelog.
 
 - none
 
+### Fixed
+
+- The package now imports and renders under **native Node ESM**. Previously every
+  bundler could load it and Node's own loader could not: `styled-components` 6.x
+  publishes CommonJS with no `exports` map, so the prebuilt default import bound
+  the module namespace object rather than the `styled` factory, and the first
+  styled call threw `TypeError: t is not a function` at import time — before any
+  render. This affected server-rendering frameworks that do not bundle server
+  dependencies, plain-Node scripts, and test suites on a default Vitest config,
+  which externalises `node_modules`.
+
+  **If you added `test.server.deps.inline: ['@fastchickenshr/coop']` as a
+  workaround, you can drop it.** Leaving it in place is harmless.
+
 ## [1.0.0-beta.1]
 
 The first release the compatibility promise applies to. Everything below is

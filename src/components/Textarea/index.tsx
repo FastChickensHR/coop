@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import type { TextareaHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
 import { controlStatusStyles } from '../FormField/fieldStyles'
 

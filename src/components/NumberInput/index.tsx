@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Input } from '../Input'
 import type { InputProps } from '../Input'
 

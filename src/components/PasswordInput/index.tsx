@@ -1,5 +1,5 @@
 import { forwardRef, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Input, type InputProps } from '../Input'
 
 const Wrap = styled.div`

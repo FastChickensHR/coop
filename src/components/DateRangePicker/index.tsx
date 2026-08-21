@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { DatePicker } from '../DatePicker'
 import { PeriodChips, type DateRangeValue } from './PeriodChips'
 

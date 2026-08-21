@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export interface SwitchProps {
   /** Whether the switch is on. */

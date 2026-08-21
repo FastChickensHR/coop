@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
 // Status variants — filled soft-color background (Active/Pending/Terminated/Draft)

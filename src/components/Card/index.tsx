@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 import { cardHeadingType } from '../../theme/typography'
 

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
 type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'

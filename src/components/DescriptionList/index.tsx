@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 /**
  * Key/value facts about a single thing (ADR-0175) — a details panel, a summary

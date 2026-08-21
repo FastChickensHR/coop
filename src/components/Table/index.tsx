@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
 // Shared table primitives (ADR-0075). Replaces the ~14 hand-rolled `styled.table`/`Th`/`Td` sets

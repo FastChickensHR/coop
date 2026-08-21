@@ -1,6 +1,6 @@
 import { useId, useMemo } from 'react'
 import type { ReactNode } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Label } from '../Label'
 import { StatusMessage } from '../Input'
 import { FieldContext } from './context'

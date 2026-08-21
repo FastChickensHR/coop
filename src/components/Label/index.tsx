@@ -1,5 +1,5 @@
 import * as RadixLabel from '@radix-ui/react-label'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const Label = styled(RadixLabel.Root)`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};

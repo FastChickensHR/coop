@@ -1,5 +1,5 @@
 import * as RadixAccordion from '@radix-ui/react-accordion'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 
 /**
  * Vertically stacked, expandable sections (ADR-0175). Radix-backed: keyboard

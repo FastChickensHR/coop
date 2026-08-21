@@ -1,5 +1,5 @@
 import * as RadixPopover from '@radix-ui/react-popover'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 import type { ComponentProps } from 'react'
 
 /**

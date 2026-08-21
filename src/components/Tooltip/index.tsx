@@ -1,5 +1,5 @@
 import * as RadixTooltip from '@radix-ui/react-tooltip'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 import type { ReactNode } from 'react'
 
 export interface TooltipProps {

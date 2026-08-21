@@ -1,5 +1,5 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
-import styled, { css } from 'styled-components'
+import { styled, css } from 'styled-components'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Chip } from '../Chip'
 import { useFieldControl, STATUS_SOFT, type FieldStatus } from '../FormField/context'

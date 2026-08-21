@@ -1,5 +1,5 @@
 import * as RadixProgress from '@radix-ui/react-progress'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export interface ProgressProps {
   /** 0–100. Omit/null for an indeterminate bar (use a Spinner if length is truly unknown). */

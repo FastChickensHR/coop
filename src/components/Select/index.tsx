@@ -1,6 +1,6 @@
 import * as RadixSelect from '@radix-ui/react-select'
 import { ChevronDownIcon, ChevronUpIcon, CheckIcon } from '@heroicons/react/24/outline'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
 import { controlStatusStyles } from '../FormField/fieldStyles'
 

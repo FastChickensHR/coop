@@ -1,5 +1,5 @@
 import * as RadixToggleGroup from '@radix-ui/react-toggle-group'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 /**
  * A segmented control — a small set of mutually-exclusive (or multi-select)

@@ -1,5 +1,5 @@
 import * as RadixSlider from '@radix-ui/react-slider'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export interface SliderProps {
   /** The current value (controlled); clamped to `min`/`max` by the track. */

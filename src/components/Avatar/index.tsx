@@ -1,5 +1,5 @@
 import * as RadixAvatar from '@radix-ui/react-avatar'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 type AvatarSize = 'sm' | 'md' | 'lg'
 

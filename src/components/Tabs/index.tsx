@@ -1,5 +1,5 @@
 import * as RadixTabs from '@radix-ui/react-tabs'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 /**
  * A tab set — sibling views of the same subject, one shown at a time

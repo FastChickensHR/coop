@@ -1,7 +1,7 @@
 import { useId, type ReactNode } from 'react'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@heroicons/react/24/outline'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useFieldControl } from '../FormField/context'
 
 export interface CheckboxProps {

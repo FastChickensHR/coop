@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Fragment, type ReactNode } from 'react'
 

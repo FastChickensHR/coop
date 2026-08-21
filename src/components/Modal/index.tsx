@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 

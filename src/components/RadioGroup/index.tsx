@@ -1,6 +1,6 @@
 import { useId, type ReactNode } from 'react'
 import * as RadixRadio from '@radix-ui/react-radio-group'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { useFieldControl } from '../FormField/context'
 
 export interface RadioOption {

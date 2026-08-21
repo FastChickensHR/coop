@@ -1,5 +1,5 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 import type { ComponentProps } from 'react'
 
 /**
