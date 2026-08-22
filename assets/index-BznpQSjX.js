@@ -415,7 +415,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border-radius: ${({theme:e})=>e.borderRadius.sm};
   background: ${({theme:e})=>e.colors.canvas};
   cursor: inherit;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background ${({theme:e})=>e.motion.duration.micro} ease, border-color ${({theme:e})=>e.motion.duration.micro} ease;
 
   &[data-state='checked'],
   &[data-state='indeterminate'] {
@@ -581,7 +581,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: ${({theme:e})=>e.zIndex[50]};
   max-height: 15rem;
   overflow-y: auto;
   margin: 0;
@@ -703,8 +703,8 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
 `,rh=H(Fm)`
   position: fixed;
   inset: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.45);
+  z-index: ${({theme:e})=>e.zIndex[50]};
+  background-color: ${({theme:e})=>e.fixed.scrim};
   animation: ${th} ${({theme:e})=>e.motion.duration.base} ${({theme:e})=>e.motion.easing.enter};
 
   @media (prefers-reduced-motion: reduce) {
@@ -724,7 +724,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border: 1px solid ${({theme:e})=>e.colors.border};
   border-radius: ${({theme:e})=>e.borderRadius.lg};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
-  z-index: 51;
+  z-index: ${({theme:e})=>e.zIndex[51]};
   animation: ${nh} ${({theme:e})=>e.motion.duration.base} ${({theme:e})=>e.motion.easing.enter};
 
   &:focus {
@@ -789,7 +789,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border-radius: ${({theme:e})=>e.borderRadius.md};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
   padding: 1rem;
-  z-index: 50;
+  z-index: ${({theme:e})=>e.zIndex[50]};
 `,jb=H.div`
   display: flex;
   align-items: center;
@@ -908,7 +908,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: ${({theme:e})=>e.fontWeight.medium};
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 150ms ease, border-color 150ms ease;
+  transition: background-color ${({theme:e})=>e.motion.duration.fast} ease, border-color ${({theme:e})=>e.motion.duration.fast} ease;
 
   &:hover:not(:disabled) {
     background-color: ${({theme:e})=>e.colors.border};
@@ -976,7 +976,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border: 1px solid ${({theme:e})=>e.colors.border};
   border-radius: ${({theme:e})=>e.borderRadius.md};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({theme:e})=>e.zIndex[60]};
   animation: ${iw} ${({theme:e})=>e.motion.duration.fast}
     ${({theme:e})=>e.motion.easing.enter};
 
@@ -1172,7 +1172,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   ${({$sticky:e})=>e&&V`
       position: sticky;
       top: 0;
-      z-index: 40;
+      z-index: ${({theme:e})=>e.zIndex[40]};
     `}
 `,Gw=H(bw)`
   &::-webkit-outer-spin-button,
@@ -1264,7 +1264,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border: 1px solid ${({theme:e})=>e.colors.border};
   border-radius: ${({theme:e})=>e.borderRadius.md};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({theme:e})=>e.zIndex[60]};
   animation: ${lT} ${({theme:e})=>e.motion.duration.fast}
     ${({theme:e})=>e.motion.easing.enter};
 
@@ -1323,7 +1323,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   border-radius: 50%;
   background: ${({theme:e})=>e.colors.canvas};
   cursor: inherit;
-  transition: border-color 120ms ease;
+  transition: border-color ${({theme:e})=>e.motion.duration.micro} ease;
 
   &[data-state='checked'] {
     border-color: ${({theme:e})=>e.colors.accent};
@@ -1374,7 +1374,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   border: 1px solid ${({theme:e})=>e.colors.border};
   border-radius: ${({theme:e})=>e.borderRadius.md};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
-  z-index: 50;
+  z-index: ${({theme:e})=>e.zIndex[50]};
 `,jO=H(QD)`
   padding: 0.25rem;
 `,MO=H(cO)`
@@ -1546,7 +1546,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   border-radius: ${({theme:e})=>e.borderRadius.full};
   background: ${({theme:e,$checked:t})=>t?e.colors.accent:e.colors.borderStrong};
   opacity: ${({$disabled:e})=>e?.5:1};
-  transition: background 120ms ease;
+  transition: background ${({theme:e})=>e.motion.duration.micro} ease;
 
   ${qk}:focus-visible + & {
     outline: 2px solid ${({theme:e})=>e.colors.accent};
@@ -1561,7 +1561,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   border-radius: 50%;
   background: #fff;
   transform: translateX(${({$checked:e})=>e?`14px`:`0`});
-  transition: transform 120ms ease;
+  transition: transform ${({theme:e})=>e.motion.duration.micro} ease;
 `;function Xk({checked:e,onCheckedChange:t,disabled:n,...r}){return(0,U.jsxs)(Kk,{$disabled:n,children:[(0,U.jsx)(qk,{type:`checkbox`,role:`switch`,checked:e,disabled:n,"aria-label":r[`aria-label`],onChange:e=>t(e.target.checked)}),(0,U.jsx)(Jk,{$checked:e,$disabled:n,children:(0,U.jsx)(Yk,{$checked:e})})]})}var Zk=H.div`
   overflow-x: auto;
 `,Qk=H.table`
@@ -1679,7 +1679,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   outline: none;
   box-sizing: border-box;
   resize: vertical;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color ${({theme:e})=>e.motion.duration.fast} ease, box-shadow ${({theme:e})=>e.motion.duration.fast} ease;
 
   ${({$status:e})=>Jd(e)}
 
@@ -1750,7 +1750,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   font-size: ${({theme:e})=>e.fontSize.xs};
   line-height: ${({theme:e})=>e.lineHeight.snug};
   box-shadow: ${({theme:e})=>e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({theme:e})=>e.zIndex[60]};
   animation: ${pN} ${({theme:e})=>e.motion.duration.fast}
     ${({theme:e})=>e.motion.easing.enter};
 
@@ -1759,10 +1759,10 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   }
 `,hN=H(dN)`
   fill: ${({theme:e})=>e.colors.ink};
-`,gN={white:`#ffffff`,black:`#000000`,transparent:`transparent`,ink900:`#16171A`,ink800:`#212327`,ink700:`#2B2D32`,ink600:`#3A3D44`,ink400:`#6B6E78`,ink300:`#A1A3AA`,ink50:`#F4F4F5`,successOnDark:`#28C76F`,brand50:`#FDECED`,brand200:`#F7A3A7`,brand500:`#ED1C24`,brand600:`#C8141B`,brand800:`#8E0C11`},_N={slate:{50:`#f8fafc`,100:`#f1f5f9`,200:`#e2e8f0`,300:`#cbd5e1`,400:`#94a3b8`,500:`#64748b`,600:`#475569`,700:`#334155`,800:`#1e293b`,900:`#0f172a`},red:{50:`#fef2f2`,100:`#fee2e2`,200:`#fecaca`,300:`#fca5a5`,400:`#f87171`,500:`#ef4444`,600:`#dc2626`,700:`#b91c1c`,800:`#991b1b`,900:`#7f1d1d`},yellow:{50:`#fefce8`,100:`#fef9c3`,200:`#fef08a`,300:`#fde047`,400:`#facc15`,500:`#eab308`,600:`#ca8a04`,700:`#a16207`,800:`#854d0e`,900:`#713f12`},green:{50:`#f0fdf4`,100:`#dcfce7`,200:`#bbf7d0`,300:`#86efac`,400:`#4ade80`,500:`#22c55e`,600:`#16a34a`,700:`#15803d`,800:`#166534`,900:`#14532d`}},vN={xs:`0.75rem`,sm:`0.8125rem`,base:`0.9375rem`,lg:`1.0625rem`,xl:`1.25rem`,"2xl":`1.5rem`,"3xl":`1.875rem`,"4xl":`2.25rem`,"5xl":`3rem`},yN={normal:`400`,medium:`500`,semibold:`600`,bold:`700`,extrabold:`800`,black:`900`},bN={flat:`1.1`,snugTight:`1.17`,tight:`1.25`,snug:`1.375`,normal:`1.5`,relaxed:`1.625`,loose:`2`},xN={tight:`-0.03em`,normal:`0`,wide:`0.08em`},SN={fontFamily:{display:`'Archivo', sans-serif`,sans:`'Public Sans', ui-sans-serif, system-ui, -apple-system, sans-serif`,mono:`'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace`}},CN={none:`0`,sm:`6px`,md:`10px`,lg:`14px`,full:`9999px`},wN={none:`0`,xs:`0.25rem`,sm:`0.5rem`,md:`0.75rem`,lg:`1rem`,xl:`1.5rem`,"2xl":`2rem`,"3xl":`3rem`,"4xl":`4rem`},TN={card:`0 1px 2px rgba(16, 17, 20, 0.06)`,pop:`0 6px 24px rgba(16, 17, 20, 0.09)`,none:`none`},EN={sm:`640px`,md:`768px`,lg:`1024px`,xl:`1280px`,"2xl":`1536px`},DN={0:`0`,10:`10`,20:`20`,30:`30`,40:`40`,50:`50`,auto:`auto`},ON={canvas:`#FFFFFF`,surface:_N.slate[50],surface2:_N.slate[100],border:_N.slate[200],borderStrong:_N.slate[300],ink:_N.slate[900],muted:_N.slate[600],subtle:_N.slate[500],onFill:`#FFFFFF`,brand:`#ED1C24`,brandHover:`#C8141B`,brandSoft:`#FDECED`,success:_N.green[600],successSoft:_N.green[50],warning:_N.yellow[700],warningSoft:_N.yellow[50],error:_N.red[600],errorSoft:_N.red[50],info:`#2563C9`,infoSoft:`#E7EEFB`,accent:`#2563C9`,accentSoft:`#E7EEFB`,highlight:`#7C3AED`,highlightSoft:`#EDE7FB`,highlightFaint:`#F5F1FC`},kN={canvas:`#0d1117`,surface:`#161b22`,surface2:`#21262d`,border:`#30363d`,borderStrong:`#484f58`,ink:`#e6edf3`,muted:`#8b949e`,subtle:`#7d8590`,onFill:`#FFFFFF`,brand:`#ED1C24`,brandHover:`#FF4A52`,brandSoft:`rgba(237, 28, 36, 0.18)`,success:_N.green[400],successSoft:`rgba(74, 222, 128, 0.16)`,warning:_N.yellow[400],warningSoft:`rgba(250, 204, 21, 0.16)`,error:_N.red[400],errorSoft:`rgba(248, 113, 113, 0.16)`,info:`#4B8DF8`,infoSoft:`rgba(75, 141, 248, 0.16)`,accent:`#4B8DF8`,accentSoft:`rgba(75, 141, 248, 0.16)`,highlight:`#A78BFA`,highlightSoft:`rgba(167, 139, 250, 0.22)`,highlightFaint:`rgba(167, 139, 250, 0.10)`},AN={fixed:gN,scales:_N,fontSize:vN,fontWeight:yN,lineHeight:bN,letterSpacing:xN,typography:SN,borderRadius:CN,spacing:wN,boxShadow:TN,screens:EN,zIndex:DN,motion:{duration:{fast:`150ms`,base:`220ms`,slow:`280ms`},easing:{enter:`cubic-bezier(0.22, 1, 0.36, 1)`,exit:`cubic-bezier(0.4, 0, 1, 1)`,standard:`cubic-bezier(0.4, 0, 0.2, 1)`}}},jN={...AN,colors:{...gN,...ON}},MN={...AN,colors:{...gN,...kN}},NN={STANDARD:112.5,LARGE:125,EXTRA_LARGE:137.5};function PN(e){return e.flatMap(e=>e.items.map(t=>({...t,group:e.label})))}function FN(e,t){let n=t.trim().toLowerCase();if(!n)return e;let r=n.split(/\s+/);return e.filter(e=>{let t=`${e.label} ${e.keywords}`.toLowerCase();return r.every(e=>t.includes(e))})}function IN({nav:e,open:t,onOpenChange:n,onNavigate:r}){let[i,a]=(0,h.useState)(``),[o,s]=(0,h.useState)(0),c=(0,h.useRef)(null),l=(0,h.useRef)(null),u=(0,h.useMemo)(()=>PN(e),[e]),d=(0,h.useMemo)(()=>FN(u,i),[u,i]),f=d.length?Math.min(o,d.length-1):0;(0,h.useEffect)(()=>{l.current?.querySelector(`[data-index="${f}"]`)?.scrollIntoView({block:`nearest`})},[f]);function p(e){e&&(r(e.id),n(!1))}function m(e){e.key===`ArrowDown`?(e.preventDefault(),s(e=>Math.min(e+1,d.length-1))):e.key===`ArrowUp`?(e.preventDefault(),s(e=>Math.max(e-1,0))):e.key===`Enter`&&(e.preventDefault(),p(d[f]))}return(0,U.jsx)(Dm,{open:t,onOpenChange:n,children:(0,U.jsxs)(Nm,{children:[(0,U.jsx)(zN,{}),(0,U.jsxs)(BN,{"aria-label":`Search the documentation`,onOpenAutoFocus:e=>{e.preventDefault(),a(``),s(0),c.current?.focus()},children:[(0,U.jsx)(Wm,{style:{position:`absolute`,width:1,height:1,overflow:`hidden`,clip:`rect(0 0 0 0)`},children:`Search`}),(0,U.jsxs)(VN,{children:[(0,U.jsx)(hc,{width:18,height:18}),(0,U.jsx)(HN,{ref:c,value:i,onChange:e=>a(e.target.value),onKeyDown:m,placeholder:`Search documentation…`,role:`combobox`,"aria-expanded":`true`,"aria-controls":`command-results`,"aria-activedescendant":d[f]?`cmd-${d[f].id}`:void 0}),(0,U.jsx)(UN,{children:`Esc`})]}),(0,U.jsx)(WN,{id:`command-results`,ref:l,role:`listbox`,children:d.length===0?(0,U.jsxs)(JN,{children:[`No matches for “`,i,`”.`]}):d.map((e,t)=>(0,U.jsxs)(GN,{id:`cmd-${e.id}`,"data-index":t,role:`option`,"aria-selected":t===f,$active:t===f,onMouseEnter:()=>s(t),onClick:()=>p(e),children:[(0,U.jsx)(KN,{children:e.label}),(0,U.jsx)(qN,{children:e.group})]},e.id))})]})]})})}var LN=Ys`from { opacity: 0; } to { opacity: 1; }`,RN=Ys`from { opacity: 0; transform: translate(-50%, -8px); } to { opacity: 1; transform: translate(-50%, 0); }`,zN=H(Fm)`
+`,gN={white:`#ffffff`,black:`#000000`,transparent:`transparent`,ink900:`#16171A`,ink800:`#212327`,ink700:`#2B2D32`,ink600:`#3A3D44`,ink400:`#6B6E78`,ink300:`#A1A3AA`,ink50:`#F4F4F5`,scrim:"${({ theme }) => theme.fixed.scrim}",successOnDark:`#28C76F`,brand50:`#FDECED`,brand200:`#F7A3A7`,brand500:`#ED1C24`,brand600:`#C8141B`,brand800:`#8E0C11`},_N={slate:{50:`#f8fafc`,100:`#f1f5f9`,200:`#e2e8f0`,300:`#cbd5e1`,400:`#94a3b8`,500:`#64748b`,600:`#475569`,700:`#334155`,800:`#1e293b`,900:`#0f172a`},red:{50:`#fef2f2`,100:`#fee2e2`,200:`#fecaca`,300:`#fca5a5`,400:`#f87171`,500:`#ef4444`,600:`#dc2626`,700:`#b91c1c`,800:`#991b1b`,900:`#7f1d1d`},yellow:{50:`#fefce8`,100:`#fef9c3`,200:`#fef08a`,300:`#fde047`,400:`#facc15`,500:`#eab308`,600:`#ca8a04`,700:`#a16207`,800:`#854d0e`,900:`#713f12`},green:{50:`#f0fdf4`,100:`#dcfce7`,200:`#bbf7d0`,300:`#86efac`,400:`#4ade80`,500:`#22c55e`,600:`#16a34a`,700:`#15803d`,800:`#166534`,900:`#14532d`}},vN={xs:`0.75rem`,sm:`0.8125rem`,base:`0.9375rem`,lg:`1.0625rem`,xl:`1.25rem`,"2xl":`1.5rem`,"3xl":`1.875rem`,"4xl":`2.25rem`,"5xl":`3rem`},yN={normal:`400`,medium:`500`,semibold:`600`,bold:`700`,extrabold:`800`,black:`900`},bN={flat:`1.1`,snugTight:`1.17`,tight:`1.25`,snug:`1.375`,normal:`1.5`,relaxed:`1.625`,loose:`2`},xN={tight:`-0.03em`,normal:`0`,wide:`0.08em`},SN={fontFamily:{display:`'Archivo', sans-serif`,sans:`'Public Sans', ui-sans-serif, system-ui, -apple-system, sans-serif`,mono:`'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace`}},CN={none:`0`,sm:`6px`,md:`10px`,lg:`14px`,full:`9999px`},wN={none:`0`,xs:`0.25rem`,sm:`0.5rem`,md:`0.75rem`,lg:`1rem`,xl:`1.5rem`,"2xl":`2rem`,"3xl":`3rem`,"4xl":`4rem`},TN={card:`0 1px 2px rgba(16, 17, 20, 0.06)`,pop:`0 6px 24px rgba(16, 17, 20, 0.09)`,none:`none`},EN={sm:`640px`,md:`768px`,lg:`1024px`,xl:`1280px`,"2xl":`1536px`},DN={0:`0`,1:`1`,10:`10`,15:`15`,20:`20`,30:`30`,40:`40`,50:`50`,51:`51`,60:`60`,61:`61`,auto:`auto`},ON={canvas:`#FFFFFF`,surface:_N.slate[50],surface2:_N.slate[100],border:_N.slate[200],borderStrong:_N.slate[300],ink:_N.slate[900],muted:_N.slate[600],subtle:_N.slate[500],onFill:`#FFFFFF`,brand:`#ED1C24`,brandHover:`#C8141B`,brandSoft:`#FDECED`,success:_N.green[600],successSoft:_N.green[50],warning:_N.yellow[700],warningSoft:_N.yellow[50],error:_N.red[600],errorSoft:_N.red[50],info:`#2563C9`,infoSoft:`#E7EEFB`,accent:`#2563C9`,accentSoft:`#E7EEFB`,highlight:`#7C3AED`,highlightSoft:`#EDE7FB`,highlightFaint:`#F5F1FC`},kN={canvas:`#0d1117`,surface:`#161b22`,surface2:`#21262d`,border:`#30363d`,borderStrong:`#484f58`,ink:`#e6edf3`,muted:`#8b949e`,subtle:`#7d8590`,onFill:`#FFFFFF`,brand:`#ED1C24`,brandHover:`#FF4A52`,brandSoft:`rgba(237, 28, 36, 0.18)`,success:_N.green[400],successSoft:`rgba(74, 222, 128, 0.16)`,warning:_N.yellow[400],warningSoft:`rgba(250, 204, 21, 0.16)`,error:_N.red[400],errorSoft:`rgba(248, 113, 113, 0.16)`,info:`#4B8DF8`,infoSoft:`rgba(75, 141, 248, 0.16)`,accent:`#4B8DF8`,accentSoft:`rgba(75, 141, 248, 0.16)`,highlight:`#A78BFA`,highlightSoft:`rgba(167, 139, 250, 0.22)`,highlightFaint:`rgba(167, 139, 250, 0.10)`},AN={fixed:gN,scales:_N,fontSize:vN,fontWeight:yN,lineHeight:bN,letterSpacing:xN,typography:SN,borderRadius:CN,spacing:wN,boxShadow:TN,screens:EN,zIndex:DN,motion:{duration:{micro:`120ms`,fast:`150ms`,base:`220ms`,slow:`280ms`},easing:{enter:`cubic-bezier(0.22, 1, 0.36, 1)`,exit:`cubic-bezier(0.4, 0, 1, 1)`,standard:`cubic-bezier(0.4, 0, 0.2, 1)`}}},jN={...AN,colors:{...gN,...ON}},MN={...AN,colors:{...gN,...kN}},NN={STANDARD:112.5,LARGE:125,EXTRA_LARGE:137.5};function PN(e){return e.flatMap(e=>e.items.map(t=>({...t,group:e.label})))}function FN(e,t){let n=t.trim().toLowerCase();if(!n)return e;let r=n.split(/\s+/);return e.filter(e=>{let t=`${e.label} ${e.keywords}`.toLowerCase();return r.every(e=>t.includes(e))})}function IN({nav:e,open:t,onOpenChange:n,onNavigate:r}){let[i,a]=(0,h.useState)(``),[o,s]=(0,h.useState)(0),c=(0,h.useRef)(null),l=(0,h.useRef)(null),u=(0,h.useMemo)(()=>PN(e),[e]),d=(0,h.useMemo)(()=>FN(u,i),[u,i]),f=d.length?Math.min(o,d.length-1):0;(0,h.useEffect)(()=>{l.current?.querySelector(`[data-index="${f}"]`)?.scrollIntoView({block:`nearest`})},[f]);function p(e){e&&(r(e.id),n(!1))}function m(e){e.key===`ArrowDown`?(e.preventDefault(),s(e=>Math.min(e+1,d.length-1))):e.key===`ArrowUp`?(e.preventDefault(),s(e=>Math.max(e-1,0))):e.key===`Enter`&&(e.preventDefault(),p(d[f]))}return(0,U.jsx)(Dm,{open:t,onOpenChange:n,children:(0,U.jsxs)(Nm,{children:[(0,U.jsx)(zN,{}),(0,U.jsxs)(BN,{"aria-label":`Search the documentation`,onOpenAutoFocus:e=>{e.preventDefault(),a(``),s(0),c.current?.focus()},children:[(0,U.jsx)(Wm,{style:{position:`absolute`,width:1,height:1,overflow:`hidden`,clip:`rect(0 0 0 0)`},children:`Search`}),(0,U.jsxs)(VN,{children:[(0,U.jsx)(hc,{width:18,height:18}),(0,U.jsx)(HN,{ref:c,value:i,onChange:e=>a(e.target.value),onKeyDown:m,placeholder:`Search documentation…`,role:`combobox`,"aria-expanded":`true`,"aria-controls":`command-results`,"aria-activedescendant":d[f]?`cmd-${d[f].id}`:void 0}),(0,U.jsx)(UN,{children:`Esc`})]}),(0,U.jsx)(WN,{id:`command-results`,ref:l,role:`listbox`,children:d.length===0?(0,U.jsxs)(JN,{children:[`No matches for “`,i,`”.`]}):d.map((e,t)=>(0,U.jsxs)(GN,{id:`cmd-${e.id}`,"data-index":t,role:`option`,"aria-selected":t===f,$active:t===f,onMouseEnter:()=>s(t),onClick:()=>p(e),children:[(0,U.jsx)(KN,{children:e.label}),(0,U.jsx)(qN,{children:e.group})]},e.id))})]})]})})}var LN=Ys`from { opacity: 0; } to { opacity: 1; }`,RN=Ys`from { opacity: 0; transform: translate(-50%, -8px); } to { opacity: 1; transform: translate(-50%, 0); }`,zN=H(Fm)`
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: ${({theme:e})=>e.zIndex[60]};
   background-color: rgba(0, 0, 0, 0.4);
   animation: ${LN} ${({theme:e})=>e.motion.duration.fast} ${({theme:e})=>e.motion.easing.enter};
 
@@ -1775,7 +1775,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   left: 50%;
   transform: translateX(-50%);
   width: min(560px, calc(100vw - 2rem));
-  z-index: 61;
+  z-index: ${({theme:e})=>e.zIndex[61]};
   background-color: ${({theme:e})=>e.colors.canvas};
   border: 1px solid ${({theme:e})=>e.colors.border};
   border-radius: ${({theme:e})=>e.borderRadius.lg};
@@ -1861,7 +1861,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
   padding: 0 1.25rem;
   border-bottom: 1px solid ${({theme:e})=>e.colors.border};
   background-color: ${({theme:e})=>e.colors.canvas};
-  z-index: 30;
+  z-index: ${({theme:e})=>e.zIndex[30]};
 `,tP=H.div`
   display: flex;
   align-items: center;
@@ -1954,7 +1954,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 20;
+    z-index: ${({theme:e})=>e.zIndex[20]};
     transform: translateX(${({$open:e})=>e?`0`:`-100%`});
     transition: transform ${({theme:e})=>e.motion.duration.base} ${({theme:e})=>e.motion.easing.enter};
     box-shadow: ${({theme:e,$open:t})=>t?e.boxShadow.pop:`none`};
@@ -1969,7 +1969,7 @@ Defaulting to \`null\`.`}var AT=bT,jT=ST,MT=H(AT)`
     display: block;
     position: absolute;
     inset: 0;
-    z-index: 15;
+    z-index: ${({theme:e})=>e.zIndex[15]};
     background-color: rgba(0, 0, 0, 0.3);
   }
 `,dP=H.div`
