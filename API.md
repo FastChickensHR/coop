@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (162)
+## Exported names (170)
 
 ```ts
 const ALWAYS: 'Always'
@@ -215,6 +215,40 @@ const DescriptionDetails: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps
 const DescriptionList: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>, never>>> & string
 
 const DescriptionTerm: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never>>> & string
+
+function Drawer(props: DrawerProps): JSX.Element
+
+function DrawerBody(props: { children: ReactNode }): JSX.Element
+
+function DrawerField(props: { children: ReactNode; label: ReactNode }): JSX.Element
+
+interface DrawerProps {
+  bodyPadding?: string
+  children: ReactNode
+  description?: ReactNode
+  footer?: ReactNode
+  headerActions?: ReactNode
+  onOpenChange: (open: boolean) => void
+  open: boolean
+  title: string
+}
+
+function DrawerProvider(props: { children: ReactNode }): JSX.Element
+
+function DrawerSection(props: { children: ReactNode; title?: ReactNode }): JSX.Element
+
+function DrawerSlot(props: DrawerSlotProps): null
+
+interface DrawerSlotProps {
+  bodyPadding?: string
+  children: ReactNode
+  description?: ReactNode
+  footer?: ReactNode
+  headerActions?: ReactNode
+  onOpenChange?: (open: boolean) => void
+  open: boolean
+  title: string
+}
 
 const DropdownMenu: FC<RadixDropdownMenu.DropdownMenuProps>
 

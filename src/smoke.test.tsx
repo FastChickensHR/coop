@@ -213,6 +213,35 @@ FIXTURES.ConfirmDialog = () => (
   />
 )
 FIXTURES.DatePicker = () => <coop.DatePicker aria-label="Effective date" />
+FIXTURES.Drawer = () => (
+  <coop.Drawer open onOpenChange={noop} title="Employee detail" description="Everything on file.">
+    <p>Body</p>
+  </coop.Drawer>
+)
+FIXTURES.DrawerProvider = () => (
+  <coop.DrawerProvider>
+    <p>Page content</p>
+  </coop.DrawerProvider>
+)
+FIXTURES.DrawerSlot = () => (
+  // A slot only means something inside the provider that owns the one global drawer.
+  <coop.DrawerProvider>
+    <coop.DrawerSlot open title="Employee detail">
+      <p>Body</p>
+    </coop.DrawerSlot>
+  </coop.DrawerProvider>
+)
+FIXTURES.DrawerBody = () => (
+  <coop.DrawerBody>
+    <p>Section</p>
+  </coop.DrawerBody>
+)
+FIXTURES.DrawerSection = () => (
+  <coop.DrawerSection title="Delivery">
+    <p>Row</p>
+  </coop.DrawerSection>
+)
+FIXTURES.DrawerField = () => <coop.DrawerField label="Carrier">BCBS</coop.DrawerField>
 FIXTURES.DateRangePicker = () => (
   <coop.DateRangePicker startAriaLabel="Range start" endAriaLabel="Range end" />
 )

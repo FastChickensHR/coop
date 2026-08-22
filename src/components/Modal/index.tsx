@@ -1,5 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { styled, keyframes } from 'styled-components'
+import { HeaderText, Title, Description, CloseButton } from './parts'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 
@@ -111,46 +112,9 @@ const Header = styled.div`
   flex-shrink: 0;
 `
 
-const HeaderText = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-  min-width: 0;
-`
 
-const Title = styled(Dialog.Title)`
-  font-family: ${({ theme }) => theme.typography.fontFamily.display};
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.ink};
-  margin: 0;
-`
 
-const Description = styled(Dialog.Description)`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.colors.muted};
-  margin: 0;
-`
 
-const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  color: ${({ theme }) => theme.colors.muted};
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background-color ${({ theme }) => theme.motion.duration.fast} ${({ theme }) => theme.motion.easing.standard};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.surface2};
-    color: ${({ theme }) => theme.colors.ink};
-  }
-`
 
 const Body = styled.div`
   padding: 0 ${({ theme }) => theme.spacing.xl};
