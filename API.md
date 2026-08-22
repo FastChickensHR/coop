@@ -591,6 +591,7 @@ const darkTheme: {
     onFill: string
     subtle: string
     success: string
+    successOnDark: string
     successSoft: string
     surface: string
     surface2: string
@@ -613,6 +614,7 @@ const darkTheme: {
     ink700: string
     ink800: string
     ink900: string
+    successOnDark: string
     transparent: string
     white: string
   }
@@ -814,6 +816,7 @@ const lightTheme: {
     onFill: string
     subtle: string
     success: string
+    successOnDark: string
     successSoft: string
     surface: string
     surface2: string
@@ -836,6 +839,7 @@ const lightTheme: {
     ink700: string
     ink800: string
     ink900: string
+    successOnDark: string
     transparent: string
     white: string
   }
@@ -1111,6 +1115,7 @@ declare module 'styled-components' {
       onFill: string
       subtle: string
       success: string
+      successOnDark: string
       successSoft: string
       surface: string
       surface2: string
@@ -1133,6 +1138,7 @@ declare module 'styled-components' {
       ink700: string
       ink800: string
       ink900: string
+      successOnDark: string
       transparent: string
       white: string
     }

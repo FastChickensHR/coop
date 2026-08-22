@@ -4031,6 +4031,7 @@ var ho = n`
 	ink400: "#6B6E78",
 	ink300: "#A1A3AA",
 	ink50: "#F4F4F5",
+	successOnDark: "#28C76F",
 	brand50: "#FDECED",
 	brand200: "#F7A3A7",
 	brand500: "#ED1C24",

@@ -113,6 +113,7 @@ export declare const lightTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        successOnDark: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -130,6 +131,7 @@ export declare const lightTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        successOnDark: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -315,6 +317,7 @@ export declare const darkTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        successOnDark: string;
         brand50: string;
         brand200: string;
         brand500: string;
@@ -332,6 +335,7 @@ export declare const darkTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        successOnDark: string;
         brand50: string;
         brand200: string;
         brand500: string;

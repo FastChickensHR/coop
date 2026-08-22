@@ -45,6 +45,11 @@ const fixed = {
   ink300: '#A1A3AA', // muted text / resting nav items
   ink50: '#F4F4F5', // active + hovered text
 
+  // Success on the always-dark surfaces (#1234): the done-green the SetupChecklist sidebar
+  // hardcoded four times. Deliberately NOT the semantic `success` scale — fixed colors never
+  // flip with the theme, which is the point on an unconditionally-dark surface.
+  successOnDark: '#28C76F',
+
   // Brand red scale
   brand50: '#FDECED',
   brand200: '#F7A3A7',
