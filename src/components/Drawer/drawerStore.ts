@@ -44,7 +44,7 @@ export function createDrawerStore(): DrawerStore {
   let generation = 0
   const set = (next: DrawerState) => {
     state = next
-    listeners.forEach((l) => l())
+    listeners.forEach((listener) => listener())
   }
   return {
     subscribe: (listener) => {
@@ -77,9 +77,9 @@ export function createDrawerStore(): DrawerStore {
       // true→false→true and cancel the drawer's enter animation mid-slide. The
       // generation check lets a same-tick acquire (which bumps it) void this
       // close, so `open` only actually falls when the slot is really gone.
-      const g = ++generation
+      const nextGeneration = ++generation
       queueMicrotask(() => {
-        if (g !== generation) return
+        if (nextGeneration !== generation) return
         if (state.activeId === id && state.open) {
           // Keep activeId + config so the closing content renders through the exit animation.
           set({ ...state, open: false })

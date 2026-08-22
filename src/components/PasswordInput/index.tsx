@@ -82,7 +82,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           type="button"
           aria-label={shown ? 'Hide password' : 'Show password'}
           aria-pressed={shown}
-          onClick={() => setShown((s) => !s)}
+          onClick={() => setShown((shown) => !shown)}
         >
           {shown ? <EyeOffIcon /> : <EyeIcon />}
         </ToggleButton>

@@ -75,16 +75,16 @@ const VARIANTS: Record<TextVariant, ReturnType<typeof css>> = {
 // only one that must NOT flip — it rides `onFill` (a fixed light) so on-fill text
 // stays readable in both modes.
 const TONES: Record<TextTone, (t: DefaultTheme) => string> = {
-  default: (t) => t.colors.ink,
-  muted: (t) => t.colors.muted,
-  subtle: (t) => t.colors.subtle,
-  brand: (t) => t.colors.brand,
-  accent: (t) => t.colors.accent,
-  danger: (t) => t.colors.error,
-  warning: (t) => t.colors.warning,
-  success: (t) => t.colors.success,
-  info: (t) => t.colors.info,
-  inverse: (t) => t.colors.onFill,
+  default: (theme) => theme.colors.ink,
+  muted: (theme) => theme.colors.muted,
+  subtle: (theme) => theme.colors.subtle,
+  brand: (theme) => theme.colors.brand,
+  accent: (theme) => theme.colors.accent,
+  danger: (theme) => theme.colors.error,
+  warning: (theme) => theme.colors.warning,
+  success: (theme) => theme.colors.success,
+  info: (theme) => theme.colors.info,
+  inverse: (theme) => theme.colors.onFill,
 }
 
 // The default element per variant — semantic-enough out of the box; override with

@@ -203,8 +203,8 @@ describe('parseUserDate', () => {
     expect(parseUserDate('20271301')).toBeNull() // month 13
   })
   it('rejects digit runs of any other length', () => {
-    for (const s of ['2', '2027', '2027061', '202706150', '202706155']) {
-      expect(parseUserDate(s)).toBeNull()
+    for (const input of ['2', '2027', '2027061', '202706150', '202706155']) {
+      expect(parseUserDate(input)).toBeNull()
     }
   })
 

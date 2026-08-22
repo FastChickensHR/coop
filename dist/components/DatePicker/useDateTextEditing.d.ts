@@ -43,11 +43,11 @@ export declare function useDateTextEditing({ value, onValueChange, isOpenEnded, 
     inputRef: import("react").RefObject<HTMLInputElement | null>;
     handlers: {
         onMouseDown: () => void;
-        onMouseUp: (e: ReactMouseEvent<HTMLInputElement>) => void;
+        onMouseUp: (event: ReactMouseEvent<HTMLInputElement>) => void;
         onFocus: () => void;
-        onChange: (e: FocusEvent<HTMLInputElement>) => void;
+        onChange: (event: FocusEvent<HTMLInputElement>) => void;
         onBlur: () => void;
-        onKeyDown: (e: ReactKeyboardEvent<HTMLInputElement>) => void;
+        onKeyDown: (event: ReactKeyboardEvent<HTMLInputElement>) => void;
     };
     commitPicked: (next: string | null) => void;
     closeToInput: () => void;

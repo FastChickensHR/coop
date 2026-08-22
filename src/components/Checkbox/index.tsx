@@ -98,7 +98,7 @@ export function Checkbox({
       <Square
         id={controlId}
         checked={checked}
-        onCheckedChange={(c) => onCheckedChange?.(c === true)}
+        onCheckedChange={(checked) => onCheckedChange?.(checked === true)}
         disabled={disabled}
         aria-label={rest['aria-label']}
         aria-describedby={fieldProps['aria-describedby']}

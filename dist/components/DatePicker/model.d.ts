@@ -14,7 +14,7 @@ export declare function monthMatrix(anchor: CalendarDate): CalendarDate[];
  * Display-only — the ban ADR-0816 §8 lands on hand-rolled *parsing*, not on formatting.
  */
 export declare function acceptedShapes(iso: string): string;
-export declare function dayLabel(d: CalendarDate): string;
+export declare function dayLabel(date: CalendarDate): string;
 export interface DateInputOptions {
     edge: DateEdge;
     allowOpenEnded?: boolean;

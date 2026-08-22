@@ -74,21 +74,21 @@ export function CalendarPopover({
         collisionPadding={8}
         role="dialog"
         aria-label="Choose date"
-        onOpenAutoFocus={(e) => e.preventDefault()}
+        onOpenAutoFocus={(event) => event.preventDefault()}
         // ⚠️ Radix returns focus to the TRIGGER on close, which would land the user on the 📅
         // icon — a control that is deliberately no longer a tab stop. The DatePicker decides
         // where focus goes after every close, so Radix must not.
-        onCloseAutoFocus={(e) => e.preventDefault()}
+        onCloseAutoFocus={(event) => event.preventDefault()}
         // ⚠️ Trap 4 — focus deliberately sits OUTSIDE the content (in the input), so Radix's
         // DismissableLayer reads typing there as a focus-outside and would dismiss the
         // calendar mid-keystroke. Guarding it is what lets the grid track what you type.
-        onFocusOutside={(e) => e.preventDefault()}
+        onFocusOutside={(event) => event.preventDefault()}
         // The input is "outside" the popover in DOM terms but is the same control to the user,
         // and under §3 it is where focus deliberately lives. Clicking into it to move the caret
         // must not dismiss the calendar you are picking from. Every other outside click still
         // closes, which is what makes the field's own click the only exception.
-        onPointerDownOutside={(e) => {
-          if (e.target === inputRef.current) e.preventDefault()
+        onPointerDownOutside={(event) => {
+          if (event.target === inputRef.current) event.preventDefault()
         }}
         // Escape only ever closes — never clears, never reverts (clearing is what select-all
         // and Delete are for). When focus is in the grid the popover is about to unmount from
@@ -100,20 +100,20 @@ export function CalendarPopover({
       >
         {picks.length > 0 && (
           <PickRow>
-            {picks.map((p) => (
+            {picks.map((pick) => (
               <PickButton
-                key={p.token}
+                key={pick.token}
                 type="button"
-                aria-label={p.accessibleName}
+                aria-label={pick.accessibleName}
                 // Same trap as the day cells: without this, mousedown steals focus out of the
                 // input before the press handler can land it back there.
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={() => onPressQuickPick(p)}
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => onPressQuickPick(pick)}
               >
                 <PickLabel>
-                  {p.label.slice(0, p.markIndex)}
-                  <Mark>{p.label[p.markIndex]}</Mark>
-                  {p.label.slice(p.markIndex + 1)}
+                  {pick.label.slice(0, pick.markIndex)}
+                  <Mark>{pick.label[pick.markIndex]}</Mark>
+                  {pick.label.slice(pick.markIndex + 1)}
                 </PickLabel>
               </PickButton>
             ))}
@@ -131,14 +131,14 @@ export function CalendarPopover({
           </NavButton>
         </CalHeader>
         <Grid ref={onGridElement} onKeyDown={onGridKeyDown}>
-          {WEEKDAYS.map((w) => (
-            <Weekday key={w} aria-hidden="true">
-              {w}
+          {WEEKDAYS.map((weekday) => (
+            <Weekday key={weekday} aria-hidden="true">
+              {weekday}
             </Weekday>
           ))}
-          {cells.map((d) => {
-            const iso = d.toString()
-            const inMonth = d.month === anchor.month && d.year === anchor.year
+          {cells.map((day) => {
+            const iso = day.toString()
+            const inMonth = day.month === anchor.month && day.year === anchor.year
             const isSelected = iso === valueIso
             return (
               <DayButton
@@ -146,7 +146,7 @@ export function CalendarPopover({
                 type="button"
                 data-date={iso}
                 tabIndex={iso === focusIso ? 0 : -1}
-                aria-label={dayLabel(d)}
+                aria-label={dayLabel(day)}
                 aria-pressed={isSelected}
                 aria-current={iso === todayIso ? 'date' : undefined}
                 disabled={outOfRange(iso, min, max)}
@@ -155,10 +155,10 @@ export function CalendarPopover({
                 $outside={!inMonth}
                 // ⚠️ Trap 2 — without this, mousedown on a day steals focus out of the input
                 // before the pick can put it back. Same trick our Combobox uses on its options.
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={() => onPickDay(d)}
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => onPickDay(day)}
               >
-                {d.day}
+                {day.day}
               </DayButton>
             )
           })}

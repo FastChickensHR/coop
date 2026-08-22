@@ -94,17 +94,17 @@ const COMPACT_DATE = /^(\d{4})(\d{2})(\d{2})$/
  * typing. Any new accepted shape must preserve it.
  */
 export function parseUserDate(input: string): CalendarDate | null {
-  const s = input.trim()
-  if (!s) return null
-  if (ISO_DATE.test(s)) return fromISO(s)
-  const compact = COMPACT_DATE.exec(s)
+  const trimmedInput = input.trim()
+  if (!trimmedInput) return null
+  if (ISO_DATE.test(trimmedInput)) return fromISO(trimmedInput)
+  const compact = COMPACT_DATE.exec(trimmedInput)
   if (compact) {
     const [, yyyy, mm, dd] = compact
     return fromISO(`${yyyy}-${mm}-${dd}`)
   }
-  const m = US_DATE.exec(s)
-  if (m) {
-    const [, mm, dd, yyyy] = m
+  const usFormatMatch = US_DATE.exec(trimmedInput)
+  if (usFormatMatch) {
+    const [, mm, dd, yyyy] = usFormatMatch
     return fromISO(`${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`)
   }
   return null

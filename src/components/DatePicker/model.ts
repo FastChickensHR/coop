@@ -28,12 +28,12 @@ export function monthMatrix(anchor: CalendarDate): CalendarDate[] {
  * Display-only — the ban ADR-0816 §8 lands on hand-rolled *parsing*, not on formatting.
  */
 export function acceptedShapes(iso: string): string {
-  const [y, m, d] = iso.split('-')
-  return `${iso}, ${y}${m}${d}, or ${m}/${d}/${y}`
+  const [year, month, day] = iso.split('-')
+  return `${iso}, ${year}${month}${day}, or ${month}/${day}/${year}`
 }
 
-export function dayLabel(d: CalendarDate): string {
-  return `${MONTH_NAMES[d.month - 1]} ${d.day}, ${d.year}`
+export function dayLabel(date: CalendarDate): string {
+  return `${MONTH_NAMES[date.month - 1]} ${date.day}, ${date.year}`
 }
 
 export interface DateInputOptions {

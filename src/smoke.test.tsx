@@ -355,7 +355,7 @@ describe('coop public barrel', () => {
     '%s mounts under the theme and is axe-clean',
     async (name) => {
       const fixture = FIXTURES[name]
-      const component = components.find(([n]) => n === name)![1]
+      const component = components.find(([exportName]) => exportName === name)![1]
       const element = fixture ? fixture() : createElement(component)
 
       const { baseElement } = render(
@@ -370,7 +370,7 @@ describe('coop public barrel', () => {
         ),
       })
 
-      expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([])
+      expect(results.violations.map((violation) => `${violation.id}: ${violation.help}`)).toEqual([])
     },
     15_000,
   )

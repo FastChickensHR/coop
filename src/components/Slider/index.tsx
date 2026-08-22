@@ -40,7 +40,7 @@ export function Slider({
   return (
     <Root
       value={[value]}
-      onValueChange={([v]) => onValueChange(v)}
+      onValueChange={([value]) => onValueChange(value)}
       min={min}
       max={max}
       step={step}

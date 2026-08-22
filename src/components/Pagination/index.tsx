@@ -30,20 +30,20 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
       >
         <ChevronLeftIcon width={16} height={16} />
       </Arrow>
-      {pages.map((p, i) =>
-        p === ELLIPSIS ? (
+      {pages.map((page, i) =>
+        page === ELLIPSIS ? (
           <Gap key={`gap-${i}`} aria-hidden="true">
             …
           </Gap>
         ) : (
           <PageButton
-            key={p}
+            key={page}
             type="button"
-            $active={p === page}
-            aria-current={p === page ? 'page' : undefined}
-            onClick={() => onPageChange(p)}
+            $active={page === page}
+            aria-current={page === page ? 'page' : undefined}
+            onClick={() => onPageChange(page)}
           >
-            {p}
+            {page}
           </PageButton>
         ),
       )}
@@ -64,13 +64,13 @@ const ELLIPSIS = -1
 /** First, last, and a ±1 window around the current page, with ellipsis gaps. */
 function pageWindow(page: number, pageCount: number): number[] {
   const out = new Set<number>([1, pageCount, page, page - 1, page + 1])
-  const sorted = [...out].filter((p) => p >= 1 && p <= pageCount).sort((a, b) => a - b)
+  const sorted = [...out].filter((page) => page >= 1 && page <= pageCount).sort((left, right) => left - right)
   const result: number[] = []
   let prev = 0
-  for (const p of sorted) {
-    if (p - prev > 1) result.push(ELLIPSIS)
-    result.push(p)
-    prev = p
+  for (const page of sorted) {
+    if (page - prev > 1) result.push(ELLIPSIS)
+    result.push(page)
+    prev = page
   }
   return result
 }

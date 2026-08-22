@@ -59,6 +59,6 @@ describe('monthMatrix', () => {
     const cells = monthMatrix(new CalendarDate(2026, 8, 1))
     expect(cells.length % 7).toBe(0)
     expect(cells[0].toString()).toBe('2026-07-26') // Aug 1 2026 is a Saturday; grid leads back to Sunday
-    expect(cells.some((d) => d.toString() === '2026-08-31')).toBe(true)
+    expect(cells.some((day) => day.toString() === '2026-08-31')).toBe(true)
   })
 })

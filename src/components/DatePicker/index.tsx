@@ -21,7 +21,7 @@ export interface DatePickerProps {
   max?: string | null
   /** Allow an open-ended (`null`) boundary, shown as `openEndedLabel` with a toggle. */
   allowOpenEnded?: boolean
-  /** Muted word shown when open-ended, e.g. "Ongoing" / "Always". */
+  /** Muted word shown when open-ended, event.g. "Ongoing" / "Always". */
   openEndedLabel?: string
   /**
    * Which end of a period this field sits on — it chooses the quick-pick list (ADR-0816 §4).
@@ -130,13 +130,13 @@ export function DatePicker({
    * `m` commits live and leaves the calendar open for the same reason typing `20260801` does;
    * *pressing* is a dismissing gesture.
    */
-  function pressQuickPick(p: QuickPick) {
-    editing.commitPicked(p.value)
+  function pressQuickPick(quickPick: QuickPick) {
+    editing.commitPicked(quickPick.value)
     setOpen(false)
   }
 
-  function pick(d: CalendarDate) {
-    const iso = d.toString()
+  function pick(date: CalendarDate) {
+    const iso = date.toString()
     if (outOfRange(iso, min, max)) return
     editing.commitPicked(iso)
     setOpen(false)
@@ -158,18 +158,18 @@ export function DatePicker({
     next?.focus()
   }
 
-  function onGridKeyDown(e: ReactKeyboardEvent) {
+  function onGridKeyDown(event: ReactKeyboardEvent) {
     // Tab from inside the grid still means leave-the-control (one tab stop per field).
-    if (e.key === 'Tab' && !e.shiftKey) {
-      e.preventDefault()
+    if (event.key === 'Tab' && !event.shiftKey) {
+      event.preventDefault()
       setFocusZone('blurred')
       setOpen(false)
       focusNextAfterInput()
       return
     }
-    const next = gridMove(e.key, focusDate)
+    const next = gridMove(event.key, focusDate)
     if (next) {
-      e.preventDefault()
+      event.preventDefault()
       moveFocus(next)
     }
   }
@@ -216,7 +216,7 @@ export function DatePicker({
               // Clicking the icon must OPEN the calendar without taking focus — §3's "two doors,
               // one per input device", where the mouse door leaves the caret where it was. Radix
               // opens on `click`, which `preventDefault` on mousedown does not suppress (trap 7).
-              onMouseDown={(e) => e.preventDefault()}
+              onMouseDown={(event) => event.preventDefault()}
               aria-label="Open calendar"
               aria-expanded={open}
               aria-controls={open ? calendarId : undefined}
@@ -254,7 +254,7 @@ export function DatePicker({
               answer the question they actually asked. Same table and same range filter as the
               button row — a pick hidden as a button is absent from the hint too. */}
           {/^[a-z]/i.test(text.trim()) && picks.length > 0
-            ? `Try ${picks.map((p) => p.token).join(', ')}.`
+            ? `Try ${picks.map((pick) => pick.token).join(', ')}.`
             : `Enter a date like ${acceptedShapes(todayIso)}.`}
         </ParseHint>
       )}

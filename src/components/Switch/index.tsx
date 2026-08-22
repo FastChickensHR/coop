@@ -63,7 +63,7 @@ export function Switch({ checked, onCheckedChange, disabled, ...rest }: SwitchPr
         checked={checked}
         disabled={disabled}
         aria-label={rest['aria-label']}
-        onChange={(e) => onCheckedChange(e.target.checked)}
+        onChange={(event) => onCheckedChange(event.target.checked)}
       />
       <Track $checked={checked} $disabled={disabled}>
         <Thumb $checked={checked} />

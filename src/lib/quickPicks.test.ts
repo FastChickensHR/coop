@@ -128,8 +128,8 @@ describe('quickPicksFor — the button row', () => {
   })
 
   it('offers Ongoing only when the field allows an open-ended boundary', () => {
-    expect(quickPicksFor({ edge: 'end' }).map((p) => p.token)).toEqual(['month', 'year'])
-    expect(quickPicksFor({ edge: 'start', allowOpenEnded: true }).map((p) => p.token)).toEqual([
+    expect(quickPicksFor({ edge: 'end' }).map((pick) => pick.token)).toEqual(['month', 'year'])
+    expect(quickPicksFor({ edge: 'start', allowOpenEnded: true }).map((pick) => pick.token)).toEqual([
       'today',
       'month',
       'year',
@@ -137,19 +137,19 @@ describe('quickPicksFor — the button row', () => {
   })
 
   it('hides out-of-range picks, so the row varies in length', () => {
-    expect(quickPicksFor({ edge: 'start', max: '2026-08-31' }).map((p) => p.token)).toEqual([
+    expect(quickPicksFor({ edge: 'start', max: '2026-08-31' }).map((pick) => pick.token)).toEqual([
       'today',
       'month',
     ])
-    expect(quickPicksFor({ edge: 'start', max: '2026-07-20' }).map((p) => p.token)).toEqual(['today'])
-    expect(quickPicksFor({ edge: 'start', min: '2026-07-20' }).map((p) => p.token)).toEqual([
+    expect(quickPicksFor({ edge: 'start', max: '2026-07-20' }).map((pick) => pick.token)).toEqual(['today'])
+    expect(quickPicksFor({ edge: 'start', min: '2026-07-20' }).map((pick) => pick.token)).toEqual([
       'month',
       'year',
     ])
   })
 
   it('treats the bounds as inclusive', () => {
-    expect(quickPicksFor({ edge: 'start', min: '2026-07-15', max: '2026-07-15' }).map((p) => p.token)).toEqual(
+    expect(quickPicksFor({ edge: 'start', min: '2026-07-15', max: '2026-07-15' }).map((pick) => pick.token)).toEqual(
       ['today'],
     )
   })
@@ -157,12 +157,12 @@ describe('quickPicksFor — the button row', () => {
   it('never range-gates Ongoing — an open boundary is the absence of a date', () => {
     // A max of Jul 20 puts both dated end-edge picks out of range; Ongoing is untouched by it.
     const picks = quickPicksFor({ edge: 'end', allowOpenEnded: true, max: '2026-07-20' })
-    expect(picks.map((p) => p.token)).toEqual(['ongoing'])
+    expect(picks.map((pick) => pick.token)).toEqual(['ongoing'])
   })
 
   it('treats empty-string bounds as no bound at all', () => {
     // ADR-0079 slice 4 shipped a bug by reading '' as a real bound, which disabled everything.
-    expect(quickPicksFor({ edge: 'start', min: '', max: '' }).map((p) => p.token)).toEqual([
+    expect(quickPicksFor({ edge: 'start', min: '', max: '' }).map((pick) => pick.token)).toEqual([
       'today',
       'month',
       'year',
@@ -198,7 +198,7 @@ describe('matchQuickPick — the typed door', () => {
     // This is what makes "unique prefix" true by construction rather than by inspection: add a
     // colliding token and this fails before anything else does.
     for (const { edge, tokens } of EDGES) {
-      const initials = tokens.map((t) => t[0])
+      const initials = tokens.map((token) => token[0])
       expect(new Set(initials).size, `${edge} initials collide`).toBe(tokens.length)
     }
   })
@@ -209,8 +209,8 @@ describe('matchQuickPick — the typed door', () => {
       for (const token of tokens) {
         const whole = matchQuickPick(token, { edge, allowOpenEnded: true })
         expect(whole.kind).toBe('match')
-        for (let n = 1; n <= token.length; n++) {
-          expect(matchQuickPick(token.slice(0, n), { edge, allowOpenEnded: true })).toEqual(whole)
+        for (let prefixLength = 1; prefixLength <= token.length; prefixLength++) {
+          expect(matchQuickPick(token.slice(0, prefixLength), { edge, allowOpenEnded: true })).toEqual(whole)
         }
       }
     }
@@ -315,7 +315,7 @@ describe('resolveRangePeriod / rangePicksFor — the four range periods', () => 
   })
 
   it('offers all four chips, in order, when the range is unbounded', () => {
-    expect(rangePicksFor().map((p) => p.period)).toEqual(['thisMonth', 'nextMonth', 'thisYear', 'nextYear'])
+    expect(rangePicksFor().map((pick) => pick.period)).toEqual(['thisMonth', 'nextMonth', 'thisYear', 'nextYear'])
     expect(rangePicksFor()).toEqual([
       { period: 'thisMonth', label: 'This month', start: '2026-07-01', end: '2026-07-31' },
       { period: 'nextMonth', label: 'Next month', start: '2026-08-01', end: '2026-08-31' },
@@ -327,8 +327,8 @@ describe('resolveRangePeriod / rangePicksFor — the four range periods', () => 
   it('gates a period all-or-nothing: half a period inside the bounds is not offered', () => {
     // Next month starts inside this window and ends outside it. Offering it would write a range the
     // field then rejects, so the whole chip goes.
-    expect(rangePicksFor({ max: '2026-08-15' }).map((p) => p.period)).toEqual(['thisMonth'])
-    expect(rangePicksFor({ min: '2026-07-10' }).map((p) => p.period)).toEqual(['nextMonth', 'nextYear'])
+    expect(rangePicksFor({ max: '2026-08-15' }).map((pick) => pick.period)).toEqual(['thisMonth'])
+    expect(rangePicksFor({ min: '2026-07-10' }).map((pick) => pick.period)).toEqual(['nextMonth', 'nextYear'])
   })
 
   it('offers nothing when the bounds admit no whole period', () => {
@@ -336,7 +336,7 @@ describe('resolveRangePeriod / rangePicksFor — the four range periods', () => 
   })
 
   it('treats the bounds as inclusive', () => {
-    expect(rangePicksFor({ min: '2026-07-01', max: '2026-07-31' }).map((p) => p.period)).toEqual(['thisMonth'])
+    expect(rangePicksFor({ min: '2026-07-01', max: '2026-07-31' }).map((pick) => pick.period)).toEqual(['thisMonth'])
   })
 
   it('treats empty-string bounds as no bound at all', () => {

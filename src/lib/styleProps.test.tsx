@@ -107,8 +107,8 @@ describe('clean style props never reach the DOM', () => {
     expect(container.querySelector('td[align]')).toBeNull()
 
     const noisy = [...err.mock.calls, ...warn.mock.calls]
-      .map((c) => String(c[0]))
-      .filter((c) => /unknown prop|non-boolean attribute|React does not recognize/i.test(c))
+      .map((call) => String(call[0]))
+      .filter((message) => /unknown prop|non-boolean attribute|React does not recognize/i.test(message))
     expect(noisy).toEqual([])
 
     err.mockRestore()

@@ -103,18 +103,18 @@ export function Combobox(props: ComboboxProps) {
 
   const isAsync = !!onSearch
   const selectedValues = selection.multiple ? selection.values : []
-  const isSelected = (v: string) => (selection.multiple ? selectedValues.includes(v) : v === selection.value)
+  const isSelected = (value: string) => (selection.multiple ? selectedValues.includes(value) : value === selection.value)
 
   // Label for a value from the current options; falls back to the raw value when the
-  // option isn't in the current (e.g. async) results, so a selection never loses its chip.
-  const labelFor = (v: string) => options.find((o) => o.value === v)?.label ?? v
+  // option isn't in the current (event.g. async) results, so a selection never loses its chip.
+  const labelFor = (value: string) => options.find((option) => option.value === value)?.label ?? value
 
-  const selectedOptions = selection.multiple ? selectedValues.map((v) => ({ value: v, label: labelFor(v) })) : []
+  const selectedOptions = selection.multiple ? selectedValues.map((value) => ({ value: value, label: labelFor(value) })) : []
   const filtered = useMemo(() => {
     if (isAsync) return options // the server already filtered
-    const q = query.trim().toLowerCase()
-    if (!q) return options
-    return options.filter((o) => o.label.toLowerCase().includes(q))
+    const normalizedQuery = query.trim().toLowerCase()
+    if (!normalizedQuery) return options
+    return options.filter((option) => option.label.toLowerCase().includes(normalizedQuery))
   }, [options, query, isAsync])
 
   // A "Create …" affordance when the typed query matches no existing option; it sits
@@ -124,9 +124,9 @@ export function Combobox(props: ComboboxProps) {
     !!creatable &&
     trimmedQuery !== '' &&
     !filtered.some(
-      (o) =>
-        o.label.toLowerCase() === trimmedQuery.toLowerCase() ||
-        o.value.toLowerCase() === trimmedQuery.toLowerCase(),
+      (option) =>
+        option.label.toLowerCase() === trimmedQuery.toLowerCase() ||
+        option.value.toLowerCase() === trimmedQuery.toLowerCase(),
     )
   const createIndex = filtered.length
   const itemCount = filtered.length + (showCreate ? 1 : 0)
@@ -158,41 +158,41 @@ export function Combobox(props: ComboboxProps) {
   function choose(opt: ComboboxOption | undefined) {
     if (!opt) return
     commit(
-      (current) => (current.includes(opt.value) ? current.filter((v) => v !== opt.value) : [...current, opt.value]),
+      (current) => (current.includes(opt.value) ? current.filter((existing) => existing !== opt.value) : [...current, opt.value]),
       opt.value,
     )
   }
 
-  function removeValue(v: string) {
-    if (selection.multiple) selection.onValuesChange(selectedValues.filter((x) => x !== v))
+  function removeValue(value: string) {
+    if (selection.multiple) selection.onValuesChange(selectedValues.filter((other) => other !== value))
   }
 
   function createValue(text: string) {
-    const v = text.trim()
-    if (!v) return
-    onCreate?.(v)
-    commit((current) => (current.includes(v) ? current : [...current, v]), v)
+    const value = text.trim()
+    if (!value) return
+    onCreate?.(value)
+    commit((current) => (current.includes(value) ? current : [...current, value]), value)
   }
 
-  function onKeyDown(e: ReactKeyboardEvent) {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
+  function onKeyDown(event: ReactKeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
       if (!open) setOpen(true)
-      else setActive((a) => Math.min(a + 1, itemCount - 1))
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setActive((a) => Math.max(a - 1, 0))
-    } else if (e.key === 'Enter') {
+      else setActive((current) => Math.min(current + 1, itemCount - 1))
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      setActive((current) => Math.max(current - 1, 0))
+    } else if (event.key === 'Enter') {
       if (open) {
-        e.preventDefault()
+        event.preventDefault()
         if (showCreate && activeIndex === createIndex) createValue(trimmedQuery)
         else choose(filtered[activeIndex])
       }
-    } else if (e.key === 'Backspace') {
+    } else if (event.key === 'Backspace') {
       if (selection.multiple && query === '' && selectedValues.length > 0) {
         removeValue(selectedValues[selectedValues.length - 1])
       }
-    } else if (e.key === 'Escape') {
+    } else if (event.key === 'Escape') {
       setOpen(false)
     }
   }
@@ -205,11 +205,11 @@ export function Combobox(props: ComboboxProps) {
         <MultiControl
           $status={controlStatus}
           data-disabled={disabled || undefined}
-          onMouseDown={(e) => {
+          onMouseDown={(event) => {
             // Clicking the container's own padding focuses the input; clicks on a
             // chip's remove button or the input itself are left alone.
-            if (e.target === e.currentTarget) {
-              e.preventDefault()
+            if (event.target === event.currentTarget) {
+              event.preventDefault()
               inputRef.current?.focus()
             }
           }}
@@ -234,8 +234,8 @@ export function Combobox(props: ComboboxProps) {
             placeholder={selectedOptions.length === 0 ? placeholder : ''}
             value={query}
             onFocus={() => setOpen(true)}
-            onChange={(e) => {
-              setQuery(e.target.value)
+            onChange={(event) => {
+              setQuery(event.target.value)
               setActive(0)
               setOpen(true)
             }}
@@ -259,8 +259,8 @@ export function Combobox(props: ComboboxProps) {
           placeholder={!selection.multiple && selection.value && !open ? labelFor(selection.value) : placeholder}
           value={displayValue}
           onFocus={() => setOpen(true)}
-          onChange={(e) => {
-            setQuery(e.target.value)
+          onChange={(event) => {
+            setQuery(event.target.value)
             setActive(0)
             setOpen(true)
           }}
@@ -320,8 +320,8 @@ function useComboboxBehavior({
   // Close on outside click.
   useEffect(() => {
     if (!open) return
-    function onDown(e: MouseEvent) {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
+    function onDown(event: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpen(false)
     }
     document.addEventListener('mousedown', onDown)
     return () => document.removeEventListener('mousedown', onDown)
@@ -393,8 +393,8 @@ function OptionsList({
           aria-selected={isSelected(opt.value)}
           $active={i === activeIndex}
           onMouseEnter={() => onActivate(i)}
-          onMouseDown={(e) => {
-            e.preventDefault()
+          onMouseDown={(event) => {
+            event.preventDefault()
             onChoose(opt)
           }}
         >
@@ -410,8 +410,8 @@ function OptionsList({
           aria-selected={false}
           $active={activeIndex === createIndex}
           onMouseEnter={() => onActivate(createIndex)}
-          onMouseDown={(e) => {
-            e.preventDefault()
+          onMouseDown={(event) => {
+            event.preventDefault()
             onCreate(createQuery)
           }}
         >

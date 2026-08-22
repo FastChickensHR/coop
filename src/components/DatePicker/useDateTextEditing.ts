@@ -135,10 +135,10 @@ export function useDateTextEditing({
       // arms nothing here, so a later click still carets correctly.
       guardMouseUpRef.current = document.activeElement !== inputRef.current
     },
-    onMouseUp: (e: ReactMouseEvent<HTMLInputElement>) => {
+    onMouseUp: (event: ReactMouseEvent<HTMLInputElement>) => {
       if (!guardMouseUpRef.current) return
       guardMouseUpRef.current = false
-      e.preventDefault()
+      event.preventDefault()
     },
     onFocus: () => {
       setFocusZone('input')
@@ -149,8 +149,8 @@ export function useDateTextEditing({
       // input.value — keeps Playwright `.fill()` and other value-setters clean.
       setText(isOpenEnded ? '' : (value ?? ''))
     },
-    onChange: (e: FocusEvent<HTMLInputElement>) => {
-      const next = e.target.value
+    onChange: (event: FocusEvent<HTMLInputElement>) => {
+      const next = event.target.value
       setText(next)
       dirtyRef.current = true
       if (parseError) setParseError(false)
@@ -181,9 +181,9 @@ export function useDateTextEditing({
         commit(text)
       }
     },
-    onKeyDown: (e: ReactKeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        e.preventDefault()
+    onKeyDown: (event: ReactKeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
         // ⭐ Enter EXPANDS a typed token to the date it resolved to, and selects it — §3's
         // uniform landing, and the confirmation the typed door otherwise lacks. ⚠️ This is the
         // ONLY place expansion may happen (see onChange).
@@ -202,15 +202,15 @@ export function useDateTextEditing({
       // single-line input. Accepted (comboboxes do the same); ArrowUp is deliberately left alone
       // as "caret to start". One press opens AND enters, so the grid is reachable by keyboard
       // even though the 📅 icon is no longer a tab stop.
-      if (e.key === 'ArrowDown') {
-        e.preventDefault()
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
         if (!isCalendarOpen()) openCalendar()
         setFocusZone('grid')
         return
       }
       // Tab always means leave-the-control. No preventDefault: the icon is tabIndex={-1}, so the
       // browser's own advance already skips to the next field; the blur handler demotes the zone.
-      if (e.key === 'Tab' && isCalendarOpen()) {
+      if (event.key === 'Tab' && isCalendarOpen()) {
         closeCalendar()
       }
     },
