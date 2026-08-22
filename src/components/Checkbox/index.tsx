@@ -28,7 +28,7 @@ const Row = styled.div<{ $disabled?: boolean }>`
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
 `
 
-const Box = styled(RadixCheckbox.Root)`
+const Square = styled(RadixCheckbox.Root)`
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -95,7 +95,7 @@ export function Checkbox({
   const controlId = id ?? fieldProps.id ?? `checkbox-${reactId}`
   return (
     <Row $disabled={disabled} className={className}>
-      <Box
+      <Square
         id={controlId}
         checked={checked}
         onCheckedChange={(c) => onCheckedChange?.(c === true)}
@@ -108,7 +108,7 @@ export function Checkbox({
         <Indicator>
           <CheckIcon />
         </Indicator>
-      </Box>
+      </Square>
       {children != null && <LabelText htmlFor={controlId}>{children}</LabelText>}
     </Row>
   )

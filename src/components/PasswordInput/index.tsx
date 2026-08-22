@@ -2,7 +2,7 @@ import { forwardRef, useState } from 'react'
 import { styled } from 'styled-components'
 import { Input, type InputProps } from '../Input'
 
-const Wrap = styled.div`
+const FieldWrap = styled.div`
   position: relative;
 `
 
@@ -76,7 +76,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   function PasswordInput(props, ref) {
     const [shown, setShown] = useState(false)
     return (
-      <Wrap>
+      <FieldWrap>
         <PaddedInput ref={ref} type={shown ? 'text' : 'password'} {...props} />
         <ToggleButton
           type="button"
@@ -86,7 +86,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         >
           {shown ? <EyeOffIcon /> : <EyeIcon />}
         </ToggleButton>
-      </Wrap>
+      </FieldWrap>
     )
   },
 )
