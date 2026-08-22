@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (170)
+## Exported names (181)
 
 ```ts
 const ALWAYS: 'Always'
@@ -320,6 +320,18 @@ interface NumberInputProps extends InputProps {}
 
 const ONGOING: 'Ongoing'
 
+const PageActions: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+
+const PageContainer: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+
+const PageHeader: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+
+function PageHeading(props: { actions?: ReactNode; subtitle?: ReactNode; title: ReactNode }): JSX.Element
+
+const PageSubtitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never>>> & string
+
+const PageTitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never>>> & string
+
 function Pagination(props: PaginationProps): JSX.Element | null
 
 interface PaginationProps {
@@ -510,6 +522,8 @@ const Thead: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttribut
 
 const Timeline: IStyledComponentBase<'web', FastOmit<FastOmit<FastOmit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never> & Partial<Pick<FastOmit<FastOmit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never>>> & string
 
+const Toaster: React.ForwardRefExoticComponent<ToasterProps & React.RefAttributes<HTMLElement>>
+
 const ToggleGroup: IStyledComponentBase<'web', FastOmit<(RadixToggleGroup.ToggleGroupSingleProps & RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & RefAttributes<HTMLDivElement>), never> & Partial<Pick<(RadixToggleGroup.ToggleGroupSingleProps & RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & RefAttributes<HTMLDivElement>), never>>> & string & Omit<ForwardRefExoticComponent<(RadixToggleGroup.ToggleGroupSingleProps | RadixToggleGroup.ToggleGroupMultipleProps) & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
 const ToggleGroupItem: IStyledComponentBase<'web', FastOmit<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
@@ -522,6 +536,8 @@ interface TooltipProps {
   delayDuration?: number
   side?: 'bottom' | 'left' | 'right' | 'top'
 }
+
+const TopBar: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, '$sticky'> & { $sticky?: boolean; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, '$sticky'> & { $sticky?: boolean; }, never>>> & string
 
 const Tr: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, 'interactive'> & { interactive?: boolean; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, 'interactive'> & { interactive?: boolean; }, never>>> & string
 
@@ -969,6 +985,10 @@ function outOfRange(iso: string, min?: string | null, max?: string | null): bool
 
 const overlineType: RuleSet<object>
 
+const pageEnter: default
+
+const pageEnterAnimation: RuleSet<object>
+
 const pageTitleType: RuleSet<object>
 
 const panelHeadingType: RuleSet<object>
@@ -1037,6 +1057,8 @@ const scales: {
 const sectionTitleType: RuleSet<object>
 
 function toISO(date: CalendarDate | null): string | null
+
+const toast: ((message: titleT, data?: ExternalToast) => string | number) & { success: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; info: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; warning: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; error: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; custom: (jsx: (id: number | string) => React.ReactElement, data?: ExternalToast) => string | number; message: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; promise: <ToastData>(promise: PromiseT<ToastData>, data?: PromiseData<ToastData>) => (string & { unwrap: () => Promise<ToastData>; }) | (number & { unwrap: () => Promise<ToastData>; }) | { unwrap: () => Promise<ToastData>; }; dismiss: (id?: number | string) => string | number; loading: (message: titleT | React.ReactNode, data?: ExternalToast) => string | number; } & { getHistory: () => (ToastT | ToastToDismiss)[]; getToasts: () => (ToastT | ToastToDismiss)[]; }
 
 function todayDate(): CalendarDate
 

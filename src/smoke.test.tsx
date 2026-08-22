@@ -267,6 +267,9 @@ FIXTURES.Modal = () => (
   </coop.Modal>
 )
 FIXTURES.NumberInput = () => <coop.NumberInput aria-label="Group size" />
+FIXTURES.PageHeading = () => (
+  <coop.PageHeading title="Members" subtitle="Everyone in the organization" />
+)
 FIXTURES.Pagination = () => <coop.Pagination page={2} pageCount={5} onPageChange={noop} />
 FIXTURES.PasswordInput = () => <coop.PasswordInput aria-label="Password" />
 FIXTURES.Progress = () => <coop.Progress value={40} aria-label="Upload progress" />

@@ -1,6 +1,6 @@
 {
   "name": "@fastchickenshr/coop",
-  "version": "0.0.0-dev.a0edc3e",
+  "version": "0.0.0-dev.563a24c",
   "description": "The open-source design system behind FastChickens HR — accessible React components styled with a typed theme.",
   "license": "MIT",
   "type": "module",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "sonner": "^2.0.5",
     "@internationalized/date": "^3.12.2",
     "@radix-ui/react-accordion": "^1.2.16",
     "@radix-ui/react-avatar": "^1.2.2",
