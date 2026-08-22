@@ -1,9 +1,9 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
-import { styled, css } from 'styled-components'
+import { styled } from 'styled-components'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Chip } from '../Chip'
-import { useFieldControl, STATUS_SOFT, type FieldStatus } from '../FormField/context'
-import { controlStatusStyles } from '../FormField/fieldStyles'
+import { useFieldControl, type FieldStatus } from '../FormField/context'
+import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 
 export interface ComboboxOption {
   value: string
@@ -339,57 +339,26 @@ const Root = styled.div`
 `
 
 const ControlInput = styled.input<{ $status?: FieldStatus }>`
-  width: 100%;
-  height: 44px;
-  padding: 0 2.5rem 0 0.875rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.colors.ink};
-  background-color: ${({ theme }) => theme.colors.canvas};
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  ${controlBaseStyles}
+  padding-right: 2.5rem;
 
   ${({ $status }) => controlStatusStyles($status)}
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.surface2};
-    color: ${({ theme }) => theme.colors.subtle};
-    cursor: not-allowed;
-  }
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.subtle};
-  }
 `
 
 const MultiControl = styled.div<{ $status?: FieldStatus }>`
+  ${controlBaseStyles}
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xs};
-  width: 100%;
+  height: auto;
   min-height: 44px;
   padding: 0.3rem 2.5rem 0.3rem 0.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  background-color: ${({ theme }) => theme.colors.canvas};
-  box-sizing: border-box;
   cursor: text;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  ${({ $status, theme }) =>
-    $status &&
-    css`
-      border-color: ${theme.colors[$status]};
-      box-shadow: 0 0 0 3px ${theme.colors[STATUS_SOFT[$status]]};
-    `}
-
-  &:focus-within {
-    border-color: ${({ theme }) => theme.colors.accent};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accentSoft};
-  }
+  /* A wrapper div never :focuses — the ring keys off the inner input (#1217; this used to be
+     a hand-inlined, slightly drifted copy of controlStatusStyles). */
+  ${({ $status }) => controlStatusStyles($status, '&:focus-within')}
 
   &[data-disabled] {
     background-color: ${({ theme }) => theme.colors.surface2};

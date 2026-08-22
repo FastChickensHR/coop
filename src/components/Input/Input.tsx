@@ -2,35 +2,11 @@ import { forwardRef } from 'react'
 import type { InputHTMLAttributes } from 'react'
 import { styled } from 'styled-components'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
-import { controlStatusStyles } from '../FormField/fieldStyles'
+import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 
 const StyledInput = styled.input<{ $status?: FieldStatus }>`
-  width: 100%;
-  height: 44px;
-  padding: 0 0.875rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.colors.ink};
-  background-color: ${({ theme }) => theme.colors.canvas};
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color ${({ theme }) => theme.motion.duration.fast}
-      ${({ theme }) => theme.motion.easing.standard},
-    box-shadow ${({ theme }) => theme.motion.duration.fast} ${({ theme }) => theme.motion.easing.standard};
-
+  ${controlBaseStyles}
   ${({ $status }) => controlStatusStyles($status)}
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.surface2};
-    color: ${({ theme }) => theme.colors.subtle};
-    cursor: not-allowed;
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.subtle};
-  }
 `
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

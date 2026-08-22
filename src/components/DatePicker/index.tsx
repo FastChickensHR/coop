@@ -13,7 +13,7 @@ import {
   startOfMonth,
 } from '@internationalized/date'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
-import { controlStatusStyles } from '../FormField/fieldStyles'
+import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 import { fromISO, outOfRange, parseUserDate, toISO, todayDate, todayISO } from '../../lib/date'
 import {
   matchQuickPick,
@@ -98,31 +98,12 @@ const FieldWrap = styled.div`
 `
 
 const TextInput = styled.input<{ $status?: FieldStatus; $openEnded?: boolean }>`
-  width: 100%;
-  height: 44px;
-  padding: 0 2.75rem 0 0.875rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  font-size: ${({ theme }) => theme.fontSize.base};
+  ${controlBaseStyles}
+  padding-right: 2.75rem;
   color: ${({ theme, $openEnded }) => ($openEnded ? theme.colors.muted : theme.colors.ink)};
   font-style: ${({ $openEnded }) => ($openEnded ? 'italic' : 'normal')};
-  background-color: ${({ theme }) => theme.colors.canvas};
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
 
   ${({ $status }) => controlStatusStyles($status)}
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.surface2};
-    color: ${({ theme }) => theme.colors.subtle};
-    cursor: not-allowed;
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.subtle};
-  }
 `
 
 const CalendarButton = styled.button`

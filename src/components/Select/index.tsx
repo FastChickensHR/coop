@@ -2,7 +2,7 @@ import * as RadixSelect from '@radix-ui/react-select'
 import { ChevronDownIcon, ChevronUpIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
-import { controlStatusStyles } from '../FormField/fieldStyles'
+import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 
 export interface SelectOption {
   value: string
@@ -39,23 +39,12 @@ export interface SelectProps {
 }
 
 const Trigger = styled(RadixSelect.Trigger)<{ $status?: FieldStatus }>`
+  ${controlBaseStyles}
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 44px;
-  padding: 0 0.875rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-family: ${({ theme }) => theme.typography.fontFamily.sans};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.colors.ink};
-  background-color: ${({ theme }) => theme.colors.canvas};
-  cursor: pointer;
-  outline: none;
   gap: 0.5rem;
-  box-sizing: border-box;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  cursor: pointer;
 
   ${({ $status }) => controlStatusStyles($status)}
 
