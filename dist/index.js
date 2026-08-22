@@ -713,10 +713,12 @@ function pt({ options: e, value: t, onValueChange: n, multiple: r, values: i, on
 		d
 	]);
 	function se(e) {
-		if (e) if (r) {
-			let t = F.includes(e.value) ? F.filter((t) => t !== e.value) : [...F, e.value];
-			a?.(t), k(""), j(0), D(!0), N.current?.focus();
-		} else n?.(e.value), k(""), D(!1);
+		if (e) {
+			if (r) {
+				let t = F.includes(e.value) ? F.filter((t) => t !== e.value) : [...F, e.value];
+				a?.(t), k(""), j(0), D(!0), N.current?.focus();
+			} else n?.(e.value), k(""), D(!1);
+		}
 	}
 	function ce(e) {
 		a?.(F.filter((t) => t !== e));
