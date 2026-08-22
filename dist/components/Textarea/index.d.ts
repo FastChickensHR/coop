@@ -1,4 +1,5 @@
 import type { TextareaHTMLAttributes } from 'react';
+/** Props for Textarea — the native textarea attributes plus FormField status wiring. */
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     /** Force the error status even outside a FormField. */
     hasError?: boolean;

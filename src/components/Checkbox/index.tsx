@@ -4,6 +4,7 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { styled } from 'styled-components'
 import { useFieldControl } from '../FormField/context'
 
+/** Props for Checkbox. */
 export interface CheckboxProps {
   /** Whether the box is ticked (controlled). */
   checked?: boolean

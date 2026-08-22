@@ -19,6 +19,7 @@ export const ToggleGroup = styled(RadixToggleGroup.Root)`
   border-radius: ${({ theme }) => theme.borderRadius.md};
 `
 
+/** One segment of a ToggleGroup. */
 export const ToggleGroupItem = styled(RadixToggleGroup.Item)`
   display: inline-flex;
   align-items: center;

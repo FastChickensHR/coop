@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
+/** Props for Pagination. */
 export interface PaginationProps {
   /** 1-based current page. */
   page: number

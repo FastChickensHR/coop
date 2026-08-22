@@ -11,6 +11,9 @@ import * as RadixTabs from '@radix-ui/react-tabs';
  * `TabsContent value="…"` per trigger.
  */
 export declare const Tabs: import("react").ForwardRefExoticComponent<RadixTabs.TabsProps & import("react").RefAttributes<HTMLDivElement>>;
+/** The tab strip (underline style). */
 export declare const TabsList: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<RadixTabs.TabsListProps & import("react").RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixTabs.TabsListProps & import("react").RefAttributes<HTMLDivElement>, never>>> & string & Omit<import("react").ForwardRefExoticComponent<RadixTabs.TabsListProps & import("react").RefAttributes<HTMLDivElement>>, keyof import("react").Component<any, {}, any>>;
+/** One tab; the active tab underlines and takes the ink tone. */
 export declare const TabsTrigger: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<RadixTabs.TabsTriggerProps & import("react").RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixTabs.TabsTriggerProps & import("react").RefAttributes<HTMLButtonElement>, never>>> & string & Omit<import("react").ForwardRefExoticComponent<RadixTabs.TabsTriggerProps & import("react").RefAttributes<HTMLButtonElement>>, keyof import("react").Component<any, {}, any>>;
+/** A tab's panel; inactive panels unmount (the Radix default). */
 export declare const TabsContent: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<RadixTabs.TabsContentProps & import("react").RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixTabs.TabsContentProps & import("react").RefAttributes<HTMLDivElement>, never>>> & string & Omit<import("react").ForwardRefExoticComponent<RadixTabs.TabsContentProps & import("react").RefAttributes<HTMLDivElement>>, keyof import("react").Component<any, {}, any>>;

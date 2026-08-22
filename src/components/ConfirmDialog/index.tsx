@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Modal } from '../Modal'
 import { Button } from '../Button'
 
+/** Props for ConfirmDialog. */
 export interface ConfirmDialogProps {
   /** Whether the dialog is showing (controlled). */
   open: boolean

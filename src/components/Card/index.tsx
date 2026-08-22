@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 import { cardHeadingType } from '../../theme/typography'
 
+/** Props for Card. */
 export interface CardProps {
   /** Adds hover affordance (pointer cursor + lift) for a whole-card click target. */
   interactive?: boolean
@@ -36,6 +37,7 @@ export const Card = styled.div.withConfig({
   `}
 `
 
+/** Top strip of a Card — title stack on the left, {@link CardActions} on the right. */
 export const CardHeader = styled.div`
   display: flex;
   align-items: flex-start;
@@ -45,12 +47,14 @@ export const CardHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `
 
+/** The Card's heading, on the card-heading type role. */
 export const CardTitle = styled.h3`
   ${cardHeadingType}
   color: ${({ theme }) => theme.colors.ink};
   margin: 0;
 `
 
+/** Right-aligned action cluster inside a {@link CardHeader}. */
 export const CardActions = styled.div`
   display: flex;
   align-items: center;
@@ -58,10 +62,12 @@ export const CardActions = styled.div`
   flex-shrink: 0;
 `
 
+/** The padded content region of a Card. */
 export const CardBody = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
 `
 
+/** Bottom strip of a Card: right-aligned actions, separated from the body. */
 export const CardFooter = styled.div`
   display: flex;
   align-items: center;

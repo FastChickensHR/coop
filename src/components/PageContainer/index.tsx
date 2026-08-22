@@ -2,6 +2,10 @@ import { styled } from 'styled-components'
 import { pageEnterAnimation } from '../../theme/motion'
 import { pageTitleType } from '../../theme/typography'
 
+/**
+ * The page's outer width-and-padding shell; content fades in on entry via the shared
+ * `pageEnterAnimation` (ADR-0081).
+ */
 export const PageContainer = styled.div`
   max-width: 80rem;
   margin: 0 auto;
@@ -19,6 +23,7 @@ export const PageContainer = styled.div`
   }
 `
 
+/** Title row at the top of a page: the heading stack left, {@link PageActions} right. */
 export const PageHeader = styled.div`
   display: flex;
   align-items: flex-start;
@@ -27,18 +32,21 @@ export const PageHeader = styled.div`
   gap: 1rem;
 `
 
+/** The page's `h1`, on the page-title type role. */
 export const PageTitle = styled.h1`
   ${pageTitleType}
   color: ${({ theme }) => theme.colors.ink};
   margin: 0;
 `
 
+/** One muted line under a {@link PageTitle}. */
 export const PageSubtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.colors.muted};
   margin: 0;
 `
 
+/** Right-aligned action cluster inside a {@link PageHeader}. */
 export const PageActions = styled.div`
   display: flex;
   align-items: center;

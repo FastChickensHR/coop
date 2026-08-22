@@ -9,6 +9,7 @@ const SIZES: Record<AvatarSize, string> = {
   lg: '3rem',
 }
 
+/** Props for Avatar — a name-seeded initials disc with an optional image. */
 export interface AvatarProps {
   /** Person/entity name — used for the alt text and the initials fallback. */
   name: string

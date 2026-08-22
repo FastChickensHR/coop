@@ -3,12 +3,14 @@ import * as RadixRadio from '@radix-ui/react-radio-group'
 import { styled } from 'styled-components'
 import { useFieldControl } from '../FormField/context'
 
+/** One RadioGroup choice: `value` is committed, `label` is shown. */
 export interface RadioOption {
   value: string
   label: ReactNode
   disabled?: boolean
 }
 
+/** Props for RadioGroup. */
 export interface RadioGroupProps {
   /** The selected option's value (controlled). */
   value?: string

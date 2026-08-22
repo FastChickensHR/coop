@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+/** Props for DrawerSlot. */
 export interface DrawerSlotProps {
     /** When true, this slot owns the global drawer and its children are shown. */
     open: boolean;

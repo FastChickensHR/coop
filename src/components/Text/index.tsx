@@ -43,6 +43,7 @@ export type TextVariant =
   | 'overline'
   | 'mono'
 
+/** Colour role for {@link Text} — semantic tones, never raw colours (ADR-0228). */
 export type TextTone =
   | 'default'
   | 'muted'
@@ -115,6 +116,7 @@ const StyledText = styled.p<StyledTextProps>`
   color: ${({ theme, $tone }) => TONES[$tone](theme)};
 `
 
+/** Props for {@link Text}. */
 export interface TextProps extends Omit<ComponentPropsWithoutRef<'p'>, 'color'> {
   /** Type-scale role (from `theme/typography.ts`). @default 'body' */
   variant?: TextVariant
@@ -126,6 +128,10 @@ export interface TextProps extends Omit<ComponentPropsWithoutRef<'p'>, 'color'> 
   children?: ReactNode
 }
 
+/**
+ * The typography primitive: every role from `theme/typography` with semantic tones — reach
+ * for it instead of styling raw text elements (ADR-0229).
+ */
 export function Text({ variant = 'body', tone = 'default', as, ...rest }: TextProps) {
   return <StyledText as={as ?? DEFAULT_ELEMENT[variant]} $variant={variant} $tone={tone} {...rest} />
 }

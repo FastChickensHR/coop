@@ -14,12 +14,14 @@ import { styled } from 'styled-components'
  */
 export const Tabs = RadixTabs.Root
 
+/** The tab strip (underline style). */
 export const TabsList = styled(RadixTabs.List)`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   gap: 0;
 `
 
+/** One tab; the active tab underlines and takes the ink tone. */
 export const TabsTrigger = styled(RadixTabs.Trigger)`
   padding: 0.75rem 1rem;
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
@@ -51,6 +53,7 @@ export const TabsTrigger = styled(RadixTabs.Trigger)`
   }
 `
 
+/** A tab's panel; inactive panels unmount (the Radix default). */
 export const TabsContent = styled(RadixTabs.Content)`
   outline: none;
 

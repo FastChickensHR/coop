@@ -1,8 +1,10 @@
 import { styled, css } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
+/** Semantic severity of an {@link Alert} — traffic-light vocabulary (ADR-0157). */
 export type AlertVariant = 'info' | 'success' | 'warning' | 'error'
 
+/** Props for {@link Alert}. */
 export interface AlertProps {
   /** Semantic severity — info / success / warning / error (traffic-light, ADR-0157). @default 'info' */
   variant?: AlertVariant
@@ -31,6 +33,10 @@ const variantStyles = {
   `,
 }
 
+/**
+ * Inline callout for something the reader should notice, framed by severity. Compose from
+ * {@link AlertIcon}, {@link AlertBody}, {@link AlertTitle} and {@link AlertMessage}.
+ */
 export const Alert = styled.div.withConfig({
   shouldForwardProp: blockStyleProps('variant'),
 })<AlertProps>`
@@ -45,6 +51,7 @@ export const Alert = styled.div.withConfig({
   ${({ variant = 'info' }) => variantStyles[variant]}
 `
 
+/** The Alert's leading icon slot, top-aligned to the first text line. */
 export const AlertIcon = styled.span`
   flex-shrink: 0;
   display: flex;
@@ -54,17 +61,20 @@ export const AlertIcon = styled.span`
   height: 1rem;
 `
 
+/** The Alert's text column — holds {@link AlertTitle} and {@link AlertMessage}. */
 export const AlertBody = styled.div`
   flex: 1;
   min-width: 0;
 `
 
+/** One-line heading of an Alert. */
 export const AlertTitle = styled.p`
   margin: 0 0 0.125rem;
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   font-size: ${({ theme }) => theme.fontSize.sm};
 `
 
+/** The Alert's body copy. */
 export const AlertMessage = styled.p`
   margin: 0;
   font-size: ${({ theme }) => theme.fontSize.sm};

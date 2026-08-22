@@ -2,6 +2,7 @@ import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { styled, keyframes } from 'styled-components'
 import type { ReactNode } from 'react'
 
+/** Props for Tooltip. */
 export interface TooltipProps {
   /** The hint text. */
   content: ReactNode

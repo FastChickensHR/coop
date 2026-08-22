@@ -12,6 +12,7 @@ import { styled, keyframes } from 'styled-components'
  */
 export const Accordion = RadixAccordion.Root
 
+/** One collapsible section of an Accordion; borders make adjacent items read as one stack. */
 export const AccordionItem = styled(RadixAccordion.Item)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
@@ -20,10 +21,12 @@ export const AccordionItem = styled(RadixAccordion.Item)`
   }
 `
 
+/** The heading wrapper Radix requires around an {@link AccordionTrigger} — heading semantics without heading styles. */
 export const AccordionHeader = styled(RadixAccordion.Header)`
   margin: 0;
 `
 
+/** The click target that opens and closes its item; the chevron tracks the open state. */
 export const AccordionTrigger = styled(RadixAccordion.Trigger)`
   display: flex;
   align-items: center;
@@ -79,6 +82,7 @@ const slideUp = keyframes`
   to { height: 0; }
 `
 
+/** The collapsible body of an accordion item, muted relative to its trigger. */
 export const AccordionContent = styled(RadixAccordion.Content)`
   overflow: hidden;
   font-size: ${({ theme }) => theme.fontSize.sm};

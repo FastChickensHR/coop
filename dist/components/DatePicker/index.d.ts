@@ -1,4 +1,5 @@
 import { type DateEdge } from '../../lib/quickPicks';
+/** Props for {@link DatePicker}. */
 export interface DatePickerProps {
     /** ISO `YYYY-MM-DD`, or `null`/undefined when unset. */
     value?: string | null;
@@ -35,4 +36,9 @@ export interface DatePickerProps {
     /** Class name for the root element (for layout only — colour and size come from the theme). */
     className?: string;
 }
+/**
+ * A date field with two doors (ADR-0816): type any accepted shape — it commits live — or
+ * open the calendar (ArrowDown by keyboard, the icon by mouse). Quick-pick tokens type
+ * ahead; `min`/`max` clamp both doors; a boundary can be open-ended.
+ */
 export declare function DatePicker({ value, onValueChange, min, max, allowOpenEnded, openEndedLabel, edge, placeholder, disabled, hasError, id, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, className, }: DatePickerProps): import("react").JSX.Element;

@@ -18,6 +18,7 @@ export const DescriptionList = styled.dl`
   }
 `
 
+/** The label half of a DescriptionList row. */
 export const DescriptionTerm = styled.dt`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.sm};
@@ -25,6 +26,7 @@ export const DescriptionTerm = styled.dt`
   margin: 0;
 `
 
+/** The value half of a DescriptionList row. */
 export const DescriptionDetails = styled.dd`
   font-family: ${({ theme }) => theme.typography.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.sm};

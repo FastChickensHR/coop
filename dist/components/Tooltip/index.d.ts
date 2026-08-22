@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+/** Props for Tooltip. */
 export interface TooltipProps {
     /** The hint text. */
     content: ReactNode;

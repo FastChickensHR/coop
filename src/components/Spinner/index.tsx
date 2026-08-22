@@ -1,6 +1,7 @@
 import { styled, keyframes } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
+/** Diameter presets for {@link Spinner}. */
 export type SpinnerSize = 'sm' | 'md' | 'lg'
 
 const SIZES: Record<SpinnerSize, string> = {
@@ -13,6 +14,7 @@ const spin = keyframes`
   to { transform: rotate(360deg); }
 `
 
+/** Props for Spinner. */
 export interface SpinnerProps {
   /** Diameter preset. @default 'md' */
   size?: SpinnerSize

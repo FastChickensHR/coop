@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 
+/** Props for Chip — a removable token, as used by the multi-select Combobox. */
 export interface ChipProps {
   /** The token's label; truncates with an ellipsis rather than wrapping. */
   children: ReactNode

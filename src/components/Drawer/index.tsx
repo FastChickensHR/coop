@@ -4,6 +4,7 @@ import { HeaderText, Title, Description, CloseButton } from '../Modal/parts'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 
+/** Props for {@link Drawer}. */
 export interface DrawerProps {
   open: boolean
   onOpenChange: (open: boolean) => void

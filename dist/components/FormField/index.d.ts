@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+/** Props for FormField. */
 export interface FormFieldProps {
     /** Field label; rendered in a <label> associated with the control. */
     label: ReactNode;

@@ -4,6 +4,7 @@ import { HeaderText, Title, Description, CloseButton } from './parts'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { ReactNode } from 'react'
 
+/** Props for {@link Modal}. */
 export interface ModalProps {
   /** Whether the dialog is showing (controlled). */
   open: boolean

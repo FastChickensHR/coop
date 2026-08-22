@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 
+/** Props for Switch. */
 export interface SwitchProps {
   /** Whether the switch is on. */
   checked: boolean

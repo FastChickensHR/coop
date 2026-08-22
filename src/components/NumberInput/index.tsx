@@ -15,6 +15,7 @@ const StyledNumberInput = styled(Input)`
   appearance: textfield;
 `
 
+/** Props for NumberInput — the base Input props, numeric attributes included. */
 export interface NumberInputProps extends InputProps {}
 
 /**

@@ -10,6 +10,7 @@ import { acceptedShapes, gridMove, monthMatrix } from './model'
 import { useDateTextEditing } from './useDateTextEditing'
 import { CalendarButton, FieldWrap, ParseHint, TextInput } from './styles'
 
+/** Props for {@link DatePicker}. */
 export interface DatePickerProps {
   /** ISO `YYYY-MM-DD`, or `null`/undefined when unset. */
   value?: string | null
@@ -47,6 +48,11 @@ export interface DatePickerProps {
   className?: string
 }
 
+/**
+ * A date field with two doors (ADR-0816): type any accepted shape — it commits live — or
+ * open the calendar (ArrowDown by keyboard, the icon by mouse). Quick-pick tokens type
+ * ahead; `min`/`max` clamp both doors; a boundary can be open-ended.
+ */
 export function DatePicker({
   value,
   onValueChange,

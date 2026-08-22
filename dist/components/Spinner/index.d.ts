@@ -1,4 +1,6 @@
+/** Diameter presets for {@link Spinner}. */
 export type SpinnerSize = 'sm' | 'md' | 'lg';
+/** Props for Spinner. */
 export interface SpinnerProps {
     /** Diameter preset. @default 'md' */
     size?: SpinnerSize;

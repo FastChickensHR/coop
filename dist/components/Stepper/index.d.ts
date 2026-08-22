@@ -1,7 +1,9 @@
 import { type ReactNode } from 'react';
+/** One step of a Stepper flow. */
 export interface Step {
     label: ReactNode;
 }
+/** Props for Stepper. */
 export interface StepperProps {
     /** The steps of the flow, in order; they are numbered from 1 for display. */
     steps: Step[];

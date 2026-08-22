@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+/** Props for ConfirmDialog. */
 export interface ConfirmDialogProps {
     /** Whether the dialog is showing (controlled). */
     open: boolean;

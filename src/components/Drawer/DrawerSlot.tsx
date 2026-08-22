@@ -1,6 +1,7 @@
 import { useEffect, useId, useLayoutEffect, type ReactNode } from 'react'
 import { useDrawerStore } from './drawerStore'
 
+/** Props for DrawerSlot. */
 export interface DrawerSlotProps {
   /** When true, this slot owns the global drawer and its children are shown. */
   open: boolean

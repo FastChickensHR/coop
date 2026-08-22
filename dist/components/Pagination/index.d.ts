@@ -1,3 +1,4 @@
+/** Props for Pagination. */
 export interface PaginationProps {
     /** 1-based current page. */
     page: number;

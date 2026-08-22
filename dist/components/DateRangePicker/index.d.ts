@@ -19,6 +19,7 @@ export interface DateRangeEdgeProps {
      *  @default 'Start date' / 'End date' */
     ariaLabel?: string;
 }
+/** Props for DateRangePicker. */
 export interface DateRangePickerProps {
     /** The range's opening boundary. */
     start?: DateRangeEdgeProps;

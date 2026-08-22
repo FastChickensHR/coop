@@ -4,6 +4,7 @@ import { styled } from 'styled-components'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
 import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 
+/** One Select choice: `value` is committed, `label` is shown. */
 export interface SelectOption {
   value: string
   label: string
@@ -13,6 +14,7 @@ export interface SelectOption {
   hint?: string
 }
 
+/** Props for {@link Select}. */
 export interface SelectProps {
   /** The selected option's value (controlled). */
   value?: string
@@ -122,6 +124,10 @@ const ScrollButton = styled(RadixSelect.ScrollUpButton)`
   cursor: default;
 `
 
+/**
+ * The standard dropdown (Radix-backed, FormField-status aware) for a shortish option list.
+ * When scanning the list is slow — states, carriers, employees — reach for Combobox instead.
+ */
 export function Select({
   value,
   onValueChange,

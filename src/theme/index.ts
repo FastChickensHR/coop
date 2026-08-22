@@ -65,6 +65,7 @@ const fixed = {
 // shade beyond the semantic aliases below (e.g. a hover state one step
 // darker than `success`).
 // ---------------------------------------------------------------------------
+/** Tailwind's published 10-step scales (ADR-0042) — reach here only when a semantic alias doesn't fit. */
 export const scales = {
   slate: {
     50: '#f8fafc',
@@ -387,22 +388,26 @@ const baseTheme = {
   motion,
 }
 
+/** The light theme object — the value handed to styled-components’ ThemeProvider. */
 export const lightTheme = {
   ...baseTheme,
   colors: { ...fixed, ...lightColors },
 }
 
+/** The dark theme object; same shape as {@link lightTheme}, semantic colours flipped. */
 export const darkTheme = {
   ...baseTheme,
   colors: { ...fixed, ...darkColors },
 }
 
+/** The theme's type; module augmentation binds styled-components' DefaultTheme to it. */
 export type AppTheme = typeof lightTheme
 
 // ---------------------------------------------------------------------------
 // User-selectable font preferences (ADR-0044)
 // ---------------------------------------------------------------------------
 
+/** The reader's font-size setting (ADR-0044); scales the rem base app-wide. */
 export type FontSizePreference = 'STANDARD' | 'LARGE' | 'EXTRA_LARGE'
 
 /**

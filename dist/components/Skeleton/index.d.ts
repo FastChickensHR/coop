@@ -1,3 +1,4 @@
+/** Props for Skeleton. */
 export interface SkeletonProps {
     /** Corner radius override (defaults to the `sm` token; use `full` for a circle). */
     radius?: string;

@@ -1,4 +1,5 @@
 import type { InputProps } from '../Input';
+/** Props for NumberInput — the base Input props, numeric attributes included. */
 export interface NumberInputProps extends InputProps {
 }
 /**

@@ -5,6 +5,7 @@ import { Chip } from '../Chip'
 import { useFieldControl, type FieldStatus } from '../FormField/context'
 import { controlBaseStyles, controlStatusStyles } from '../FormField/fieldStyles'
 
+/** One Combobox choice: `value` is committed, `label` is shown and searched. */
 export interface ComboboxOption {
   value: string
   label: string

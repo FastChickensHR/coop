@@ -4,6 +4,7 @@ import { blockStyleProps } from '../../lib/styleProps'
 type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
 type Size = 'sm' | 'md' | 'lg'
 
+/** Props for {@link Button}. */
 export interface ButtonProps {
   /** Visual emphasis. `primary` = the one commit action per view; `danger` = destructive. @default 'primary' */
   variant?: Variant
@@ -59,6 +60,10 @@ const sizeStyles = {
   `,
 }
 
+/**
+ * The standard button: `variant` carries emphasis (one `primary` commit action per view,
+ * ADR-0157), `size` tracks the shared control heights.
+ */
 export const Button = styled.button.withConfig({
   shouldForwardProp: blockStyleProps('variant', 'size'),
 })<ButtonProps>`

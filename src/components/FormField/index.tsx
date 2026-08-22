@@ -6,6 +6,7 @@ import { StatusMessage } from '../Input'
 import { FieldContext } from './context'
 import type { FieldContextValue, FieldStatus } from './context'
 
+/** Props for FormField. */
 export interface FormFieldProps {
   /** Field label; rendered in a <label> associated with the control. */
   label: ReactNode

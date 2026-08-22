@@ -1,3 +1,4 @@
+/** One Select choice: `value` is committed, `label` is shown. */
 export interface SelectOption {
     value: string;
     label: string;
@@ -6,6 +7,7 @@ export interface SelectOption {
     /** Muted sub-line under the label — e.g. why a disabled option can't be chosen. */
     hint?: string;
 }
+/** Props for {@link Select}. */
 export interface SelectProps {
     /** The selected option's value (controlled). */
     value?: string;
@@ -30,4 +32,8 @@ export interface SelectProps {
     /** Forwarded to the trigger so `styled(Select)` can adjust sizing/layout. */
     className?: string;
 }
+/**
+ * The standard dropdown (Radix-backed, FormField-status aware) for a shortish option list.
+ * When scanning the list is slow — states, carriers, employees — reach for Combobox instead.
+ */
 export declare function Select({ value, onValueChange, options, placeholder, disabled, hasError, id, className, tabIndex, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, }: SelectProps): import("react").JSX.Element;

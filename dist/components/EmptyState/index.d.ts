@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+/** Props for EmptyState. */
 export interface EmptyStateProps {
     /** Optional leading icon/illustration (e.g. a heroicon). */
     icon?: ReactNode;

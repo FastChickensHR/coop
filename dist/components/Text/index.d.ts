@@ -18,7 +18,9 @@ import type { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react';
  *   <Text variant="mono" as="span">ABC-123</Text>
  */
 export type TextVariant = 'display' | 'h1' | 'h2' | 'sectionTitle' | 'bodyLarge' | 'body' | 'bodySmall' | 'caption' | 'overline' | 'mono';
+/** Colour role for {@link Text} — semantic tones, never raw colours (ADR-0228). */
 export type TextTone = 'default' | 'muted' | 'subtle' | 'brand' | 'accent' | 'danger' | 'warning' | 'success' | 'info' | 'inverse';
+/** Props for {@link Text}. */
 export interface TextProps extends Omit<ComponentPropsWithoutRef<'p'>, 'color'> {
     /** Type-scale role (from `theme/typography.ts`). @default 'body' */
     variant?: TextVariant;
@@ -29,4 +31,8 @@ export interface TextProps extends Omit<ComponentPropsWithoutRef<'p'>, 'color'> 
     /** The text to render. */
     children?: ReactNode;
 }
+/**
+ * The typography primitive: every role from `theme/typography` with semantic tones — reach
+ * for it instead of styling raw text elements (ADR-0229).
+ */
 export declare function Text({ variant, tone, as, ...rest }: TextProps): import("react").JSX.Element;

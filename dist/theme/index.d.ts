@@ -26,6 +26,7 @@
  * Fixed colors (ink900, brand500 etc.) do NOT flip with dark mode and are
  * safe to use in always-dark contexts like the sidebar.
  */
+/** Tailwind's published 10-step scales (ADR-0042) — reach here only when a semantic alias doesn't fit. */
 export declare const scales: {
     slate: {
         50: string;
@@ -76,6 +77,7 @@ export declare const scales: {
         900: string;
     };
 };
+/** The light theme object — the value handed to styled-components’ ThemeProvider. */
 export declare const lightTheme: {
     colors: {
         canvas: string;
@@ -280,6 +282,7 @@ export declare const lightTheme: {
         };
     };
 };
+/** The dark theme object; same shape as {@link lightTheme}, semantic colours flipped. */
 export declare const darkTheme: {
     colors: {
         canvas: string;
@@ -484,7 +487,9 @@ export declare const darkTheme: {
         };
     };
 };
+/** The theme's type; module augmentation binds styled-components' DefaultTheme to it. */
 export type AppTheme = typeof lightTheme;
+/** The reader's font-size setting (ADR-0044); scales the rem base app-wide. */
 export type FontSizePreference = 'STANDARD' | 'LARGE' | 'EXTRA_LARGE';
 /**
  * Root <html> font-size percentage per FontSizePreference level. The whole

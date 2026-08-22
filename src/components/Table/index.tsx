@@ -13,18 +13,25 @@ export const TableScroll = styled.div`
   overflow-x: auto;
 `
 
+/**
+ * The standard data table. Compose with {@link Thead}/{@link Tbody}/{@link Tr}/{@link Th}/
+ * {@link Td} — ADR-0075 requires these over raw table elements or local styled copies.
+ */
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   font-size: ${({ theme }) => theme.fontSize.sm};
 `
 
+/** The header band, on the surface tone. */
 export const Thead = styled.thead`
   background-color: ${({ theme }) => theme.colors.surface};
 `
 
+/** The body; exists so composition mirrors the HTML table model. */
 export const Tbody = styled.tbody``
 
+/** A row; `interactive` adds the hover affordance for click-to-expand rows. */
 export const Tr = styled.tr.withConfig({
   shouldForwardProp: blockStyleProps('interactive'),
 })<{ interactive?: boolean }>`
@@ -35,6 +42,7 @@ export const Tr = styled.tr.withConfig({
 
 type Align = 'left' | 'right' | 'center'
 
+/** A header cell; `align` and `noBorder` mirror Td's. */
 export const Th = styled.th.withConfig({
   shouldForwardProp: blockStyleProps('noBorder', 'align'),
 })<{ noBorder?: boolean; align?: Align }>`
@@ -53,6 +61,7 @@ export const Th = styled.th.withConfig({
 // Orthogonal cell variants: `mono` = a monospace data cell (dates, codes) — small, non-wrapping,
 // but NOT recoloured; `muted` = secondary/muted colour. Compose them: a muted mono cell is
 // `mono muted`, an ink mono cell (e.g. a filename) is just `mono`.
+/** A body cell; `align`/`noBorder` control layout, `mono`/`muted` compose per the note above. */
 export const Td = styled.td.withConfig({
   shouldForwardProp: blockStyleProps('noBorder', 'align', 'mono', 'muted'),
 })<{ noBorder?: boolean; align?: Align; mono?: boolean; muted?: boolean }>`
@@ -73,6 +82,7 @@ export const Td = styled.td.withConfig({
 // column (mark its Th/Td `data-identity`) stays left, the action column (`data-action`) sits tight
 // on the right, and past-version rows (`data-past` on the <Tr>) read muted. Compose it with the
 // same Thead/Tbody/Tr/Th/Td; mark the value column's cells `mono` (or `muted`).
+/** The bitemporal timeline variant of {@link Table} — see the note above for its markers. */
 export const Timeline = styled(Table)`
   th,
   td {

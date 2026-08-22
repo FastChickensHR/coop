@@ -1,9 +1,11 @@
 import { type ReactNode } from 'react';
+/** One step of a breadcrumb trail; the last crumb (no `href`) is the current page. */
 export interface Crumb {
     label: ReactNode;
     /** Link target; omit for the current (last) page. */
     href?: string;
 }
+/** Props for Breadcrumbs. */
 export interface BreadcrumbsProps {
     /** The trail, root first; the last entry is rendered as the current page, not a link. */
     items: Crumb[];

@@ -1,3 +1,4 @@
+/** One Combobox choice: `value` is committed, `label` is shown and searched. */
 export interface ComboboxOption {
     value: string;
     label: string;

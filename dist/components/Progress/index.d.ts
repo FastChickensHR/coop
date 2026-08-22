@@ -1,3 +1,4 @@
+/** Props for Progress. */
 export interface ProgressProps {
     /** 0–100. Omit/null for an indeterminate bar (use a Spinner if length is truly unknown). */
     value?: number | null;

@@ -6,6 +6,7 @@ const pulse = keyframes`
   50% { opacity: 0.45; }
 `
 
+/** Props for Skeleton. */
 export interface SkeletonProps {
   /** Corner radius override (defaults to the `sm` token; use `full` for a circle). */
   radius?: string

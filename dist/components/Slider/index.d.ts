@@ -1,3 +1,4 @@
+/** Props for Slider. */
 export interface SliderProps {
     /** The current value (controlled); clamped to `min`/`max` by the track. */
     value: number;

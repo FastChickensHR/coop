@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+/** Props for Checkbox. */
 export interface CheckboxProps {
     /** Whether the box is ticked (controlled). */
     checked?: boolean;
