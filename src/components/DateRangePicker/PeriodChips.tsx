@@ -119,7 +119,7 @@ const ChipButton = styled.button`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 150ms ease, border-color 150ms ease;
+  transition: background-color ${({ theme }) => theme.motion.duration.fast} ease, border-color ${({ theme }) => theme.motion.duration.fast} ease;
 
   &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.border};

@@ -41,7 +41,7 @@ const Square = styled(RadixCheckbox.Root)`
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background: ${({ theme }) => theme.colors.canvas};
   cursor: inherit;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background ${({ theme }) => theme.motion.duration.micro} ease, border-color ${({ theme }) => theme.motion.duration.micro} ease;
 
   &[data-state='checked'],
   &[data-state='indeterminate'] {

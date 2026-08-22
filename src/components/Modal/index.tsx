@@ -69,8 +69,8 @@ const contentShow = keyframes`
 const Overlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.45);
+  z-index: ${({ theme }) => theme.zIndex[50]};
+  background-color: ${({ theme }) => theme.fixed.scrim};
   animation: ${overlayShow} ${({ theme }) => theme.motion.duration.base} ${({ theme }) => theme.motion.easing.enter};
 
   @media (prefers-reduced-motion: reduce) {
@@ -92,7 +92,7 @@ const Content = styled(Dialog.Content)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
-  z-index: 51;
+  z-index: ${({ theme }) => theme.zIndex[51]};
   animation: ${contentShow} ${({ theme }) => theme.motion.duration.base} ${({ theme }) => theme.motion.easing.enter};
 
   &:focus {

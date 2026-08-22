@@ -496,7 +496,7 @@ const List = styled.ul`
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex[50]};
   max-height: 15rem;
   overflow-y: auto;
   margin: 0;

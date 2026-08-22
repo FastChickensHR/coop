@@ -54,7 +54,7 @@ export const Content = styled(Popover.Content)`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
   padding: 1rem;
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex[50]};
 `
 
 export const CalHeader = styled.div`

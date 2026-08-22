@@ -115,6 +115,7 @@ export declare const lightTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        scrim: string;
         successOnDark: string;
         brand50: string;
         brand200: string;
@@ -133,6 +134,7 @@ export declare const lightTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        scrim: string;
         successOnDark: string;
         brand50: string;
         brand200: string;
@@ -262,15 +264,21 @@ export declare const lightTheme: {
     };
     zIndex: {
         0: string;
+        1: string;
         10: string;
+        15: string;
         20: string;
         30: string;
         40: string;
         50: string;
+        51: string;
+        60: string;
+        61: string;
         auto: string;
     };
     motion: {
         readonly duration: {
+            readonly micro: "120ms";
             readonly fast: "150ms";
             readonly base: "220ms";
             readonly slow: "280ms";
@@ -320,6 +328,7 @@ export declare const darkTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        scrim: string;
         successOnDark: string;
         brand50: string;
         brand200: string;
@@ -338,6 +347,7 @@ export declare const darkTheme: {
         ink400: string;
         ink300: string;
         ink50: string;
+        scrim: string;
         successOnDark: string;
         brand50: string;
         brand200: string;
@@ -467,15 +477,21 @@ export declare const darkTheme: {
     };
     zIndex: {
         0: string;
+        1: string;
         10: string;
+        15: string;
         20: string;
         30: string;
         40: string;
         50: string;
+        51: string;
+        60: string;
+        61: string;
         auto: string;
     };
     motion: {
         readonly duration: {
+            readonly micro: "120ms";
             readonly fast: "150ms";
             readonly base: "220ms";
             readonly slow: "280ms";

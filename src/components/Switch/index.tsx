@@ -34,7 +34,7 @@ const Track = styled.span<{ $checked: boolean; $disabled?: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ theme, $checked }) => ($checked ? theme.colors.accent : theme.colors.borderStrong)};
   opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  transition: background 120ms ease;
+  transition: background ${({ theme }) => theme.motion.duration.micro} ease;
 
   ${HiddenInput}:focus-visible + & {
     outline: 2px solid ${({ theme }) => theme.colors.accent};
@@ -51,7 +51,7 @@ const Thumb = styled.span<{ $checked: boolean }>`
   border-radius: 50%;
   background: #fff;
   transform: translateX(${({ $checked }) => ($checked ? '14px' : '0')});
-  transition: transform 120ms ease;
+  transition: transform ${({ theme }) => theme.motion.duration.micro} ease;
 `
 
 /** A themed on/off toggle backed by a native checkbox (accessible, no extra deps). */

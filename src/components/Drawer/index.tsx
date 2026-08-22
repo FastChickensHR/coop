@@ -49,10 +49,10 @@ const ENTER = '400ms cubic-bezier(0.32, 0.72, 0, 1)'
 const EXIT = '280ms cubic-bezier(0.55, 0, 1, 0.45)'
 
 const Overlay = styled(Dialog.Overlay)`
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: ${({ theme }) => theme.fixed.scrim};
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: ${({ theme }) => theme.zIndex[40]};
 
   &[data-state='open'] {
     animation: ${fadeIn} ${ENTER};
@@ -74,7 +74,7 @@ const Content = styled(Dialog.Content)`
   background-color: ${({ theme }) => theme.colors.canvas};
   border-left: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex[50]};
   display: flex;
   flex-direction: column;
 

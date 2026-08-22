@@ -18,7 +18,7 @@ const StyledTextarea = styled.textarea<{ $status?: FieldStatus }>`
   outline: none;
   box-sizing: border-box;
   resize: vertical;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color ${({ theme }) => theme.motion.duration.fast} ease, box-shadow ${({ theme }) => theme.motion.duration.fast} ease;
 
   ${({ $status }) => controlStatusStyles($status)}
 

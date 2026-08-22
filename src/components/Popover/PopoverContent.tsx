@@ -21,7 +21,7 @@ const StyledContent = styled(RadixPopover.Content)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({ theme }) => theme.zIndex[60]};
   animation: ${fadeIn} ${({ theme }) => theme.motion.duration.fast}
     ${({ theme }) => theme.motion.easing.enter};
 

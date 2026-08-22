@@ -45,6 +45,10 @@ const fixed = {
   ink300: '#A1A3AA', // muted text / resting nav items
   ink50: '#F4F4F5', // active + hovered text
 
+  // #1257: the one dialog scrim (Modal, Drawer, the app shell's mobile overlay). Fixed —
+  // a scrim dims whatever is behind it identically in both themes.
+  scrim: '${({ theme }) => theme.fixed.scrim}',
+
   // Success on the always-dark surfaces (#1234): the done-green the SetupChecklist sidebar
   // hardcoded four times. Deliberately NOT the semantic `success` scale — fixed colors never
   // flip with the theme, which is the point on an unconditionally-dark surface.
@@ -231,11 +235,23 @@ const screens = {
 
 const zIndex = {
   0: '0',
+  // #1257: a one-notch nudge above siblings (sticky table cells) — a local stacking hint,
+  // not a layer of the app.
+  1: '1',
   10: '10',
+  // #1257: between content chrome (10/20) and page chrome (20/30) — the docs layout's
+  // mid-layer. Exact values preserved from the literals they replace.
+  15: '15',
   20: '20',
   30: '30',
   40: '40',
   50: '50',
+  // #1257: a dialog's content sits one notch above its own overlay (Modal 50/51,
+  // the docs command palette 60/61); floating helpers (tooltip, menus, popovers)
+  // live at 60 so they clear an open dialog.
+  51: '51',
+  60: '60',
+  61: '61',
   auto: 'auto',
 }
 
@@ -359,6 +375,9 @@ const darkColors = {
 // ---------------------------------------------------------------------------
 const motion = {
   duration: {
+    // #1257: state-flip micro-interactions (checkbox, switch, hover fades) — the 120ms
+    // family the audit found hand-rolled sixteen times.
+    micro: '120ms',
     fast: '150ms', // hovers, overlay-out
     base: '220ms', // general enter/settle, overlay-in
     slow: '280ms', // page / content route transitions

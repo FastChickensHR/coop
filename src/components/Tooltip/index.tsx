@@ -56,7 +56,7 @@ const Content = styled(RadixTooltip.Content)`
   font-size: ${({ theme }) => theme.fontSize.xs};
   line-height: ${({ theme }) => theme.lineHeight.snug};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({ theme }) => theme.zIndex[60]};
   animation: ${fadeIn} ${({ theme }) => theme.motion.duration.fast}
     ${({ theme }) => theme.motion.easing.enter};
 

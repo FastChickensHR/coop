@@ -58,7 +58,7 @@ const Dot = styled(RadixRadio.Item)`
   border-radius: 50%;
   background: ${({ theme }) => theme.colors.canvas};
   cursor: inherit;
-  transition: border-color 120ms ease;
+  transition: border-color ${({ theme }) => theme.motion.duration.micro} ease;
 
   &[data-state='checked'] {
     border-color: ${({ theme }) => theme.colors.accent};

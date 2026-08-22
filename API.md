@@ -591,6 +591,7 @@ const darkTheme: {
     ink900: string
     muted: string
     onFill: string
+    scrim: string
     subtle: string
     success: string
     successOnDark: string
@@ -616,6 +617,7 @@ const darkTheme: {
     ink700: string
     ink800: string
     ink900: string
+    scrim: string
     successOnDark: string
     transparent: string
     white: string
@@ -657,6 +659,7 @@ const darkTheme: {
     duration: {
       base: '220ms'
       fast: '150ms'
+      micro: '120ms'
       slow: '280ms'
     }
     easing: {
@@ -742,11 +745,16 @@ const darkTheme: {
   }
   zIndex: {
     '0': string
+    '1': string
     '10': string
+    '15': string
     '20': string
     '30': string
     '40': string
     '50': string
+    '51': string
+    '60': string
+    '61': string
     auto: string
   }
 }
@@ -816,6 +824,7 @@ const lightTheme: {
     ink900: string
     muted: string
     onFill: string
+    scrim: string
     subtle: string
     success: string
     successOnDark: string
@@ -841,6 +850,7 @@ const lightTheme: {
     ink700: string
     ink800: string
     ink900: string
+    scrim: string
     successOnDark: string
     transparent: string
     white: string
@@ -882,6 +892,7 @@ const lightTheme: {
     duration: {
       base: '220ms'
       fast: '150ms'
+      micro: '120ms'
       slow: '280ms'
     }
     easing: {
@@ -967,11 +978,16 @@ const lightTheme: {
   }
   zIndex: {
     '0': string
+    '1': string
     '10': string
+    '15': string
     '20': string
     '30': string
     '40': string
     '50': string
+    '51': string
+    '60': string
+    '61': string
     auto: string
   }
 }
@@ -1115,6 +1131,7 @@ declare module 'styled-components' {
       ink900: string
       muted: string
       onFill: string
+      scrim: string
       subtle: string
       success: string
       successOnDark: string
@@ -1140,6 +1157,7 @@ declare module 'styled-components' {
       ink700: string
       ink800: string
       ink900: string
+      scrim: string
       successOnDark: string
       transparent: string
       white: string
@@ -1181,6 +1199,7 @@ declare module 'styled-components' {
       duration: {
         base: '220ms'
         fast: '150ms'
+        micro: '120ms'
         slow: '280ms'
       }
       easing: {
@@ -1266,11 +1285,16 @@ declare module 'styled-components' {
     }
     zIndex: {
       '0': string
+      '1': string
       '10': string
+      '15': string
       '20': string
       '30': string
       '40': string
       '50': string
+      '51': string
+      '60': string
+      '61': string
       auto: string
     }
   }

@@ -67,7 +67,7 @@ const Content = styled(RadixSelect.Content)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: ${({ theme }) => theme.boxShadow.pop};
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex[50]};
 `
 
 const Viewport = styled(RadixSelect.Viewport)`

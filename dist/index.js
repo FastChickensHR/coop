@@ -528,7 +528,7 @@ var rt = r.div`
   border-radius: ${({ theme: e }) => e.borderRadius.sm};
   background: ${({ theme: e }) => e.colors.canvas};
   cursor: inherit;
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background ${({ theme: e }) => e.motion.duration.micro} ease, border-color ${({ theme: e }) => e.motion.duration.micro} ease;
 
   &[data-state='checked'],
   &[data-state='indeterminate'] {
@@ -942,7 +942,7 @@ var _t = r.div`
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: ${({ theme: e }) => e.zIndex[50]};
   max-height: 15rem;
   overflow-y: auto;
   margin: 0;
@@ -1053,8 +1053,8 @@ var Mt = n`from { opacity: 0; } to { opacity: 1; }`, Nt = n`
 `, Pt = r(k.Overlay)`
   position: fixed;
   inset: 0;
-  z-index: 50;
-  background-color: rgba(0, 0, 0, 0.45);
+  z-index: ${({ theme: e }) => e.zIndex[50]};
+  background-color: ${({ theme: e }) => e.fixed.scrim};
   animation: ${Mt} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
 
   @media (prefers-reduced-motion: reduce) {
@@ -1074,7 +1074,7 @@ var Mt = n`from { opacity: 0; } to { opacity: 1; }`, Nt = n`
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.lg};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 51;
+  z-index: ${({ theme: e }) => e.zIndex[51]};
   animation: ${Nt} ${({ theme: e }) => e.motion.duration.base} ${({ theme: e }) => e.motion.easing.enter};
 
   &:focus {
@@ -1402,7 +1402,7 @@ var yn = r.div`
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
   padding: 1rem;
-  z-index: 50;
+  z-index: ${({ theme: e }) => e.zIndex[50]};
 `, Cn = r.div`
   display: flex;
   align-items: center;
@@ -1828,7 +1828,7 @@ var Rn = r.div`
   font-weight: ${({ theme: e }) => e.fontWeight.medium};
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 150ms ease, border-color 150ms ease;
+  transition: background-color ${({ theme: e }) => e.motion.duration.fast} ease, border-color ${({ theme: e }) => e.motion.duration.fast} ease;
 
   &:hover:not(:disabled) {
     background-color: ${({ theme: e }) => e.colors.border};
@@ -1939,7 +1939,7 @@ var Gn = r.dl`
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({ theme: e }) => e.zIndex[60]};
   animation: ${Xn} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
@@ -2151,10 +2151,10 @@ var br = n`
   from { transform: translateX(0); }
   to { transform: translateX(100%); }
 `, wr = "400ms cubic-bezier(0.32, 0.72, 0, 1)", Tr = "280ms cubic-bezier(0.55, 0, 1, 0.45)", Er = r(k.Overlay)`
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: ${({ theme: e }) => e.fixed.scrim};
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: ${({ theme: e }) => e.zIndex[40]};
 
   &[data-state='open'] {
     animation: ${br} ${wr};
@@ -2174,7 +2174,7 @@ var br = n`
   background-color: ${({ theme: e }) => e.colors.canvas};
   border-left: 1px solid ${({ theme: e }) => e.colors.border};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 50;
+  z-index: ${({ theme: e }) => e.zIndex[50]};
   display: flex;
   flex-direction: column;
 
@@ -3075,7 +3075,7 @@ var Ni = /*#__PURE__*/ g.forwardRef(function(e, t) {
   ${({ $sticky: e }) => e && t`
       position: sticky;
       top: 0;
-      z-index: 40;
+      z-index: ${({ theme: e }) => e.zIndex[40]};
     `}
 `, Fi = r(ur)`
   &::-webkit-outer-spin-button,
@@ -3277,7 +3277,7 @@ var Xi = y(function(e, t) {
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({ theme: e }) => e.zIndex[60]};
   animation: ${ea} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
@@ -3355,7 +3355,7 @@ var sa = r(U.Root)`
   border-radius: 50%;
   background: ${({ theme: e }) => e.colors.canvas};
   cursor: inherit;
-  transition: border-color 120ms ease;
+  transition: border-color ${({ theme: e }) => e.motion.duration.micro} ease;
 
   &[data-state='checked'] {
     border-color: ${({ theme: e }) => e.colors.accent};
@@ -3439,7 +3439,7 @@ var pa = r(W.Trigger)`
   border: 1px solid ${({ theme: e }) => e.colors.border};
   border-radius: ${({ theme: e }) => e.borderRadius.md};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 50;
+  z-index: ${({ theme: e }) => e.zIndex[50]};
 `, ha = r(W.Viewport)`
   padding: 0.25rem;
 `, ga = r(W.Item)`
@@ -3715,7 +3715,7 @@ var Pa = r.ol`
   border-radius: ${({ theme: e }) => e.borderRadius.full};
   background: ${({ theme: e, $checked: t }) => t ? e.colors.accent : e.colors.borderStrong};
   opacity: ${({ $disabled: e }) => e ? .5 : 1};
-  transition: background 120ms ease;
+  transition: background ${({ theme: e }) => e.motion.duration.micro} ease;
 
   ${Ba}:focus-visible + & {
     outline: 2px solid ${({ theme: e }) => e.colors.accent};
@@ -3730,7 +3730,7 @@ var Pa = r.ol`
   border-radius: 50%;
   background: #fff;
   transform: translateX(${({ $checked: e }) => e ? "14px" : "0"});
-  transition: transform 120ms ease;
+  transition: transform ${({ theme: e }) => e.motion.duration.micro} ease;
 `;
 function Ua({ checked: e, onCheckedChange: t, disabled: n, ...r }) {
 	return /* @__PURE__ */ s(za, {
@@ -3912,7 +3912,7 @@ var so = r.textarea`
   outline: none;
   box-sizing: border-box;
   resize: vertical;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color ${({ theme: e }) => e.motion.duration.fast} ease, box-shadow ${({ theme: e }) => e.motion.duration.fast} ease;
 
   ${({ $status: e }) => ft(e)}
 
@@ -4007,7 +4007,7 @@ var po = n`
   font-size: ${({ theme: e }) => e.fontSize.xs};
   line-height: ${({ theme: e }) => e.lineHeight.snug};
   box-shadow: ${({ theme: e }) => e.boxShadow.pop};
-  z-index: 60;
+  z-index: ${({ theme: e }) => e.zIndex[60]};
   animation: ${po} ${({ theme: e }) => e.motion.duration.fast}
     ${({ theme: e }) => e.motion.easing.enter};
 
@@ -4027,6 +4027,7 @@ var po = n`
 	ink400: "#6B6E78",
 	ink300: "#A1A3AA",
 	ink50: "#F4F4F5",
+	scrim: "${({ theme }) => theme.fixed.scrim}",
 	successOnDark: "#28C76F",
 	brand50: "#FDECED",
 	brand200: "#F7A3A7",
@@ -4143,11 +4144,16 @@ var po = n`
 	"2xl": "1536px"
 }, Eo = {
 	0: "0",
+	1: "1",
 	10: "10",
+	15: "15",
 	20: "20",
 	30: "30",
 	40: "40",
 	50: "50",
+	51: "51",
+	60: "60",
+	61: "61",
 	auto: "auto"
 }, Do = {
 	canvas: "#FFFFFF",
@@ -4216,6 +4222,7 @@ var po = n`
 	zIndex: Eo,
 	motion: {
 		duration: {
+			micro: "120ms",
 			fast: "150ms",
 			base: "220ms",
 			slow: "280ms"

@@ -26,6 +26,6 @@ export const TopBar = styled.header<{ $sticky?: boolean }>`
     css`
       position: sticky;
       top: 0;
-      z-index: 40;
+      z-index: ${({ theme }) => theme.zIndex[40]};
     `}
 `
