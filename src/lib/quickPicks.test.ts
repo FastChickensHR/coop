@@ -27,7 +27,6 @@ import {
   resolveRangePeriod,
   type DateEdge,
   type QuickPickToken,
-  type RangePeriod,
 } from './quickPicks'
 
 /** Pin the wall clock to an absolute instant, and pin which zone counts as local. */
@@ -347,7 +346,7 @@ describe('resolveRangePeriod / rangePicksFor — the four range periods', () => 
 
   it('resolves every period the chip list reports', () => {
     for (const { period, start, end } of rangePicksFor()) {
-      expect(resolveRangePeriod(period as RangePeriod)).toEqual({ start, end })
+      expect(resolveRangePeriod(period)).toEqual({ start, end })
     }
   })
 })
