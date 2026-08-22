@@ -106,7 +106,7 @@ export function Combobox(props: ComboboxProps) {
   const isSelected = (value: string) => (selection.multiple ? selectedValues.includes(value) : value === selection.value)
 
   // Label for a value from the current options; falls back to the raw value when the
-  // option isn't in the current (event.g. async) results, so a selection never loses its chip.
+  // option isn't in the current (e.g. async) results, so a selection never loses its chip.
   const labelFor = (value: string) => options.find((option) => option.value === value)?.label ?? value
 
   const selectedOptions = selection.multiple ? selectedValues.map((value) => ({ value: value, label: labelFor(value) })) : []

@@ -10,7 +10,7 @@ export interface DatePickerProps {
     max?: string | null;
     /** Allow an open-ended (`null`) boundary, shown as `openEndedLabel` with a toggle. */
     allowOpenEnded?: boolean;
-    /** Muted word shown when open-ended, event.g. "Ongoing" / "Always". */
+    /** Muted word shown when open-ended, e.g. "Ongoing" / "Always". */
     openEndedLabel?: string;
     /**
      * Which end of a period this field sits on — it chooses the quick-pick list (ADR-0816 §4).
