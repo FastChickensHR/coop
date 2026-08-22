@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type RefObject } from 'react'
 import { styled } from 'styled-components'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Chip } from '../Chip'
@@ -10,19 +10,9 @@ export interface ComboboxOption {
   label: string
 }
 
-export interface ComboboxProps {
+interface ComboboxCommonProps {
   /** The choices to offer; filtered client-side as the user types unless `onSearch` is given. */
   options: ComboboxOption[]
-  /** Selected value (single-select mode). */
-  value?: string
-  /** Called with the picked value (single-select mode). */
-  onValueChange?: (value: string) => void
-  /** Enable multi-select: selections render as removable chips, picking toggles membership, and the list stays open. */
-  multiple?: boolean
-  /** Selected values (multi-select mode, with `multiple`). */
-  values?: string[]
-  /** Called with the full next selection (multi-select mode, with `multiple`). */
-  onValuesChange?: (values: string[]) => void
   /** Fetch options remotely: called (debounced) with the query as the user types. When provided, the component stops filtering client-side — the server-supplied `options` are shown as-is. */
   onSearch?: (query: string) => void
   /** Show a loading row while remote results are in flight (used with `onSearch`). */
@@ -47,6 +37,31 @@ export interface ComboboxProps {
   className?: string
 }
 
+/** Single-select: one value, picking closes the list. */
+export interface ComboboxSingleProps extends ComboboxCommonProps {
+  multiple?: false
+  /** Selected value. */
+  value?: string
+  /** Called with the picked value. */
+  onValueChange?: (value: string) => void
+}
+
+/** Multi-select: selections render as removable chips, picking toggles membership, the list stays open. */
+export interface ComboboxMultiProps extends ComboboxCommonProps {
+  multiple: true
+  /** Selected values. */
+  values: string[]
+  /** Called with the full next selection. */
+  onValuesChange: (values: string[]) => void
+}
+
+/**
+ * The two modes as a discriminated union (#1229, docs/code-style.md TypeScript 4): the old
+ * flat surface let `multiple` + `value` or a bare `values` type-check and fail by convention —
+ * now a single-select cannot carry `values`, and a multi cannot carry `value`.
+ */
+export type ComboboxProps = ComboboxSingleProps | ComboboxMultiProps
+
 /**
  * A searchable select (ADR-0175): type to filter a long option list, then pick
  * one — or several with `multiple`, where picks become removable chips. Use a
@@ -57,25 +72,25 @@ export interface ComboboxProps {
  * enter a value that isn't listed. Full keyboard nav (type, arrows, Enter, Escape;
  * Backspace removes the last chip) and FormField status wiring.
  */
-export function Combobox({
-  options,
-  value,
-  onValueChange,
-  multiple,
-  values,
-  onValuesChange,
-  onSearch,
-  loading,
-  debounceMs = 250,
-  creatable,
-  onCreate,
-  placeholder = 'Search…',
-  disabled,
-  hasError,
-  id,
-  className,
-  'aria-label': ariaLabel,
-}: ComboboxProps) {
+export function Combobox(props: ComboboxProps) {
+  const {
+    options,
+    onSearch,
+    loading,
+    debounceMs = 250,
+    creatable,
+    onCreate,
+    placeholder = 'Search…',
+    disabled,
+    hasError,
+    id,
+    className,
+    'aria-label': ariaLabel,
+  } = props
+  // Narrow the union once; everything below speaks in terms of `selection`, never the raw props.
+  const selection = props.multiple
+    ? { multiple: true as const, values: props.values, onValuesChange: props.onValuesChange }
+    : { multiple: false as const, value: props.value, onValueChange: props.onValueChange }
   const { fieldProps, status } = useFieldControl()
   const controlStatus: FieldStatus | undefined = hasError ? 'error' : status
 
@@ -87,14 +102,14 @@ export function Combobox({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const isAsync = !!onSearch
-  const selectedValues = values ?? []
-  const isSelected = (v: string) => (multiple ? selectedValues.includes(v) : v === value)
+  const selectedValues = selection.multiple ? selection.values : []
+  const isSelected = (v: string) => (selection.multiple ? selectedValues.includes(v) : v === selection.value)
 
   // Label for a value from the current options; falls back to the raw value when the
   // option isn't in the current (e.g. async) results, so a selection never loses its chip.
   const labelFor = (v: string) => options.find((o) => o.value === v)?.label ?? v
 
-  const selectedOptions = multiple ? selectedValues.map((v) => ({ value: v, label: labelFor(v) })) : []
+  const selectedOptions = selection.multiple ? selectedValues.map((v) => ({ value: v, label: labelFor(v) })) : []
   const filtered = useMemo(() => {
     if (isAsync) return options // the server already filtered
     const q = query.trim().toLowerCase()
@@ -123,72 +138,40 @@ export function Combobox({
   const listboxId = `${baseId}-listbox`
   const optionId = (index: number) => `${baseId}-option-${index}`
 
-  // Close on outside click.
-  useEffect(() => {
-    if (!open) return
-    function onDown(e: MouseEvent) {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener('mousedown', onDown)
-    return () => document.removeEventListener('mousedown', onDown)
-  }, [open])
+  useComboboxBehavior({ open, setOpen, rootRef, listRef, activeIndex, isAsync, query, debounceMs, onSearch })
 
-  // Keep the highlighted option scrolled into view.
-  useEffect(() => {
-    listRef.current?.querySelector<HTMLElement>(`[data-index="${activeIndex}"]`)?.scrollIntoView({ block: 'nearest' })
-  }, [activeIndex, open])
-
-  // Keep the latest onSearch in a ref so re-creating the callback each render doesn't
-  // reset the debounce timer below.
-  const onSearchRef = useRef(onSearch)
-  useEffect(() => {
-    onSearchRef.current = onSearch
-  })
-
-  // Debounced remote search: fire when the query changes or the list opens, in async mode.
-  useEffect(() => {
-    if (!isAsync || !open) return
-    const timer = setTimeout(() => onSearchRef.current?.(query), debounceMs)
-    return () => clearTimeout(timer)
-  }, [query, open, isAsync, debounceMs])
-
-  function choose(opt: ComboboxOption | undefined) {
-    if (!opt) return
-    if (multiple) {
-      const next = selectedValues.includes(opt.value)
-        ? selectedValues.filter((v) => v !== opt.value)
-        : [...selectedValues, opt.value]
-      onValuesChange?.(next)
+  /** Multi keeps the list open for the next toggle; single closes on the pick. */
+  function commit(nextForMulti: (current: string[]) => string[], single: string) {
+    if (selection.multiple) {
+      selection.onValuesChange(nextForMulti(selectedValues))
       setQuery('')
       setActive(0)
       setOpen(true)
       inputRef.current?.focus()
     } else {
-      onValueChange?.(opt.value)
+      selection.onValueChange?.(single)
       setQuery('')
       setOpen(false)
     }
   }
 
+  function choose(opt: ComboboxOption | undefined) {
+    if (!opt) return
+    commit(
+      (current) => (current.includes(opt.value) ? current.filter((v) => v !== opt.value) : [...current, opt.value]),
+      opt.value,
+    )
+  }
+
   function removeValue(v: string) {
-    onValuesChange?.(selectedValues.filter((x) => x !== v))
+    if (selection.multiple) selection.onValuesChange(selectedValues.filter((x) => x !== v))
   }
 
   function createValue(text: string) {
     const v = text.trim()
     if (!v) return
     onCreate?.(v)
-    if (multiple) {
-      if (!selectedValues.includes(v)) onValuesChange?.([...selectedValues, v])
-      setQuery('')
-      setActive(0)
-      setOpen(true)
-      inputRef.current?.focus()
-    } else {
-      onValueChange?.(v)
-      setQuery('')
-      setOpen(false)
-    }
+    commit((current) => (current.includes(v) ? current : [...current, v]), v)
   }
 
   function onKeyDown(e: ReactKeyboardEvent) {
@@ -206,7 +189,7 @@ export function Combobox({
         else choose(filtered[activeIndex])
       }
     } else if (e.key === 'Backspace') {
-      if (multiple && query === '' && selectedValues.length > 0) {
+      if (selection.multiple && query === '' && selectedValues.length > 0) {
         removeValue(selectedValues[selectedValues.length - 1])
       }
     } else if (e.key === 'Escape') {
@@ -214,11 +197,11 @@ export function Combobox({
     }
   }
 
-  const displayValue = open ? query : value ? labelFor(value) : ''
+  const displayValue = open ? query : !selection.multiple && selection.value ? labelFor(selection.value) : ''
 
   return (
     <Root ref={rootRef} className={className}>
-      {multiple ? (
+      {selection.multiple ? (
         <MultiControl
           $status={controlStatus}
           data-disabled={disabled || undefined}
@@ -273,7 +256,7 @@ export function Combobox({
           aria-invalid={controlStatus === 'error' || undefined}
           $status={controlStatus}
           disabled={disabled}
-          placeholder={value && !open ? labelFor(value) : placeholder}
+          placeholder={!selection.multiple && selection.value && !open ? labelFor(selection.value) : placeholder}
           value={displayValue}
           onFocus={() => setOpen(true)}
           onChange={(e) => {
@@ -288,48 +271,156 @@ export function Combobox({
         <ChevronUpDownIcon width={18} height={18} />
       </Chevron>
       {open && (
-        <List id={listboxId} ref={listRef} role="listbox" aria-multiselectable={multiple || undefined}>
-          {loading && <Loading aria-live="polite">Searching…</Loading>}
-          {!loading && filtered.length === 0 && !showCreate && <Empty>No matches</Empty>}
-          {filtered.map((opt, i) => (
-              <Option
-                key={opt.value}
-                id={optionId(i)}
-                data-index={i}
-                role="option"
-                aria-selected={isSelected(opt.value)}
-                $active={i === activeIndex}
-                onMouseEnter={() => setActive(i)}
-                onMouseDown={(e) => {
-                  e.preventDefault()
-                  choose(opt)
-                }}
-              >
-                <span>{opt.label}</span>
-                {isSelected(opt.value) && <CheckIcon width={16} height={16} />}
-              </Option>
-            ))}
-          {showCreate && (
-            <Option
-              id={optionId(createIndex)}
-              data-index={createIndex}
-              role="option"
-              aria-selected={false}
-              $active={activeIndex === createIndex}
-              onMouseEnter={() => setActive(createIndex)}
-              onMouseDown={(e) => {
-                e.preventDefault()
-                createValue(trimmedQuery)
-              }}
-            >
-              <CreateRow>
-                Create “<strong>{trimmedQuery}</strong>”
-              </CreateRow>
-            </Option>
-          )}
-        </List>
+        <OptionsList
+          listboxId={listboxId}
+          listRef={listRef}
+          multiple={selection.multiple}
+          loading={loading}
+          filtered={filtered}
+          optionId={optionId}
+          isSelected={isSelected}
+          activeIndex={activeIndex}
+          onActivate={setActive}
+          onChoose={choose}
+          showCreate={showCreate}
+          createIndex={createIndex}
+          createQuery={trimmedQuery}
+          onCreate={createValue}
+        />
       )}
     </Root>
+  )
+}
+
+
+
+/** The open-list behaviors — outside-click close, keep-highlight-visible, debounced remote
+ *  search — pulled beside the component (#1229) so its body stays wiring + markup. */
+function useComboboxBehavior({
+  open,
+  setOpen,
+  rootRef,
+  listRef,
+  activeIndex,
+  isAsync,
+  query,
+  debounceMs,
+  onSearch,
+}: {
+  open: boolean
+  setOpen: (open: boolean) => void
+  rootRef: RefObject<HTMLDivElement | null>
+  listRef: RefObject<HTMLUListElement | null>
+  activeIndex: number
+  isAsync: boolean
+  query: string
+  debounceMs: number
+  onSearch?: (query: string) => void
+}) {
+  // Close on outside click.
+  useEffect(() => {
+    if (!open) return
+    function onDown(e: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', onDown)
+    return () => document.removeEventListener('mousedown', onDown)
+  }, [open, rootRef, setOpen])
+
+  // Keep the highlighted option scrolled into view.
+  useEffect(() => {
+    listRef.current?.querySelector<HTMLElement>(`[data-index="${activeIndex}"]`)?.scrollIntoView({ block: 'nearest' })
+  }, [activeIndex, open, listRef])
+
+  // Keep the latest onSearch in a ref so re-creating the callback each render doesn't
+  // reset the debounce timer below.
+  const onSearchRef = useRef(onSearch)
+  useEffect(() => {
+    onSearchRef.current = onSearch
+  })
+
+  // Debounced remote search: fire when the query changes or the list opens, in async mode.
+  useEffect(() => {
+    if (!isAsync || !open) return
+    const timer = setTimeout(() => onSearchRef.current?.(query), debounceMs)
+    return () => clearTimeout(timer)
+  }, [query, open, isAsync, debounceMs])
+}
+
+/** The dropdown rows — options, the loading/empty states, and the Create affordance —
+ *  private to Combobox (#1229): rendering only, every decision flows back through props. */
+function OptionsList({
+  listboxId,
+  listRef,
+  multiple,
+  loading,
+  filtered,
+  optionId,
+  isSelected,
+  activeIndex,
+  onActivate,
+  onChoose,
+  showCreate,
+  createIndex,
+  createQuery,
+  onCreate,
+}: {
+  listboxId: string
+  listRef: RefObject<HTMLUListElement | null>
+  multiple: boolean
+  loading?: boolean
+  filtered: ComboboxOption[]
+  optionId: (index: number) => string
+  isSelected: (value: string) => boolean
+  activeIndex: number
+  onActivate: (index: number) => void
+  onChoose: (option: ComboboxOption | undefined) => void
+  showCreate: boolean
+  createIndex: number
+  createQuery: string
+  onCreate: (text: string) => void
+}) {
+  return (
+    <List id={listboxId} ref={listRef} role="listbox" aria-multiselectable={multiple || undefined}>
+      {loading && <Loading aria-live="polite">Searching…</Loading>}
+      {!loading && filtered.length === 0 && !showCreate && <Empty>No matches</Empty>}
+      {filtered.map((opt, i) => (
+        <Option
+          key={opt.value}
+          id={optionId(i)}
+          data-index={i}
+          role="option"
+          aria-selected={isSelected(opt.value)}
+          $active={i === activeIndex}
+          onMouseEnter={() => onActivate(i)}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            onChoose(opt)
+          }}
+        >
+          <span>{opt.label}</span>
+          {isSelected(opt.value) && <CheckIcon width={16} height={16} />}
+        </Option>
+      ))}
+      {showCreate && (
+        <Option
+          id={optionId(createIndex)}
+          data-index={createIndex}
+          role="option"
+          aria-selected={false}
+          $active={activeIndex === createIndex}
+          onMouseEnter={() => onActivate(createIndex)}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            onCreate(createQuery)
+          }}
+        >
+          <CreateRow>
+            Create “<strong>{createQuery}</strong>”
+          </CreateRow>
+        </Option>
+      )}
+    </List>
   )
 }
 

@@ -243,7 +243,7 @@ FIXTURES.DrawerSection = () => (
 )
 FIXTURES.DrawerField = () => <coop.DrawerField label="Carrier">BCBS</coop.DrawerField>
 FIXTURES.DateRangePicker = () => (
-  <coop.DateRangePicker startAriaLabel="Range start" endAriaLabel="Range end" />
+  <coop.DateRangePicker start={{ ariaLabel: 'Range start' }} end={{ ariaLabel: 'Range end' }} />
 )
 FIXTURES.EmptyState = () => (
   <coop.EmptyState title="No integrations yet" description="Create one to start sending files." />

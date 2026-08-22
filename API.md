@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (181)
+## Exported names (184)
 
 ```ts
 const ALWAYS: 'Always'
@@ -121,29 +121,23 @@ interface ChipProps {
 
 function Combobox(props: ComboboxProps): JSX.Element
 
+interface ComboboxMultiProps extends ComboboxCommonProps {
+  multiple: true
+  onValuesChange: (values: string[]) => void
+  values: string[]
+}
+
 interface ComboboxOption {
   label: string
   value: string
 }
 
-interface ComboboxProps {
-  'aria-label'?: string
-  className?: string
-  creatable?: boolean
-  debounceMs?: number
-  disabled?: boolean
-  hasError?: boolean
-  id?: string
-  loading?: boolean
-  multiple?: boolean
-  onCreate?: (value: string) => void
-  onSearch?: (query: string) => void
+type ComboboxProps = ComboboxSingleProps | ComboboxMultiProps
+
+interface ComboboxSingleProps extends ComboboxCommonProps {
+  multiple?: false
   onValueChange?: (value: string) => void
-  onValuesChange?: (values: string[]) => void
-  options: ComboboxOption[]
-  placeholder?: string
   value?: string
-  values?: string[]
 }
 
 function ConfirmDialog(props: ConfirmDialogProps): JSX.Element
@@ -187,27 +181,26 @@ interface DatePickerProps {
   value?: string | null
 }
 
+interface DateRangeEdgeProps {
+  allowOpenEnded?: boolean
+  ariaLabel?: string
+  id?: string
+  onValueChange?: (value: string | null) => void
+  openEndedLabel?: string
+  value?: string | null
+}
+
 function DateRangePicker(props: DateRangePickerProps): JSX.Element
 
 interface DateRangePickerProps {
-  allowOpenEndedEnd?: boolean
-  allowOpenEndedStart?: boolean
   disabled?: boolean
-  end?: string | null
-  endAriaLabel?: string
-  endId?: string
-  endOpenEndedLabel?: string
+  end?: DateRangeEdgeProps
   hasError?: boolean
   max?: string | null
   min?: string | null
-  onEndChange?: (value: string | null) => void
   onRangeChange?: (range: DateRangeValue) => void
-  onStartChange?: (value: string | null) => void
   periodsAriaLabel?: string
-  start?: string | null
-  startAriaLabel?: string
-  startId?: string
-  startOpenEndedLabel?: string
+  start?: DateRangeEdgeProps
 }
 
 const DescriptionDetails: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never>>> & string
@@ -1276,7 +1269,7 @@ declare module 'styled-components' {
 }
 ```
 
-## Internal types reached by the surface (3)
+## Internal types reached by the surface (4)
 
 Not exported — a consumer cannot import these — but each one appears inside the
 resolved type of something that is, so narrowing one still breaks consumer code.
@@ -1284,6 +1277,21 @@ They are part of the gated surface for that reason alone.
 
 ```ts
 type Align = 'center' | 'left' | 'right'
+
+interface ComboboxCommonProps {
+  'aria-label'?: string
+  className?: string
+  creatable?: boolean
+  debounceMs?: number
+  disabled?: boolean
+  hasError?: boolean
+  id?: string
+  loading?: boolean
+  onCreate?: (value: string) => void
+  onSearch?: (query: string) => void
+  options: ComboboxOption[]
+  placeholder?: string
+}
 
 interface DateRangeValue {
   end: string
