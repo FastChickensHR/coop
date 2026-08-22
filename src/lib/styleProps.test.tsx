@@ -49,7 +49,7 @@ describe('clean style props never reach the DOM', () => {
             b
           </Button>
           <Alert variant="warning">a</Alert>
-          <Badge variant="active">x</Badge>
+          <Badge variant="success">x</Badge>
           <Card interactive>c</Card>
           <Skeleton radius="4px" />
           <Spinner size="lg" color="red" />

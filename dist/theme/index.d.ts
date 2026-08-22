@@ -2,7 +2,7 @@
  * Design token bridge for styled-components ThemeProvider.
  *
  * Two theme objects (lightTheme / darkTheme) are exported. UserPreferencesContext
- * in src/features/theme/UserPreferencesContext.tsx selects between them based on
+ * in the consuming app's theme-preference provider selects between them based on
  * user preference (localStorage → OS fallback). All colors are plain TypeScript
  * values — no CSS custom properties.
  *
@@ -102,9 +102,9 @@ export declare const lightTheme: {
         infoSoft: string;
         accent: string;
         accentSoft: string;
-        oe: string;
-        oeSoft: string;
-        oeFaint: string;
+        highlight: string;
+        highlightSoft: string;
+        highlightFaint: string;
         white: string;
         black: string;
         transparent: string;
@@ -307,9 +307,9 @@ export declare const darkTheme: {
         infoSoft: string;
         accent: string;
         accentSoft: string;
-        oe: string;
-        oeSoft: string;
-        oeFaint: string;
+        highlight: string;
+        highlightSoft: string;
+        highlightFaint: string;
         white: string;
         black: string;
         transparent: string;

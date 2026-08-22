@@ -2,7 +2,7 @@
  * Design token bridge for styled-components ThemeProvider.
  *
  * Two theme objects (lightTheme / darkTheme) are exported. UserPreferencesContext
- * in src/features/theme/UserPreferencesContext.tsx selects between them based on
+ * in the consuming app's theme-preference provider selects between them based on
  * user preference (localStorage → OS fallback). All colors are plain TypeScript
  * values — no CSS custom properties.
  *
@@ -292,12 +292,13 @@ const lightColors = {
   accent: '#2563C9',
   accentSoft: '#E7EEFB',
 
-  // Open Enrollment — violet, deliberately outside the run-dot palette
-  // (red/green/yellow/blue) so OE windows read as a distinct kind (ADR-0048).
-  // `oeSoft` tints the window on the calendar; `oeFaint` the silent period.
-  oe: '#7C3AED',
-  oeSoft: '#EDE7FB',
-  oeFaint: '#F5F1FC',
+  // Highlight — violet, deliberately outside the status palette (red/green/yellow/blue) so a
+  // highlighted range reads as a distinct kind, not a status (ADR-0048). `highlightSoft` tints
+  // a primary range, `highlightFaint` a secondary one; what those ranges MEAN is the app's
+  // vocabulary, at the call site (#1235).
+  highlight: '#7C3AED',
+  highlightSoft: '#EDE7FB',
+  highlightFaint: '#F5F1FC',
 }
 
 const darkColors = {
@@ -344,10 +345,10 @@ const darkColors = {
   accent: '#4B8DF8',
   accentSoft: 'rgba(75, 141, 248, 0.16)',
 
-  // Open Enrollment — violet, outside the run-dot palette (ADR-0048).
-  oe: '#A78BFA',
-  oeSoft: 'rgba(167, 139, 250, 0.22)',
-  oeFaint: 'rgba(167, 139, 250, 0.10)',
+  // Highlight — violet, outside the status palette (ADR-0048); see the light-theme note.
+  highlight: '#A78BFA',
+  highlightSoft: 'rgba(167, 139, 250, 0.22)',
+  highlightFaint: 'rgba(167, 139, 250, 0.10)',
 }
 
 // ---------------------------------------------------------------------------

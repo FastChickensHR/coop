@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (184)
+## Exported names (185)
 
 ```ts
 const ALWAYS: 'Always'
@@ -65,8 +65,10 @@ interface AvatarProps {
 const Badge: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'variant'> & BadgeProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'variant'> & BadgeProps, never>>> & string
 
 interface BadgeProps {
-  variant?: 'active' | 'default' | 'draft' | 'inbound' | 'outbound' | 'pending' | 'terminated'
+  variant?: 'error' | 'neutral' | 'outline-info' | 'outline-neutral' | 'outline-success' | 'success' | 'warning'
 }
+
+type BadgeTone = 'error' | 'neutral' | 'outline-info' | 'outline-neutral' | 'outline-success' | 'success' | 'warning'
 
 function Breadcrumbs(props: BreadcrumbsProps): JSX.Element
 
@@ -574,6 +576,9 @@ const darkTheme: {
     canvas: string
     error: string
     errorSoft: string
+    highlight: string
+    highlightFaint: string
+    highlightSoft: string
     info: string
     infoSoft: string
     ink: string
@@ -585,9 +590,6 @@ const darkTheme: {
     ink800: string
     ink900: string
     muted: string
-    oe: string
-    oeFaint: string
-    oeSoft: string
     onFill: string
     subtle: string
     success: string
@@ -799,6 +801,9 @@ const lightTheme: {
     canvas: string
     error: string
     errorSoft: string
+    highlight: string
+    highlightFaint: string
+    highlightSoft: string
     info: string
     infoSoft: string
     ink: string
@@ -810,9 +815,6 @@ const lightTheme: {
     ink800: string
     ink900: string
     muted: string
-    oe: string
-    oeFaint: string
-    oeSoft: string
     onFill: string
     subtle: string
     success: string
@@ -1098,6 +1100,9 @@ declare module 'styled-components' {
       canvas: string
       error: string
       errorSoft: string
+      highlight: string
+      highlightFaint: string
+      highlightSoft: string
       info: string
       infoSoft: string
       ink: string
@@ -1109,9 +1114,6 @@ declare module 'styled-components' {
       ink800: string
       ink900: string
       muted: string
-      oe: string
-      oeFaint: string
-      oeSoft: string
       onFill: string
       subtle: string
       success: string

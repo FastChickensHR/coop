@@ -1,65 +1,72 @@
 import { styled, css } from 'styled-components'
 import { blockStyleProps } from '../../lib/styleProps'
 
-// Status variants — filled soft-color background (Active/Pending/Terminated/Draft)
-type StatusVariant = 'active' | 'pending' | 'terminated' | 'draft'
-
-// Tag variants — outline only (Inbound/Outbound/Default directional labels)
-type TagVariant = 'inbound' | 'outbound' | 'default'
-
-type BadgeVariant = StatusVariant | TagVariant
+/**
+ * The generic tone vocabulary (#1235): filled tones follow Alert's error/info/success/warning
+ * house model, `outline-*` are the quieter bordered form. Domain words (statuses, EDI
+ * directions) live in the APP, which maps its vocabulary onto a tone at the call site —
+ * coop is published under MIT and speaks only generic UI language (docs/code-style.md,
+ * Naming 3).
+ */
+export type BadgeTone =
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'neutral'
+  | 'outline-info'
+  | 'outline-success'
+  | 'outline-neutral'
 
 export interface BadgeProps {
-  /** Status or tag style (active/pending/terminated/draft/inbound/outbound). @default 'default' */
-  variant?: BadgeVariant
+  /** Filled tone (success/warning/error/neutral) or quiet outline form. @default 'outline-neutral' */
+  variant?: BadgeTone
 }
 
-const statusStyles = {
-  active: css`
+const variantStyles: Record<BadgeTone, ReturnType<typeof css>> = {
+  // Filled — soft ground, strong text
+  success: css`
     background-color: ${({ theme }) => theme.colors.successSoft};
     color: ${({ theme }) => theme.colors.success};
     border: none;
   `,
-  pending: css`
+  warning: css`
     background-color: ${({ theme }) => theme.colors.warningSoft};
     color: ${({ theme }) => theme.colors.warning};
     border: none;
   `,
-  terminated: css`
+  error: css`
     background-color: ${({ theme }) => theme.colors.errorSoft};
     color: ${({ theme }) => theme.colors.error};
     border: none;
   `,
-  draft: css`
+  neutral: css`
     background-color: ${({ theme }) => theme.colors.surface2};
     color: ${({ theme }) => theme.colors.muted};
     border: none;
   `,
-}
-
-const tagStyles = {
-  inbound: css`
+  // Outline — transparent ground, bordered
+  'outline-info': css`
     background-color: transparent;
     color: ${({ theme }) => theme.colors.info};
     border: 1px solid ${({ theme }) => theme.colors.borderStrong};
   `,
-  outbound: css`
+  'outline-success': css`
     background-color: transparent;
     color: ${({ theme }) => theme.colors.success};
     border: 1px solid ${({ theme }) => theme.colors.borderStrong};
   `,
-  default: css`
+  'outline-neutral': css`
     background-color: transparent;
     color: ${({ theme }) => theme.colors.muted};
     border: 1px solid ${({ theme }) => theme.colors.borderStrong};
   `,
 }
 
-const variantStyles: Record<BadgeVariant, ReturnType<typeof css>> = {
-  ...statusStyles,
-  ...tagStyles,
-}
-
+/**
+ * A small rounded label for a state or category (ADR-0175). Pick a filled tone for statuses
+ * the reader should feel (success/warning/error/neutral) and an `outline-*` tone for quiet
+ * directional or categorical tags. One line of content; use Chip for removable selections.
+ */
 export const Badge = styled.span.withConfig({
   shouldForwardProp: blockStyleProps('variant'),
 })<BadgeProps>`
@@ -74,5 +81,5 @@ export const Badge = styled.span.withConfig({
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   white-space: nowrap;
 
-  ${({ variant = 'default' }) => variantStyles[variant]}
+  ${({ variant = 'outline-neutral' }) => variantStyles[variant]}
 `
