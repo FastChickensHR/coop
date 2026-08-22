@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react'
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
+import type { ReactElement } from 'react'
+import { screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { lightTheme } from '@fastchickenshr/coop'
 import { PageHeading } from './PageHeading'
+import { renderWithTheme } from '../../test-utils'
 
-const wrap = (ui: ReactNode) => render(<ThemeProvider theme={lightTheme}>{ui}</ThemeProvider>)
+const wrap = (ui: ReactElement) => renderWithTheme(ui)
 
 describe('PageHeading', () => {
   it('renders the title as the page heading', () => {
