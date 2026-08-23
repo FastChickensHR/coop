@@ -9,6 +9,12 @@ import * as RadixToggleGroup from '@radix-ui/react-toggle-group';
  * Compose like Radix: `ToggleGroup` (root, `type="single"|"multiple"`) ›
  * `ToggleGroupItem value="…"`.
  */
-export declare const ToggleGroup: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<(RadixToggleGroup.ToggleGroupSingleProps & import("react").RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & import("react").RefAttributes<HTMLDivElement>), never> & Partial<Pick<(RadixToggleGroup.ToggleGroupSingleProps & import("react").RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & import("react").RefAttributes<HTMLDivElement>), never>>> & string & Omit<import("react").ForwardRefExoticComponent<(RadixToggleGroup.ToggleGroupSingleProps | RadixToggleGroup.ToggleGroupMultipleProps) & import("react").RefAttributes<HTMLDivElement>>, keyof import("react").Component<any, {}, any>>;
+export declare const ToggleGroup: import("styled-components/dist/types").IStyledComponentBase<"web", ((Omit<RadixToggleGroup.ToggleGroupSingleProps & import("react").RefAttributes<HTMLDivElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}) | (Omit<RadixToggleGroup.ToggleGroupMultipleProps & import("react").RefAttributes<HTMLDivElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+})) & import("styled-components/dist/types").BaseObject> & string & Omit<import("react").ForwardRefExoticComponent<(RadixToggleGroup.ToggleGroupSingleProps | RadixToggleGroup.ToggleGroupMultipleProps) & import("react").RefAttributes<HTMLDivElement>>, keyof import("react").Component<any, {}, any>>;
 /** One segment of a ToggleGroup. */
-export declare const ToggleGroupItem: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<RadixToggleGroup.ToggleGroupItemProps & import("react").RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixToggleGroup.ToggleGroupItemProps & import("react").RefAttributes<HTMLButtonElement>, never>>> & string & Omit<import("react").ForwardRefExoticComponent<RadixToggleGroup.ToggleGroupItemProps & import("react").RefAttributes<HTMLButtonElement>>, keyof import("react").Component<any, {}, any>>;
+export declare const ToggleGroupItem: import("styled-components/dist/types").IStyledComponentBase<"web", Omit<RadixToggleGroup.ToggleGroupItemProps & import("react").RefAttributes<HTMLButtonElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}> & string & Omit<import("react").ForwardRefExoticComponent<RadixToggleGroup.ToggleGroupItemProps & import("react").RefAttributes<HTMLButtonElement>>, keyof import("react").Component<any, {}, any>>;

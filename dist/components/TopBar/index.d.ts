@@ -8,8 +8,8 @@
  * documented fixed-dark recipe (the fixed ink scale: `ink900` ground,
  * `ink300`/`ink50` text).
  */
-export declare const TopBar: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLElement>, HTMLElement>, "$sticky"> & {
+export declare const TopBar: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLElement>, HTMLElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, {
     $sticky?: boolean;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLElement>, HTMLElement>, "$sticky"> & {
-    $sticky?: boolean;
-}, never>>> & string;
+}>> & string;

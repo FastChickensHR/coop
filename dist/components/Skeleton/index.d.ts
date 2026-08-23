@@ -11,20 +11,28 @@ export interface SkeletonProps {
  *
  * Honours prefers-reduced-motion (static block, no pulse).
  */
-export declare const Skeleton: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never>>> & string;
+export declare const Skeleton: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, SkeletonProps>> & string;
 /** A round skeleton — for an avatar or icon placeholder. */
-export declare const SkeletonCircle: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never>>, "as" | "forwardedAs"> & {
+export declare const SkeletonCircle: import("styled-components/dist/types").IStyledComponentBase<"web", Omit<import("styled-components").FastOmit<import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, SkeletonProps>, "as" | "forwardedAs"> & {
     as?: import("styled-components").WebTarget | undefined;
     forwardedAs?: import("styled-components").WebTarget | undefined;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never>>, "as" | "forwardedAs"> & {
-    as?: import("styled-components").WebTarget | undefined;
-    forwardedAs?: import("styled-components").WebTarget | undefined;
-}, never>>> & string;
+}, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("styled-components").CSSProperties & {
+        [key: `--${string}`]: string | number | undefined;
+    }) | undefined;
+}> & string;
 /** A single line of text-height skeleton. */
-export declare const SkeletonText: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never>>, "as" | "forwardedAs"> & {
+export declare const SkeletonText: import("styled-components/dist/types").IStyledComponentBase<"web", Omit<import("styled-components").FastOmit<import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, SkeletonProps>, "as" | "forwardedAs"> & {
     as?: import("styled-components").WebTarget | undefined;
     forwardedAs?: import("styled-components").WebTarget | undefined;
-}, never> & Partial<Pick<import("styled-components").FastOmit<import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "radius"> & SkeletonProps, never>>, "as" | "forwardedAs"> & {
-    as?: import("styled-components").WebTarget | undefined;
-    forwardedAs?: import("styled-components").WebTarget | undefined;
-}, never>>> & string;
+}, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("styled-components").CSSProperties & {
+        [key: `--${string}`]: string | number | undefined;
+    }) | undefined;
+}> & string;

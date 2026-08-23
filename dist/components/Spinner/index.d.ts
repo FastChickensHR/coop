@@ -16,4 +16,6 @@ export interface SpinnerProps {
  * set the `color` prop). Honours prefers-reduced-motion by slowing, not
  * stopping — a stopped spinner reads as broken.
  */
-export declare const Spinner: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, keyof SpinnerProps> & SpinnerProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, keyof SpinnerProps> & SpinnerProps, never>>> & string;
+export declare const Spinner: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, SpinnerProps>> & string;

@@ -15,4 +15,6 @@ export interface BadgeProps {
  * the reader should feel (success/warning/error/neutral) and an `outline-*` tone for quiet
  * directional or categorical tags. One line of content; use Chip for removable selections.
  */
-export declare const Badge: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components").FastOmit<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, "variant"> & BadgeProps, never> & Partial<Pick<import("styled-components").FastOmit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, "variant"> & BadgeProps, never>>> & string;
+export declare const Badge: import("styled-components/dist/types").IStyledComponentBase<"web", import("styled-components/dist/types").Merged<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, "style"> & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | undefined;
+}, BadgeProps>> & string;

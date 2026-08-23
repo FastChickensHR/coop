@@ -27,27 +27,27 @@ const ANYTIME: 'Anytime'
 
 const Accordion: ForwardRefExoticComponent<(RadixAccordion.AccordionSingleProps | RadixAccordion.AccordionMultipleProps) & RefAttributes<HTMLDivElement>>
 
-const AccordionContent: IStyledComponentBase<'web', FastOmit<RadixAccordion.AccordionContentProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixAccordion.AccordionContentProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionContentProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const AccordionContent: IStyledComponentBase<'web', Omit<RadixAccordion.AccordionContentProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionContentProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const AccordionHeader: IStyledComponentBase<'web', FastOmit<RadixAccordion.AccordionHeaderProps & RefAttributes<HTMLHeadingElement>, never> & Partial<Pick<RadixAccordion.AccordionHeaderProps & RefAttributes<HTMLHeadingElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionHeaderProps & RefAttributes<HTMLHeadingElement>>, keyof Component<any, {}, any>>
+const AccordionHeader: IStyledComponentBase<'web', Omit<RadixAccordion.AccordionHeaderProps & RefAttributes<HTMLHeadingElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionHeaderProps & RefAttributes<HTMLHeadingElement>>, keyof Component<any, {}, any>>
 
-const AccordionItem: IStyledComponentBase<'web', FastOmit<RadixAccordion.AccordionItemProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixAccordion.AccordionItemProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionItemProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const AccordionItem: IStyledComponentBase<'web', Omit<RadixAccordion.AccordionItemProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionItemProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const AccordionTrigger: IStyledComponentBase<'web', FastOmit<RadixAccordion.AccordionTriggerProps & RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixAccordion.AccordionTriggerProps & RefAttributes<HTMLButtonElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionTriggerProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
+const AccordionTrigger: IStyledComponentBase<'web', Omit<RadixAccordion.AccordionTriggerProps & RefAttributes<HTMLButtonElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixAccordion.AccordionTriggerProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
 
-const Alert: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'variant'> & AlertProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'variant'> & AlertProps, never>>> & string
+const Alert: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, AlertProps>> & string
 
-const AlertBody: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const AlertBody: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const AlertIcon: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, never>>> & string
+const AlertIcon: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const AlertMessage: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never>>> & string
+const AlertMessage: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 interface AlertProps {
   variant?: 'error' | 'info' | 'success' | 'warning'
 }
 
-const AlertTitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never>>> & string
+const AlertTitle: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 type AlertVariant = 'error' | 'info' | 'success' | 'warning'
 
@@ -62,7 +62,7 @@ interface AvatarProps {
   src?: string
 }
 
-const Badge: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'variant'> & BadgeProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'variant'> & BadgeProps, never>>> & string
+const Badge: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, BadgeProps>> & string
 
 interface BadgeProps {
   variant?: 'error' | 'neutral' | 'outline-info' | 'outline-neutral' | 'outline-success' | 'success' | 'warning'
@@ -77,28 +77,28 @@ interface BreadcrumbsProps {
   items: Crumb[]
 }
 
-const Button: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, keyof ButtonProps> & ButtonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, keyof ButtonProps> & ButtonProps, never>>> & string
+const Button: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, ButtonProps>> & string
 
 interface ButtonProps {
   size?: 'lg' | 'md' | 'sm'
   variant?: 'danger' | 'ghost' | 'primary' | 'secondary'
 }
 
-const Card: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'interactive'> & CardProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'interactive'> & CardProps, never>>> & string
+const Card: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, CardProps>> & string
 
-const CardActions: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const CardActions: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const CardBody: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const CardBody: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const CardFooter: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const CardFooter: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const CardHeader: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const CardHeader: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 interface CardProps {
   interactive?: boolean
 }
 
-const CardTitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never>>> & string
+const CardTitle: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 function Checkbox(props: CheckboxProps): JSX.Element
 
@@ -205,11 +205,11 @@ interface DateRangePickerProps {
   start?: DateRangeEdgeProps
 }
 
-const DescriptionDetails: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never>>> & string
+const DescriptionDetails: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const DescriptionList: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>, never>>> & string
+const DescriptionList: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const DescriptionTerm: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, never>>> & string
+const DescriptionTerm: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 function Drawer(props: DrawerProps): JSX.Element
 
@@ -247,13 +247,13 @@ interface DrawerSlotProps {
 
 const DropdownMenu: FC<RadixDropdownMenu.DropdownMenuProps>
 
-function DropdownMenuContent(props: FastOmit<FastOmit<RadixDropdownMenu.DropdownMenuContentProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixDropdownMenu.DropdownMenuContentProps & RefAttributes<HTMLDivElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }): JSX.Element
+function DropdownMenuContent(props: FastOmit<Omit<RadixDropdownMenu.DropdownMenuContentProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }): JSX.Element
 
-const DropdownMenuItem: IStyledComponentBase<'web', FastOmit<FastOmit<RadixDropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>, 'danger'> & { danger?: boolean; }, never> & Partial<Pick<FastOmit<RadixDropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>, 'danger'> & { danger?: boolean; }, never>>> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const DropdownMenuItem: IStyledComponentBase<'web', Merged<Omit<RadixDropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { danger?: boolean; }>> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const DropdownMenuLabel: IStyledComponentBase<'web', FastOmit<RadixDropdownMenu.DropdownMenuLabelProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixDropdownMenu.DropdownMenuLabelProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuLabelProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const DropdownMenuLabel: IStyledComponentBase<'web', Omit<RadixDropdownMenu.DropdownMenuLabelProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuLabelProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const DropdownMenuSeparator: IStyledComponentBase<'web', FastOmit<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const DropdownMenuSeparator: IStyledComponentBase<'web', Omit<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
 const DropdownMenuTrigger: ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuTriggerProps & RefAttributes<HTMLButtonElement>>
 
@@ -267,9 +267,9 @@ interface EmptyStateProps {
   title: ReactNode
 }
 
-const ErrorText: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never>>> & string
+const ErrorText: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const Field: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const Field: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 type FontFamilyPreference = 'DEFAULT'
 
@@ -295,7 +295,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean
 }
 
-const Label: IStyledComponentBase<'web', FastOmit<RadixLabel.LabelProps & RefAttributes<HTMLLabelElement>, never> & Partial<Pick<RadixLabel.LabelProps & RefAttributes<HTMLLabelElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixLabel.LabelProps & RefAttributes<HTMLLabelElement>>, keyof Component<any, {}, any>>
+const Label: IStyledComponentBase<'web', Omit<RadixLabel.LabelProps & RefAttributes<HTMLLabelElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixLabel.LabelProps & RefAttributes<HTMLLabelElement>>, keyof Component<any, {}, any>>
 
 function Modal(props: ModalProps): JSX.Element
 
@@ -315,17 +315,17 @@ interface NumberInputProps extends InputProps {}
 
 const ONGOING: 'Ongoing'
 
-const PageActions: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const PageActions: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const PageContainer: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const PageContainer: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const PageHeader: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const PageHeader: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 function PageHeading(props: { actions?: ReactNode; subtitle?: ReactNode; title: ReactNode }): JSX.Element
 
-const PageSubtitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, never>>> & string
+const PageSubtitle: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const PageTitle: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, never>>> & string
+const PageTitle: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 function Pagination(props: PaginationProps): JSX.Element | null
 
@@ -344,7 +344,7 @@ const Popover: FC<RadixPopover.PopoverProps>
 
 const PopoverClose: ForwardRefExoticComponent<RadixPopover.PopoverCloseProps & RefAttributes<HTMLButtonElement>>
 
-function PopoverContent(props: FastOmit<FastOmit<RadixPopover.PopoverContentProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixPopover.PopoverContentProps & RefAttributes<HTMLDivElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }): JSX.Element
+function PopoverContent(props: FastOmit<Omit<RadixPopover.PopoverContentProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }): JSX.Element
 
 const PopoverTrigger: ForwardRefExoticComponent<RadixPopover.PopoverTriggerProps & RefAttributes<HTMLButtonElement>>
 
@@ -421,15 +421,15 @@ interface SelectProps {
   value?: string
 }
 
-const Skeleton: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never>>> & string
+const Skeleton: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, SkeletonProps>> & string
 
-const SkeletonCircle: IStyledComponentBase<'web', FastOmit<FastOmit<FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never> & Partial<Pick<FastOmit<FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never>>> & string
+const SkeletonCircle: IStyledComponentBase<'web', Omit<FastOmit<Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, SkeletonProps>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | (CSSProperties & { [key: `--${string}`]: string | number | undefined; }) | undefined; }> & string
 
 interface SkeletonProps {
   radius?: string
 }
 
-const SkeletonText: IStyledComponentBase<'web', FastOmit<FastOmit<FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never> & Partial<Pick<FastOmit<FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'radius'> & SkeletonProps, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never>>> & string
+const SkeletonText: IStyledComponentBase<'web', Omit<FastOmit<Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, SkeletonProps>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | (CSSProperties & { [key: `--${string}`]: string | number | undefined; }) | undefined; }> & string
 
 function Slider(props: SliderProps): JSX.Element
 
@@ -444,7 +444,7 @@ interface SliderProps {
   value: number
 }
 
-const Spinner: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, keyof SpinnerProps> & SpinnerProps, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, keyof SpinnerProps> & SpinnerProps, never>>> & string
+const Spinner: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, SpinnerProps>> & string
 
 interface SpinnerProps {
   color?: string
@@ -453,7 +453,7 @@ interface SpinnerProps {
 
 type SpinnerSize = 'lg' | 'md' | 'sm'
 
-const StatusMessage: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'status'> & { status: FieldStatus; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'status'> & { status: FieldStatus; }, never>>> & string
+const StatusMessage: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { status: FieldStatus; }>> & string
 
 interface Step {
   label: ReactNode
@@ -476,21 +476,21 @@ interface SwitchProps {
   onCheckedChange: (checked: boolean) => void
 }
 
-const Table: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>> & string
+const Table: IStyledComponentBase<'web', Omit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const TableScroll: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>> & string
+const TableScroll: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
 const Tabs: ForwardRefExoticComponent<RadixTabs.TabsProps & RefAttributes<HTMLDivElement>>
 
-const TabsContent: IStyledComponentBase<'web', FastOmit<RadixTabs.TabsContentProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixTabs.TabsContentProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsContentProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const TabsContent: IStyledComponentBase<'web', Omit<RadixTabs.TabsContentProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsContentProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const TabsList: IStyledComponentBase<'web', FastOmit<RadixTabs.TabsListProps & RefAttributes<HTMLDivElement>, never> & Partial<Pick<RadixTabs.TabsListProps & RefAttributes<HTMLDivElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsListProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const TabsList: IStyledComponentBase<'web', Omit<RadixTabs.TabsListProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsListProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const TabsTrigger: IStyledComponentBase<'web', FastOmit<RadixTabs.TabsTriggerProps & RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixTabs.TabsTriggerProps & RefAttributes<HTMLButtonElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsTriggerProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
+const TabsTrigger: IStyledComponentBase<'web', Omit<RadixTabs.TabsTriggerProps & RefAttributes<HTMLButtonElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixTabs.TabsTriggerProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
 
-const Tbody: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never>>> & string
+const Tbody: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const Td: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, 'align' | 'noBorder' | 'mono' | 'muted'> & { noBorder?: boolean; align?: Align; mono?: boolean; muted?: boolean; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, 'align' | 'noBorder' | 'mono' | 'muted'> & { noBorder?: boolean; align?: Align; mono?: boolean; muted?: boolean; }, never>>> & string
+const Td: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { noBorder?: boolean; align?: Align; mono?: boolean; muted?: boolean; }>> & string
 
 function Text(props: TextProps): JSX.Element
 
@@ -511,17 +511,17 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   hasError?: boolean
 }
 
-const Th: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, 'align' | 'noBorder'> & { noBorder?: boolean; align?: Align; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, 'align' | 'noBorder'> & { noBorder?: boolean; align?: Align; }, never>>> & string
+const Th: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { noBorder?: boolean; align?: Align; }>> & string
 
-const Thead: IStyledComponentBase<'web', FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never> & Partial<Pick<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never>>> & string
+const Thead: IStyledComponentBase<'web', Omit<DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string
 
-const Timeline: IStyledComponentBase<'web', FastOmit<FastOmit<FastOmit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never> & Partial<Pick<FastOmit<FastOmit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never> & Partial<Pick<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, never>>, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, never>>> & string
+const Timeline: IStyledComponentBase<'web', Omit<FastOmit<Omit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, 'as' | 'forwardedAs'> & { as?: WebTarget | undefined; forwardedAs?: WebTarget | undefined; }, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | (CSSProperties & { [key: `--${string}`]: string | number | undefined; }) | undefined; }> & string
 
 const Toaster: React.ForwardRefExoticComponent<ToasterProps & React.RefAttributes<HTMLElement>>
 
-const ToggleGroup: IStyledComponentBase<'web', FastOmit<(RadixToggleGroup.ToggleGroupSingleProps & RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & RefAttributes<HTMLDivElement>), never> & Partial<Pick<(RadixToggleGroup.ToggleGroupSingleProps & RefAttributes<HTMLDivElement>) | (RadixToggleGroup.ToggleGroupMultipleProps & RefAttributes<HTMLDivElement>), never>>> & string & Omit<ForwardRefExoticComponent<(RadixToggleGroup.ToggleGroupSingleProps | RadixToggleGroup.ToggleGroupMultipleProps) & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
+const ToggleGroup: IStyledComponentBase<'web', ((Omit<RadixToggleGroup.ToggleGroupSingleProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }) | (Omit<RadixToggleGroup.ToggleGroupMultipleProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; })) & BaseObject> & string & Omit<ForwardRefExoticComponent<(RadixToggleGroup.ToggleGroupSingleProps | RadixToggleGroup.ToggleGroupMultipleProps) & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
-const ToggleGroupItem: IStyledComponentBase<'web', FastOmit<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>, never> & Partial<Pick<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>, never>>> & string & Omit<ForwardRefExoticComponent<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
+const ToggleGroupItem: IStyledComponentBase<'web', Omit<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>>, keyof Component<any, {}, any>>
 
 function Tooltip(props: TooltipProps): JSX.Element
 
@@ -532,9 +532,9 @@ interface TooltipProps {
   side?: 'bottom' | 'left' | 'right' | 'top'
 }
 
-const TopBar: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, '$sticky'> & { $sticky?: boolean; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, '$sticky'> & { $sticky?: boolean; }, never>>> & string
+const TopBar: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { $sticky?: boolean; }>> & string
 
-const Tr: IStyledComponentBase<'web', FastOmit<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, 'interactive'> & { interactive?: boolean; }, never> & Partial<Pick<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, 'interactive'> & { interactive?: boolean; }, never>>> & string
+const Tr: IStyledComponentBase<'web', Merged<Omit<DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }, { interactive?: boolean; }>> & string
 
 const bodyLargeType: RuleSet<object>
 
