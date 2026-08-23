@@ -3112,16 +3112,16 @@ function Li({ page: e, pageCount: t, onPageChange: n, className: r }) {
 					height: 16
 				})
 			}),
-			i.map((e, t) => e === Ri ? /* @__PURE__ */ o(Wi, {
+			i.map((t, r) => t === Ri ? /* @__PURE__ */ o(Wi, {
 				"aria-hidden": "true",
 				children: "…"
-			}, `gap-${t}`) : /* @__PURE__ */ o(Ui, {
+			}, `gap-${r}`) : /* @__PURE__ */ o(Ui, {
 				type: "button",
-				$active: e === e,
-				"aria-current": e === e ? "page" : void 0,
-				onClick: () => n(e),
-				children: e
-			}, e)),
+				$active: t === e,
+				"aria-current": t === e ? "page" : void 0,
+				onClick: () => n(t),
+				children: t
+			}, t)),
 			/* @__PURE__ */ o(Hi, {
 				type: "button",
 				"aria-label": "Next page",

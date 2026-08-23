@@ -31,20 +31,20 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
       >
         <ChevronLeftIcon width={16} height={16} />
       </Arrow>
-      {pages.map((page, i) =>
-        page === ELLIPSIS ? (
+      {pages.map((item, i) =>
+        item === ELLIPSIS ? (
           <Gap key={`gap-${i}`} aria-hidden="true">
             …
           </Gap>
         ) : (
           <PageButton
-            key={page}
+            key={item}
             type="button"
-            $active={page === page}
-            aria-current={page === page ? 'page' : undefined}
-            onClick={() => onPageChange(page)}
+            $active={item === page}
+            aria-current={item === page ? 'page' : undefined}
+            onClick={() => onPageChange(item)}
           >
-            {page}
+            {item}
           </PageButton>
         ),
       )}
