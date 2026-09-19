@@ -47,7 +47,7 @@ export declare const Timeline: import("styled-components/dist/types").IStyledCom
     as?: import("styled-components").WebTarget | undefined;
     forwardedAs?: import("styled-components").WebTarget | undefined;
 }, "style"> & {
-    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("styled-components").CSSProperties & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("react").CSSProperties & {
         [key: `--${string}`]: string | number | undefined;
     }) | undefined;
 }> & string;

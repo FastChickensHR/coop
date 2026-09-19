@@ -21,7 +21,7 @@ export declare const SkeletonCircle: import("styled-components/dist/types").ISty
     as?: import("styled-components").WebTarget | undefined;
     forwardedAs?: import("styled-components").WebTarget | undefined;
 }, "style"> & {
-    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("styled-components").CSSProperties & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("react").CSSProperties & {
         [key: `--${string}`]: string | number | undefined;
     }) | undefined;
 }> & string;
@@ -32,7 +32,7 @@ export declare const SkeletonText: import("styled-components/dist/types").IStyle
     as?: import("styled-components").WebTarget | undefined;
     forwardedAs?: import("styled-components").WebTarget | undefined;
 }, "style"> & {
-    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("styled-components").CSSProperties & {
+    style?: import("react").CSSProperties | import("styled-components/dist/types").CSSPropertiesWithVars | (import("react").CSSProperties & {
         [key: `--${string}`]: string | number | undefined;
     }) | undefined;
 }> & string;
