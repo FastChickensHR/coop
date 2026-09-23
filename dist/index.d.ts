@@ -13,6 +13,7 @@ export * from './components/DatePicker';
 export * from './components/DateRangePicker';
 export * from './components/DescriptionList';
 export * from './components/DropdownMenu';
+export * from './components/EmailInput';
 export * from './components/EmptyState';
 export * from './components/FormField';
 export * from './components/Input';

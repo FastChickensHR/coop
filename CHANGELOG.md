@@ -109,6 +109,17 @@ the changelog.
 
 - none
 
+### Added
+
+- **`EmailInput`** — the base `Input` locked to email duty, beside `PasswordInput`
+  and `NumberInput`. It checks the format itself and speaks on the way out of the
+  box, so a mistyped address is caught where it was typed rather than at the
+  button. It does not depend on how the surrounding form was configured, which is
+  what makes that true everywhere rather than something each form has to
+  remember, and it stays quiet inside a `FormField` that already carries an error
+  so the two never speak at once. The check is deliberately forgiving: it is not
+  the arbiter of whether an address exists.
+
 ### Fixed
 
 - The package now imports and renders under **native Node ESM**. Previously every

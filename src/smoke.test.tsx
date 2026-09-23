@@ -259,6 +259,7 @@ FIXTURES.FormField = () => (
   </coop.FormField>
 )
 FIXTURES.ErrorText = () => <coop.ErrorText>Enter a group number.</coop.ErrorText>
+FIXTURES.EmailInput = () => <coop.EmailInput aria-label="Your email" />
 FIXTURES.Input = () => <coop.Input aria-label="Group number" />
 FIXTURES.Label = () => <coop.Label htmlFor="smoke-label-target">Group number</coop.Label>
 FIXTURES.Modal = () => (

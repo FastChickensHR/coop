@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (185)
+## Exported names (187)
 
 ```ts
 const ALWAYS: 'Always'
@@ -256,6 +256,10 @@ const DropdownMenuLabel: IStyledComponentBase<'web', Omit<RadixDropdownMenu.Drop
 const DropdownMenuSeparator: IStyledComponentBase<'web', Omit<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>, 'style'> & { style?: CSSProperties | CSSPropertiesWithVars | undefined; }> & string & Omit<ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuSeparatorProps & RefAttributes<HTMLDivElement>>, keyof Component<any, {}, any>>
 
 const DropdownMenuTrigger: ForwardRefExoticComponent<RadixDropdownMenu.DropdownMenuTriggerProps & RefAttributes<HTMLButtonElement>>
+
+const EmailInput: ForwardRefExoticComponent<EmailInputProps & RefAttributes<HTMLInputElement>>
+
+type EmailInputProps = Omit<InputProps, 'type'>
 
 function EmptyState(props: EmptyStateProps): JSX.Element
 
