@@ -37,7 +37,12 @@ export const Tr = styled.tr.withConfig({
 })<{ interactive?: boolean }>`
   cursor: ${({ interactive }) => (interactive ? 'pointer' : 'default')};
   ${({ interactive, theme }) =>
-    interactive && `&:hover { background-color: ${theme.colors.surface}; }`}
+    interactive &&
+    `
+      transition: background-color ${theme.motion.duration.fast};
+      &:hover { background-color: ${theme.colors.surface2}; }
+      &:focus-visible { outline: 2px solid ${theme.colors.accent}; outline-offset: -2px; }
+    `}
 `
 
 type Align = 'left' | 'right' | 'center'
