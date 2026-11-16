@@ -1576,7 +1576,11 @@ Defaulting to \`null\`.`}Zw(pT,`getInvalidValueError`);var mT=iT,hT=oT,gT=B(mT)`
   background-color: ${({theme:e})=>e.colors.surface};
 `,WO=B.tbody``,GO=B.tr.withConfig({shouldForwardProp:td(`interactive`)})`
   cursor: ${({interactive:e})=>e?`pointer`:`default`};
-  ${({interactive:e,theme:t})=>e&&`&:hover { background-color: ${t.colors.surface}; }`}
+  ${({interactive:e,theme:t})=>e&&`
+      transition: background-color ${t.motion.duration.fast};
+      &:hover { background-color: ${t.colors.surface2}; }
+      &:focus-visible { outline: 2px solid ${t.colors.accent}; outline-offset: -2px; }
+    `}
 `,KO=B.th.withConfig({shouldForwardProp:td(`noBorder`,`align`)})`
   padding: 0.75rem 1rem;
   text-align: ${({align:e})=>e??`left`};
