@@ -13,6 +13,7 @@ export interface DrawerSlotConfig {
   headerActions?: ReactNode
   footer?: ReactNode
   bodyPadding?: string
+  size?: 'wide' | 'narrow'
   /** Invoked when the drawer requests to close (Esc, overlay click, close button).
    *  The owning slot flips its `open` to false in response (controlled). */
   onRequestClose?: () => void

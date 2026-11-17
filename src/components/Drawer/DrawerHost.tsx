@@ -34,6 +34,7 @@ function DrawerHost({ store }: { store: DrawerStore }) {
       headerActions={config?.headerActions}
       footer={config?.footer}
       bodyPadding={config?.bodyPadding}
+      size={config?.size}
     >
       {config?.children}
     </Drawer>

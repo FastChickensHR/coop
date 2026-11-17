@@ -2201,8 +2201,8 @@ var wr = n`
   top: 0;
   right: 0;
   bottom: 0;
-  min-width: 78vw;
-  width: 78vw;
+  min-width: ${({ $size: e }) => e === "narrow" ? "min(36rem, 100vw)" : "78vw"};
+  width: ${({ $size: e }) => e === "narrow" ? "min(36rem, 100vw)" : "78vw"};
   max-width: 100vw;
   background-color: ${({ theme: e }) => e.colors.canvas};
   border-left: 1px solid ${({ theme: e }) => e.colors.border};
@@ -2263,30 +2263,33 @@ var wr = n`
   border-top: 1px solid ${({ theme: e }) => e.colors.border};
   flex-shrink: 0;
 `;
-function Ir({ open: e, onOpenChange: t, title: n, description: r, headerActions: i, children: a, footer: c, bodyPadding: l }) {
+function Ir({ open: e, onOpenChange: t, title: n, description: r, headerActions: i, children: a, footer: c, bodyPadding: l, size: u = "wide" }) {
 	return /* @__PURE__ */ o(A.Root, {
 		open: e,
 		onOpenChange: t,
-		children: /* @__PURE__ */ s(A.Portal, { children: [/* @__PURE__ */ o(Ar, {}), /* @__PURE__ */ s(jr, { children: [
-			/* @__PURE__ */ s(Mr, { children: [/* @__PURE__ */ s(Et, { children: [/* @__PURE__ */ o(Dt, { children: n }), r ? /* @__PURE__ */ o(Ot, { children: r }) : /* @__PURE__ */ o(A.Description, {
-				"aria-hidden": !0,
-				style: { display: "none" }
-			})] }), /* @__PURE__ */ s(Nr, { children: [i, /* @__PURE__ */ o(A.Close, {
-				asChild: !0,
-				children: /* @__PURE__ */ o(kt, {
-					"aria-label": "Close",
-					children: /* @__PURE__ */ o(h, {
-						width: 20,
-						height: 20
+		children: /* @__PURE__ */ s(A.Portal, { children: [/* @__PURE__ */ o(Ar, {}), /* @__PURE__ */ s(jr, {
+			$size: u,
+			children: [
+				/* @__PURE__ */ s(Mr, { children: [/* @__PURE__ */ s(Et, { children: [/* @__PURE__ */ o(Dt, { children: n }), r ? /* @__PURE__ */ o(Ot, { children: r }) : /* @__PURE__ */ o(A.Description, {
+					"aria-hidden": !0,
+					style: { display: "none" }
+				})] }), /* @__PURE__ */ s(Nr, { children: [i, /* @__PURE__ */ o(A.Close, {
+					asChild: !0,
+					children: /* @__PURE__ */ o(kt, {
+						"aria-label": "Close",
+						children: /* @__PURE__ */ o(h, {
+							width: 20,
+							height: 20
+						})
 					})
-				})
-			})] })] }),
-			/* @__PURE__ */ o(Pr, {
-				$padding: l,
-				children: a
-			}),
-			c && /* @__PURE__ */ o(Fr, { children: c })
-		] })] })
+				})] })] }),
+				/* @__PURE__ */ o(Pr, {
+					$padding: l,
+					children: a
+				}),
+				c && /* @__PURE__ */ o(Fr, { children: c })
+			]
+		})] })
 	});
 }
 //#endregion
@@ -2338,21 +2341,22 @@ function Hr() {
 }
 //#endregion
 //#region src/components/Drawer/DrawerSlot.tsx
-function Ur({ open: e, title: t, description: n, headerActions: r, footer: i, bodyPadding: a, onOpenChange: o, children: s }) {
-	let c = Hr(), l = C();
+function Ur({ open: e, title: t, description: n, headerActions: r, footer: i, bodyPadding: a, size: o, onOpenChange: s, children: c }) {
+	let l = Hr(), u = C();
 	return w(() => {
-		e ? c.acquire(l, {
+		e ? l.acquire(u, {
 			title: t,
 			description: n,
 			headerActions: r,
 			footer: i,
 			bodyPadding: a,
-			onRequestClose: o ? () => o(!1) : void 0,
-			children: s
-		}) : c.release(l);
+			size: o,
+			onRequestClose: s ? () => s(!1) : void 0,
+			children: c
+		}) : l.release(u);
 	}, [
-		c,
 		l,
+		u,
 		e,
 		t,
 		n,
@@ -2360,8 +2364,9 @@ function Ur({ open: e, title: t, description: n, headerActions: r, footer: i, bo
 		i,
 		a,
 		o,
-		s
-	]), S(() => () => c.release(l), [c, l]), null;
+		s,
+		c
+	]), S(() => () => l.release(u), [l, u]), null;
 }
 //#endregion
 //#region src/components/Drawer/DrawerHost.tsx
@@ -2384,6 +2389,7 @@ function Gr({ store: e }) {
 		headerActions: n?.headerActions,
 		footer: n?.footer,
 		bodyPadding: n?.bodyPadding,
+		size: n?.size,
 		children: n?.children
 	});
 }

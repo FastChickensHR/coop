@@ -18,7 +18,7 @@ Interfaces list their **declared** members; inherited DOM attributes are carried
 `extends` clause. The theme prints its **shape**, never its token values — token values
 are outside the promise.
 
-## Exported names (187)
+## Exported names (188)
 
 ```ts
 const ALWAYS: 'Always'
@@ -225,12 +225,15 @@ interface DrawerProps {
   headerActions?: ReactNode
   onOpenChange: (open: boolean) => void
   open: boolean
+  size?: 'narrow' | 'wide'
   title: string
 }
 
 function DrawerProvider(props: { children: ReactNode }): JSX.Element
 
 function DrawerSection(props: { children: ReactNode; title?: ReactNode }): JSX.Element
+
+type DrawerSize = 'narrow' | 'wide'
 
 function DrawerSlot(props: DrawerSlotProps): null
 
@@ -242,6 +245,7 @@ interface DrawerSlotProps {
   headerActions?: ReactNode
   onOpenChange?: (open: boolean) => void
   open: boolean
+  size?: 'narrow' | 'wide'
   title: string
 }
 

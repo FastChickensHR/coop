@@ -14,7 +14,12 @@ export interface DrawerProps {
   children: ReactNode
   footer?: ReactNode
   bodyPadding?: string
+  /** `wide` (default) is the 78vw detail surface; `narrow` is a ~36rem slide-over for a short list. */
+  size?: DrawerSize
 }
+
+/** How much of the page the drawer covers. */
+export type DrawerSize = 'wide' | 'narrow'
 
 // Opacity fades — used for the overlay both ways, and for the panel itself under
 // prefers-reduced-motion (where the slide transform is dropped, ADR-0081).
@@ -63,13 +68,13 @@ const Overlay = styled(Dialog.Overlay)`
   }
 `
 
-const Content = styled(Dialog.Content)`
+const Content = styled(Dialog.Content)<{ $size: DrawerSize }>`
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
-  min-width: 78vw;
-  width: 78vw;
+  min-width: ${({ $size }) => ($size === 'narrow' ? 'min(36rem, 100vw)' : '78vw')};
+  width: ${({ $size }) => ($size === 'narrow' ? 'min(36rem, 100vw)' : '78vw')};
   max-width: 100vw;
   background-color: ${({ theme }) => theme.colors.canvas};
   border-left: 1px solid ${({ theme }) => theme.colors.border};
@@ -148,12 +153,12 @@ const Footer = styled.div`
  * Choose by shape and intent: a Modal is a short centred task; a Drawer is the surface for
  * richer detail views.
  */
-export function Drawer({ open, onOpenChange, title, description, headerActions, children, footer, bodyPadding }: DrawerProps) {
+export function Drawer({ open, onOpenChange, title, description, headerActions, children, footer, bodyPadding, size = 'wide' }: DrawerProps) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Overlay />
-        <Content>
+        <Content $size={size}>
           <Header>
             <HeaderText>
               <Title>{title}</Title>

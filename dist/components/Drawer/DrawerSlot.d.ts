@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import type { DrawerSize } from './index';
 /** Props for DrawerSlot. */
 export interface DrawerSlotProps {
     /** When true, this slot owns the global drawer and its children are shown. */
@@ -8,6 +9,8 @@ export interface DrawerSlotProps {
     headerActions?: ReactNode;
     footer?: ReactNode;
     bodyPadding?: string;
+    /** `narrow` for a short list; defaults to the wide detail surface. */
+    size?: DrawerSize;
     /** Called when the drawer requests to close (Esc, overlay click, close button).
      *  The owner flips `open` to false in response — the slot is controlled. */
     onOpenChange?: (open: boolean) => void;
@@ -22,4 +25,4 @@ export interface DrawerSlotProps {
  *
  * Renders no DOM of its own — the children appear inside the host.
  */
-export declare function DrawerSlot({ open, title, description, headerActions, footer, bodyPadding, onOpenChange, children, }: DrawerSlotProps): null;
+export declare function DrawerSlot({ open, title, description, headerActions, footer, bodyPadding, size, onOpenChange, children, }: DrawerSlotProps): null;

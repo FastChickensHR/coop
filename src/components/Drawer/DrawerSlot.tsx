@@ -1,5 +1,6 @@
 import { useEffect, useId, useLayoutEffect, type ReactNode } from 'react'
 import { useDrawerStore } from './drawerStore'
+import type { DrawerSize } from './index'
 
 /** Props for DrawerSlot. */
 export interface DrawerSlotProps {
@@ -10,6 +11,8 @@ export interface DrawerSlotProps {
   headerActions?: ReactNode
   footer?: ReactNode
   bodyPadding?: string
+  /** `narrow` for a short list; defaults to the wide detail surface. */
+  size?: DrawerSize
   /** Called when the drawer requests to close (Esc, overlay click, close button).
    *  The owner flips `open` to false in response — the slot is controlled. */
   onOpenChange?: (open: boolean) => void
@@ -32,6 +35,7 @@ export function DrawerSlot({
   headerActions,
   footer,
   bodyPadding,
+  size,
   onOpenChange,
   children,
 }: DrawerSlotProps) {
@@ -49,13 +53,14 @@ export function DrawerSlot({
         headerActions,
         footer,
         bodyPadding,
+        size,
         onRequestClose: onOpenChange ? () => onOpenChange(false) : undefined,
         children,
       })
     } else {
       store.release(id)
     }
-  }, [store, id, open, title, description, headerActions, footer, bodyPadding, onOpenChange, children])
+  }, [store, id, open, title, description, headerActions, footer, bodyPadding, size, onOpenChange, children])
 
   // If the owner unmounts (e.g. a route change) while open, close the drawer.
   useEffect(() => () => store.release(id), [store, id])

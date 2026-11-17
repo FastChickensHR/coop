@@ -119,6 +119,10 @@ the changelog.
   remember, and it stays quiet inside a `FormField` that already carries an error
   so the two never speak at once. The check is deliberately forgiving: it is not
   the arbiter of whether an address exists.
+- **`Drawer` / `DrawerSlot` `size`** — an optional `'wide' | 'narrow'` size. `wide`
+  (the default) is the existing 78vw detail surface, so every current drawer is
+  unchanged; `narrow` is a ~36rem slide-over for a short list, such as a day on the
+  Calendar.
 
 ### Fixed
 
